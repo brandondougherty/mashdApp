@@ -1,0 +1,81 @@
+Array ( 
+[id] => 758339866_10203037340163280 
+[from] => 
+	Array ( 
+		[name] => Abraham Chavez 
+		[id] => 758339866 
+		  ) 
+[story] => Abraham Chavez was tagged in a video. 
+[story_tags] => Array ( 
+				[0] => Array ( 
+					[0] => Array ( 
+						[id] => 758339866 
+						[name] => Abraham Chavez 
+						[offset] => 0 
+						[length] => 14 
+						[type] => user 
+								  ) 
+				  			  ) 
+				  	   ) 
+[actions] => Array ( 
+			[0] => Array ( 
+				[name] => Comment 
+				[link] => https://www.facebook.com/758339866/posts/10203037340163280 
+						 ) 
+					) 
+[privacy] => Array ( 
+			[value] => 
+				   ) 
+[type] => status 
+[created_time] => 2014-01-04T01:27:04+0000 
+[updated_time] => 2014-01-04T01:27:04+0000 
+[likes] => Array ( 
+			[data] => Array ( 
+						[0] => Array ( 
+								[id] => 1364681560 
+								[name] => Yemina Lira
+									 ) 
+						[1] => Array ( 
+								[id] => 1460257143 
+								[name] => Israel W Maes
+									 ) 
+						[2] => Array ( 
+								[id] => 1481929673 
+								[name] => Brian Hernandez 
+									 )
+							) 
+			[paging] => Array ( 
+						[cursors] => Array ( 
+									[after] => MTIwNTEzNzIxNQ== 
+									[before] => MTM2NDY4MTU2MA== 
+											) 
+				   				)
+				 ) 
+[comments] => Array ( 
+			[data] => Array ( 
+						[0] => Array ( 
+									[id] => 10203037340163280_7311052 
+									[from] => Array ( 
+												[name] => Joel Cerda 
+												[id] => 1827191202 
+													) 
+									[message] => Great motivational video! 
+									[can_remove] => 
+									[created_time] => 2014-01-04T01:43:09+0000 
+									[like_count] => 1 
+									[user_likes] => 
+									) 
+						[1] => Array ( 
+									[id] => 10203037340163280_7311053 
+									[from] => Array ( 
+												[name] => Aaron Buckley 
+												[id] => 1205137215 
+													) 
+									[message] => Awesome Video! 
+									[can_remove] => 
+									[created_time] => 2014-01-04T01:43:15+0000 
+									[like_count] => 1 
+									[user_likes] => 
+									 ) 
+							) 
+			[paging] => Array ( [cursors] => Array ( [after] => Mg== [before] => MQ== ) ) ) ) 

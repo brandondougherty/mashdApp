@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta http-equiv="Content-Type" content="video/mp4; charset=UTF-8" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+ <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+	<title>Angular stuff</title>
+	<!--<link rel="stylesheet" href="app/css/style.css">-->
+
+	<script src="cordova.js"></script>
+	<script src="js/jquery.js"></script>
+
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+	<link href="css/foundation.min.css" rel="stylesheet" type="text/css">
+	<script src="js/foundation.min.js"></script>
+	<script src="js/foundation.tooltip.js"></script>
+	<script src="js/modernizr.js"></script>
+	<link rel="stylesheet" href="css/main.css" />
+	<script src="vendor/js/angular.js"></script>
+	<script src="js/jquery.stickem.js"></script>
+	<script src="vendor/js/angular-route.js"></script>
+	<script src="vendor/js/angular-ui-router.js"></script>
+	<script src="app/js/app.js"></script>
+	<script type="text/javascript">
+	var app = {
+    initialize: function() {
+        this.bindEvents();
+    },
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, true);
+    },
+
+    onDeviceReady: function() {
+        angular.element(document).ready(function() {
+            angular.bootstrap(document);
+        });
+    },
+};
+        app.initialize();
+       
+    </script>
+</head>
+
+<body>
+	
+<div id="view" ui-view></div>
+		
+</body>
+</html>

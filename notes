@@ -1,0 +1,16 @@
+
+
+
+####header name and title if any
+if (empty($data['story']))
+	echo $data['from']['name']
+else
+	echo $data['story']
+
+-shared links do not show up in json array for me/home
+-shared links with pictures
+-stuff posted via other apps
+-if you get current time using php(which is server side) does it get the time of the server location or browser location
+
+instagram stuff --
+The redirect URL typically points to a server-side script that requests the access token through a POST to the authorization server. The POST is authenticated by the client secret, and provides the authorization code received as proof that the resource owner has indeed authorized the request. The server responds with the access token and an expiration time in the POST response.

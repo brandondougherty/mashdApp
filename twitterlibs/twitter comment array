@@ -1,0 +1,1297 @@
+object(stdClass)#5 (2) {
+  ["statuses"]=>
+  array(7) {
+    [0]=>
+    object(stdClass)#6 (23) {
+      ["metadata"]=>
+      object(stdClass)#7 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 05:19:23 +0000 2014"
+      ["id"]=>
+      float(4.345575302124E+17)
+      ["id_str"]=>
+      string(18) "434557530212401152"
+      ["text"]=>
+      string(54) "@dscarra #PrayForVenezuela help us dude with a mention"
+      ["source"]=>
+      string(82) "<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      NULL
+      ["in_reply_to_status_id_str"]=>
+      NULL
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#8 (40) {
+        ["id"]=>
+        int(239697880)
+        ["id_str"]=>
+        string(9) "239697880"
+        ["name"]=>
+        string(20) "Jose A Gonzalez  "
+        ["screen_name"]=>
+        string(14) "joseagonzalezd"
+        ["location"]=>
+        string(19) "Valencia, Venezuela"
+        ["description"]=>
+        string(92) "Orgulloso de mi familia y mis amigos. Venezolano sin complejos y Magallanero de sangre azul!"
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#9 (1) {
+          ["description"]=>
+          object(stdClass)#10 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(206)
+        ["friends_count"]=>
+        int(428)
+        ["listed_count"]=>
+        int(2)
+        ["created_at"]=>
+        string(30) "Tue Jan 18 06:26:17 +0000 2011"
+        ["favourites_count"]=>
+        int(28)
+        ["utc_offset"]=>
+        int(-16200)
+        ["time_zone"]=>
+        string(7) "Caracas"
+        ["geo_enabled"]=>
+        bool(true)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(4933)
+        ["lang"]=>
+        string(2) "es"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "352726"
+        ["profile_background_image_url"]=>
+        string(48) "http://abs.twimg.com/images/themes/theme5/bg.gif"
+        ["profile_background_image_url_https"]=>
+        string(49) "https://abs.twimg.com/images/themes/theme5/bg.gif"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(98) "http://pbs.twimg.com/profile_images/1403725922/d5af09c1f7e289dc300b84e5e36acedadabcdefg_normal.jpg"
+        ["profile_image_url_https"]=>
+        string(99) "https://pbs.twimg.com/profile_images/1403725922/d5af09c1f7e289dc300b84e5e36acedadabcdefg_normal.jpg"
+        ["profile_banner_url"]=>
+        string(58) "https://pbs.twimg.com/profile_banners/239697880/1365291050"
+        ["profile_link_color"]=>
+        string(6) "D02B55"
+        ["profile_sidebar_border_color"]=>
+        string(6) "829D5E"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "99CC33"
+        ["profile_text_color"]=>
+        string(6) "3E4415"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#11 (4) {
+        ["hashtags"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#12 (2) {
+            ["text"]=>
+            string(16) "PrayForVenezuela"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(9)
+              [1]=>
+              int(26)
+            }
+          }
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#13 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+    [1]=>
+    object(stdClass)#14 (23) {
+      ["metadata"]=>
+      object(stdClass)#15 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 05:05:21 +0000 2014"
+      ["id"]=>
+      float(4.3455399986635E+17)
+      ["id_str"]=>
+      string(18) "434553999866347520"
+      ["text"]=>
+      string(120) "@dscarra I don't get why the schedule just can't be changed accordingly for something like this. I want quality games..."
+      ["source"]=>
+      string(3) "web"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      float(4.3455131463936E+17)
+      ["in_reply_to_status_id_str"]=>
+      string(18) "434551314639364096"
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#16 (40) {
+        ["id"]=>
+        int(22141384)
+        ["id_str"]=>
+        string(8) "22141384"
+        ["name"]=>
+        string(2) "JC"
+        ["screen_name"]=>
+        string(9) "JC_Wicked"
+        ["location"]=>
+        string(0) ""
+        ["description"]=>
+        string(0) ""
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#17 (1) {
+          ["description"]=>
+          object(stdClass)#18 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(8)
+        ["friends_count"]=>
+        int(123)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Fri Feb 27 13:56:08 +0000 2009"
+        ["favourites_count"]=>
+        int(58)
+        ["utc_offset"]=>
+        int(-21600)
+        ["time_zone"]=>
+        string(26) "Central Time (US & Canada)"
+        ["geo_enabled"]=>
+        bool(false)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(367)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "FFFFFF"
+        ["profile_background_image_url"]=>
+        string(79) "http://pbs.twimg.com/profile_background_images/378800000161692780/lwAcbXaO.jpeg"
+        ["profile_background_image_url_https"]=>
+        string(80) "https://pbs.twimg.com/profile_background_images/378800000161692780/lwAcbXaO.jpeg"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(75) "http://pbs.twimg.com/profile_images/425353889508913152/LIewblIR_normal.jpeg"
+        ["profile_image_url_https"]=>
+        string(76) "https://pbs.twimg.com/profile_images/425353889508913152/LIewblIR_normal.jpeg"
+        ["profile_banner_url"]=>
+        string(57) "https://pbs.twimg.com/profile_banners/22141384/1388741465"
+        ["profile_link_color"]=>
+        string(6) "2FC2EF"
+        ["profile_sidebar_border_color"]=>
+        string(6) "000000"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "252429"
+        ["profile_text_color"]=>
+        string(6) "666666"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#19 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#20 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+    [2]=>
+    object(stdClass)#21 (23) {
+      ["metadata"]=>
+      object(stdClass)#22 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "pl"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 05:02:18 +0000 2014"
+      ["id"]=>
+      float(4.3455322899101E+17)
+      ["id_str"]=>
+      string(18) "434553228991008768"
+      ["text"]=>
+      string(21) "@dscarra @sjokz gg wp"
+      ["source"]=>
+      string(3) "web"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      float(4.3455095363983E+17)
+      ["in_reply_to_status_id_str"]=>
+      string(18) "434550953639833600"
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#23 (40) {
+        ["id"]=>
+        float(2165622978)
+        ["id_str"]=>
+        string(10) "2165622978"
+        ["name"]=>
+        string(11) "Jon Webster"
+        ["screen_name"]=>
+        string(11) "CoreKittten"
+        ["location"]=>
+        string(0) ""
+        ["description"]=>
+        string(119) "Diamond 1 Mid laner for Core Pro Gaming. Total nerd for strategy and analysis, come join the conversation! IGN: Kittten"
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#24 (1) {
+          ["description"]=>
+          object(stdClass)#25 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(341)
+        ["friends_count"]=>
+        int(226)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Wed Oct 30 23:09:58 +0000 2013"
+        ["favourites_count"]=>
+        int(5)
+        ["utc_offset"]=>
+        NULL
+        ["time_zone"]=>
+        NULL
+        ["geo_enabled"]=>
+        bool(false)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(57)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "C0DEED"
+        ["profile_background_image_url"]=>
+        string(78) "http://pbs.twimg.com/profile_background_images/434408785587609600/Hn-uHaTw.png"
+        ["profile_background_image_url_https"]=>
+        string(79) "https://pbs.twimg.com/profile_background_images/434408785587609600/Hn-uHaTw.png"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(74) "http://pbs.twimg.com/profile_images/434117147267043328/3JVDXsT4_normal.png"
+        ["profile_image_url_https"]=>
+        string(75) "https://pbs.twimg.com/profile_images/434117147267043328/3JVDXsT4_normal.png"
+        ["profile_banner_url"]=>
+        string(59) "https://pbs.twimg.com/profile_banners/2165622978/1392366304"
+        ["profile_link_color"]=>
+        string(6) "0084B4"
+        ["profile_sidebar_border_color"]=>
+        string(6) "FFFFFF"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "DDEEF6"
+        ["profile_text_color"]=>
+        string(6) "333333"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#26 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(2) {
+          [0]=>
+          object(stdClass)#27 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+          [1]=>
+          object(stdClass)#28 (5) {
+            ["screen_name"]=>
+            string(5) "sjokz"
+            ["name"]=>
+            string(16) "Eefje Depoortere"
+            ["id"]=>
+            int(96625583)
+            ["id_str"]=>
+            string(8) "96625583"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(9)
+              [1]=>
+              int(15)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "pl"
+    }
+    [3]=>
+    object(stdClass)#29 (23) {
+      ["metadata"]=>
+      object(stdClass)#30 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 04:58:16 +0000 2014"
+      ["id"]=>
+      float(4.3455221626412E+17)
+      ["id_str"]=>
+      string(18) "434552216264118273"
+      ["text"]=>
+      string(69) "@dscarra Is he going to be replaced by @CrsStvicious while he's gone?"
+      ["source"]=>
+      string(83) "<a href="https://about.twitter.com/products/tweetdeck" rel="nofollow">TweetDeck</a>"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      float(4.3455131463936E+17)
+      ["in_reply_to_status_id_str"]=>
+      string(18) "434551314639364096"
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#31 (40) {
+        ["id"]=>
+        int(229323943)
+        ["id_str"]=>
+        string(9) "229323943"
+        ["name"]=>
+        string(8) "Daf Dude"
+        ["screen_name"]=>
+        string(7) "Dafnier"
+        ["location"]=>
+        string(19) "Downtown everywhere"
+        ["description"]=>
+        string(57) "League player,  history major and all around chill person"
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#32 (1) {
+          ["description"]=>
+          object(stdClass)#33 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(37)
+        ["friends_count"]=>
+        int(111)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Wed Dec 22 03:32:50 +0000 2010"
+        ["favourites_count"]=>
+        int(1345)
+        ["utc_offset"]=>
+        int(-18000)
+        ["time_zone"]=>
+        string(26) "Eastern Time (US & Canada)"
+        ["geo_enabled"]=>
+        bool(true)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(2126)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "1A1B1F"
+        ["profile_background_image_url"]=>
+        string(48) "http://abs.twimg.com/images/themes/theme9/bg.gif"
+        ["profile_background_image_url_https"]=>
+        string(49) "https://abs.twimg.com/images/themes/theme9/bg.gif"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(74) "http://pbs.twimg.com/profile_images/418559060464521216/WkMhPOdf_normal.png"
+        ["profile_image_url_https"]=>
+        string(75) "https://pbs.twimg.com/profile_images/418559060464521216/WkMhPOdf_normal.png"
+        ["profile_banner_url"]=>
+        string(58) "https://pbs.twimg.com/profile_banners/229323943/1392231968"
+        ["profile_link_color"]=>
+        string(6) "2FC2EF"
+        ["profile_sidebar_border_color"]=>
+        string(6) "181A1E"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "252429"
+        ["profile_text_color"]=>
+        string(6) "666666"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#34 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(2) {
+          [0]=>
+          object(stdClass)#35 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+          [1]=>
+          object(stdClass)#36 (5) {
+            ["screen_name"]=>
+            string(12) "CrsStvicious"
+            ["name"]=>
+            string(16) "Crs Saintvicious"
+            ["id"]=>
+            int(436782436)
+            ["id_str"]=>
+            string(9) "436782436"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(39)
+              [1]=>
+              int(52)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+    [4]=>
+    object(stdClass)#37 (23) {
+      ["metadata"]=>
+      object(stdClass)#38 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 04:58:11 +0000 2014"
+      ["id"]=>
+      float(4.34552196928E+17)
+      ["id_str"]=>
+      string(18) "434552196928000000"
+      ["text"]=>
+      string(44) "@dscarra What do you do when ranked is down?"
+      ["source"]=>
+      string(3) "web"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      NULL
+      ["in_reply_to_status_id_str"]=>
+      NULL
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#39 (40) {
+        ["id"]=>
+        int(1939237231)
+        ["id_str"]=>
+        string(10) "1939237231"
+        ["name"]=>
+        string(15) "DragonwarriorXI"
+        ["screen_name"]=>
+        string(14) "GamingStudios1"
+        ["location"]=>
+        string(0) ""
+        ["description"]=>
+        string(22) "http://t.co/0z8rYJk8Xv"
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#40 (1) {
+          ["description"]=>
+          object(stdClass)#41 (1) {
+            ["urls"]=>
+            array(1) {
+              [0]=>
+              object(stdClass)#42 (4) {
+                ["url"]=>
+                string(22) "http://t.co/0z8rYJk8Xv"
+                ["expanded_url"]=>
+                string(40) "http://www.youtube.com/gamingstudios1234"
+                ["display_url"]=>
+                string(29) "youtube.com/gamingstudios1…"
+                ["indices"]=>
+                array(2) {
+                  [0]=>
+                  int(0)
+                  [1]=>
+                  int(22)
+                }
+              }
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(2)
+        ["friends_count"]=>
+        int(6)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Sun Oct 06 00:06:45 +0000 2013"
+        ["favourites_count"]=>
+        int(1)
+        ["utc_offset"]=>
+        NULL
+        ["time_zone"]=>
+        NULL
+        ["geo_enabled"]=>
+        bool(false)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(307)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "C0DEED"
+        ["profile_background_image_url"]=>
+        string(48) "http://abs.twimg.com/images/themes/theme1/bg.png"
+        ["profile_background_image_url_https"]=>
+        string(49) "https://abs.twimg.com/images/themes/theme1/bg.png"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(99) "http://pbs.twimg.com/profile_images/378800000554479911/dd5e9ae2663631a905636ea2df01234a_normal.jpeg"
+        ["profile_image_url_https"]=>
+        string(100) "https://pbs.twimg.com/profile_images/378800000554479911/dd5e9ae2663631a905636ea2df01234a_normal.jpeg"
+        ["profile_banner_url"]=>
+        string(59) "https://pbs.twimg.com/profile_banners/1939237231/1381108800"
+        ["profile_link_color"]=>
+        string(6) "0084B4"
+        ["profile_sidebar_border_color"]=>
+        string(6) "C0DEED"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "DDEEF6"
+        ["profile_text_color"]=>
+        string(6) "333333"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(true)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#43 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#44 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+    [5]=>
+    object(stdClass)#45 (23) {
+      ["metadata"]=>
+      object(stdClass)#46 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 04:56:12 +0000 2014"
+      ["id"]=>
+      float(4.3455169669434E+17)
+      ["id_str"]=>
+      string(18) "434551696694337536"
+      ["text"]=>
+      string(89) "@dscarra Saw this too and was surprised. He's not playing because of passport issues? -_-"
+      ["source"]=>
+      string(3) "web"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      float(4.3455131463936E+17)
+      ["in_reply_to_status_id_str"]=>
+      string(18) "434551314639364096"
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#47 (39) {
+        ["id"]=>
+        int(371821327)
+        ["id_str"]=>
+        string(9) "371821327"
+        ["name"]=>
+        string(2) "AJ"
+        ["screen_name"]=>
+        string(12) "Solo_Penguin"
+        ["location"]=>
+        string(13) "The Interwebs"
+        ["description"]=>
+        string(17) "I play the vidya."
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#48 (1) {
+          ["description"]=>
+          object(stdClass)#49 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(234)
+        ["friends_count"]=>
+        int(112)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Sun Sep 11 15:46:02 +0000 2011"
+        ["favourites_count"]=>
+        int(314)
+        ["utc_offset"]=>
+        int(-25200)
+        ["time_zone"]=>
+        string(27) "Mountain Time (US & Canada)"
+        ["geo_enabled"]=>
+        bool(false)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(13239)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "131516"
+        ["profile_background_image_url"]=>
+        string(49) "http://abs.twimg.com/images/themes/theme14/bg.gif"
+        ["profile_background_image_url_https"]=>
+        string(50) "https://abs.twimg.com/images/themes/theme14/bg.gif"
+        ["profile_background_tile"]=>
+        bool(true)
+        ["profile_image_url"]=>
+        string(75) "http://pbs.twimg.com/profile_images/428708612546904066/jJHZ62qC_normal.jpeg"
+        ["profile_image_url_https"]=>
+        string(76) "https://pbs.twimg.com/profile_images/428708612546904066/jJHZ62qC_normal.jpeg"
+        ["profile_link_color"]=>
+        string(6) "009999"
+        ["profile_sidebar_border_color"]=>
+        string(6) "EEEEEE"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "EFEFEF"
+        ["profile_text_color"]=>
+        string(6) "333333"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#50 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#51 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+    [6]=>
+    object(stdClass)#52 (23) {
+      ["metadata"]=>
+      object(stdClass)#53 (2) {
+        ["result_type"]=>
+        string(6) "recent"
+        ["iso_language_code"]=>
+        string(2) "en"
+      }
+      ["created_at"]=>
+      string(30) "Sat Feb 15 04:55:10 +0000 2014"
+      ["id"]=>
+      float(4.345514358296E+17)
+      ["id_str"]=>
+      string(18) "434551435829604352"
+      ["text"]=>
+      string(41) "@dscarra Glad to have that sorted out eh?"
+      ["source"]=>
+      string(83) "<a href="https://about.twitter.com/products/tweetdeck" rel="nofollow">TweetDeck</a>"
+      ["truncated"]=>
+      bool(false)
+      ["in_reply_to_status_id"]=>
+      float(4.3455041213841E+17)
+      ["in_reply_to_status_id_str"]=>
+      string(18) "434550412138405889"
+      ["in_reply_to_user_id"]=>
+      int(392513215)
+      ["in_reply_to_user_id_str"]=>
+      string(9) "392513215"
+      ["in_reply_to_screen_name"]=>
+      string(7) "dscarra"
+      ["user"]=>
+      object(stdClass)#54 (40) {
+        ["id"]=>
+        int(38965726)
+        ["id_str"]=>
+        string(8) "38965726"
+        ["name"]=>
+        string(10) "Alex Boehn"
+        ["screen_name"]=>
+        string(10) "seiichisin"
+        ["location"]=>
+        string(5) "Texas"
+        ["description"]=>
+        string(78) "I am a sarcastic person by nature, artist by choice, and gamer by death count."
+        ["url"]=>
+        NULL
+        ["entities"]=>
+        object(stdClass)#55 (1) {
+          ["description"]=>
+          object(stdClass)#56 (1) {
+            ["urls"]=>
+            array(0) {
+            }
+          }
+        }
+        ["protected"]=>
+        bool(false)
+        ["followers_count"]=>
+        int(35)
+        ["friends_count"]=>
+        int(24)
+        ["listed_count"]=>
+        int(0)
+        ["created_at"]=>
+        string(30) "Sun May 10 01:07:32 +0000 2009"
+        ["favourites_count"]=>
+        int(1)
+        ["utc_offset"]=>
+        int(-21600)
+        ["time_zone"]=>
+        string(26) "Central Time (US & Canada)"
+        ["geo_enabled"]=>
+        bool(false)
+        ["verified"]=>
+        bool(false)
+        ["statuses_count"]=>
+        int(2505)
+        ["lang"]=>
+        string(2) "en"
+        ["contributors_enabled"]=>
+        bool(false)
+        ["is_translator"]=>
+        bool(false)
+        ["is_translation_enabled"]=>
+        bool(false)
+        ["profile_background_color"]=>
+        string(6) "1A1B1F"
+        ["profile_background_image_url"]=>
+        string(48) "http://abs.twimg.com/images/themes/theme9/bg.gif"
+        ["profile_background_image_url_https"]=>
+        string(49) "https://abs.twimg.com/images/themes/theme9/bg.gif"
+        ["profile_background_tile"]=>
+        bool(false)
+        ["profile_image_url"]=>
+        string(92) "http://pbs.twimg.com/profile_images/1658562733/l_c801ffac787a7cfc282845d446375ade_normal.jpg"
+        ["profile_image_url_https"]=>
+        string(93) "https://pbs.twimg.com/profile_images/1658562733/l_c801ffac787a7cfc282845d446375ade_normal.jpg"
+        ["profile_banner_url"]=>
+        string(57) "https://pbs.twimg.com/profile_banners/38965726/1356946236"
+        ["profile_link_color"]=>
+        string(6) "2FC2EF"
+        ["profile_sidebar_border_color"]=>
+        string(6) "181A1E"
+        ["profile_sidebar_fill_color"]=>
+        string(6) "252429"
+        ["profile_text_color"]=>
+        string(6) "666666"
+        ["profile_use_background_image"]=>
+        bool(true)
+        ["default_profile"]=>
+        bool(false)
+        ["default_profile_image"]=>
+        bool(false)
+        ["following"]=>
+        bool(false)
+        ["follow_request_sent"]=>
+        bool(false)
+        ["notifications"]=>
+        bool(false)
+      }
+      ["geo"]=>
+      NULL
+      ["coordinates"]=>
+      NULL
+      ["place"]=>
+      NULL
+      ["contributors"]=>
+      NULL
+      ["retweet_count"]=>
+      int(0)
+      ["favorite_count"]=>
+      int(0)
+      ["entities"]=>
+      object(stdClass)#57 (4) {
+        ["hashtags"]=>
+        array(0) {
+        }
+        ["symbols"]=>
+        array(0) {
+        }
+        ["urls"]=>
+        array(0) {
+        }
+        ["user_mentions"]=>
+        array(1) {
+          [0]=>
+          object(stdClass)#58 (5) {
+            ["screen_name"]=>
+            string(7) "dscarra"
+            ["name"]=>
+            string(6) "Scarra"
+            ["id"]=>
+            int(392513215)
+            ["id_str"]=>
+            string(9) "392513215"
+            ["indices"]=>
+            array(2) {
+              [0]=>
+              int(0)
+              [1]=>
+              int(8)
+            }
+          }
+        }
+      }
+      ["favorited"]=>
+      bool(false)
+      ["retweeted"]=>
+      bool(false)
+      ["lang"]=>
+      string(2) "en"
+    }
+  }
+  ["search_metadata"]=>
+  object(stdClass)#59 (8) {
+    ["completed_in"]=>
+    float(0.046)
+    ["max_id"]=>
+    float(4.345575302124E+17)
+    ["max_id_str"]=>
+    string(18) "434557530212401152"
+    ["query"]=>
+    string(12) "to%3Adscarra"
+    ["refresh_url"]=>
+    string(81) "?since_id=434557530212401152&q=to%3Adscarra&result_type=recent&include_entities=1"
+    ["count"]=>
+    int(100)
+    ["since_id"]=>
+    float(4.3455131463936E+17)
+    ["since_id_str"]=>
+    string(18) "434551314639364096"
+  }
+}
