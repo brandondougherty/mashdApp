@@ -24,9 +24,6 @@ $host  = $_SERVER['HTTP_HOST'];
 $host_upper = strtoupper($host);
 $path   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
-// Generates activation code simple 4 digit number
-$activ_code = rand(1000,9999);
-
 $usr_email = $data['email'];
 
 /************ USER EMAIL CHECK ************************************
@@ -54,7 +51,7 @@ $sql_insert = "INSERT into `users`
 			
 mysql_query($sql_insert,$link) or die("Insertion Failed:" . mysql_error());
 $user_Id = mysql_insert_id($link);  
-$md5_id = md5($user_id);
+$md5_id = md5($user_Id);
 mysql_query("update users set md5_id='$md5_id' where id='$user_Id'");
 
 if($user_registration)  {
@@ -79,13 +76,13 @@ THIS IS AN AUTOMATED RESPONSE.
     session_regenerate_id (true); //prevent against session fixation attacks.
 
     // this sets variables in the session 
-	$_SESSION['user_id']= $id;
+	$_SESSION['user_id']= $user_Id;
 	$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 	
 	//update the timestamp and key for cookie
 	$stamp = time();
 	$ckey = GenKey();
-	mysql_query("update users set `ctime`='$stamp', `ckey` = '$ckey' where id='$id'") or die(mysql_error());
+	mysql_query("update users set `ctime`='$stamp', `ckey` = '$ckey' where id='$user_Id'") or die(mysql_error());
 	
 	 $registered = array('user_registered'=>'true');
 

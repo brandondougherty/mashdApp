@@ -168,7 +168,7 @@ if(isset($user_id)) {
               if(isset($data['comments']['data'][$i])){
               $comment = $data['comments']['data'][$i]; 
                 $time = time_elapsed_string(strtotime($comment['created_time']));
-                echo $comment['from']['name'] . ' ' . $comment['message'] . ' - ' . $time;
+                echo '<b>'.$comment['from']['name'] . '</b> ' . $comment['message'] . ' - ' . $time;
                 echo "<br />";
                 
               }

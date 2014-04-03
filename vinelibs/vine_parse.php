@@ -40,7 +40,12 @@ if($vines['liked'] == '1'){
   echo " <button class='button small round vineLike'>Like</button>";
 }
 echo " <button class='button small round vineComment'>Comment</button>";
-echo " <button class='button small round vineRevine'>Revine</button>";
+if($vines['myRepostIdStr'] != '0'){
+  $repostId = $vines['myRepostIdStr'];
+  echo " <button class='button small round deletVineRevine alert' data='" .$repostId. "'>Revine</button>";
+}else{
+  echo " <button class='button small round vineRevine'>Revine</button>";
+}
 echo "<div class='vineStats'>";
 if(!empty($likes)){
       $num_likes = (int)str_replace(' ', '', $likes);

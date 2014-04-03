@@ -302,7 +302,45 @@ app.directive('design', function (){
 			        }});
 			    $(this).removeClass( "deletVineLike alert" ).addClass("likeVine");
 		    });
+		    //REVINE
+		     $(document).on('click', '.vineRevine', function(){
+		     	 var $this = $(this);
+				var id= $this.parent().attr('data');
+		    	console.log(id);
+		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineRevine.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			        success:function(data){
+			        	console.log('Revine sent!');
+			        	//change class of this button to deletInstagramLike
+			        	var response = $.parseJSON(data);
+			        	var repostId = response.repostIdStr;
+			        	console.log(repostId);
+			        	$this.attr('data', repostId);
+			        }});
+			        	$this.removeClass( "vineRevine" ).addClass( "deletVineRevine alert" );
+		      });
 
+		     //UNDO-REVINE
+		     $(document).on('click', '.deletVineRevine', function(){
+				var id= $(this).parent().attr('data');
+				var repostId = $(this).attr('data');
+		    	console.log(id);
+		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineRevine.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id,
+			           		  repostId: repostId
+			           		 },
+			        success:function(){
+			        	console.log('Revine sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+		    	 $(this).removeAttr('data');
+			    $(this).removeClass( "deletVineRevine alert" ).addClass("vineRevine");
+			   
+		    });
 
 			$(document).on('click', '.instaComments', function() {
 			    var currentDiv, pageValue, newPage, newPageid;

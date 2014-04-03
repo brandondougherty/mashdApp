@@ -173,5 +173,64 @@ function deleteVineLike($key,$id)
         curl_close($ch);
 }
 
+function vineRevine($key,$id)
+{
+        // Additional endpoints available from https://github.com/starlock/vino/wiki/API-Reference
+        $url = "https://api.vineapp.com/posts/" . $id . "/repost";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.01',
+                                            'x-vine-client: vinewww/1.0',
+                                          'vine-session-id: '.$key,
+                                         'X-Requested-With: XMLHttpRequest'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 1);
+
+        $result = json_decode(curl_exec($ch), true);
+
+        if (!$result)
+        {
+                echo curl_error($ch);
+        }
+        else
+        {
+                return $result;
+        }
+
+        curl_close($ch);
+}
+
+function deleteVineRevine($key,$id,$repostId)
+{
+        // Additional endpoints available from https://github.com/starlock/vino/wiki/API-Reference
+        $url = "https://api.vineapp.com/posts/" . $id . "/repost/" . $repostId;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.01',
+                                            'x-vine-client: vinewww/1.0',
+                                          'vine-session-id: '.$key,
+                                         'X-Requested-With: XMLHttpRequest'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        $result = json_decode(curl_exec($ch), true);
+
+        if (!$result)
+        {
+                echo curl_error($ch);
+        }
+        else
+        {
+                return $result;
+        }
+
+        curl_close($ch);
+}
 }
 ?>
