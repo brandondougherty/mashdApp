@@ -28,12 +28,20 @@ if(isset($poster_if_revined)){
 echo "<img src='$original_poster_avatar' class='vineAvatar' height = 50px width = 50px > ";
 echo "<span class='vineUsername'>" . $original_poster_username . "</span>"; 
 echo "<span class='vineTime'>" . $the_time . "</span>";
-echo "</div>";
+echo "</div><img src='images/vine_corner_icon.svg' class='cornerIcon' />";
 $video = $vines['videoUrl'];
-                               
-echo "<div class='newVideo'><object src='$video' type=video/mp4 height=100% width=100%></object></div>";
+$thumb = $vines['thumbnailUrl'];                
+echo "<div class='newVideo'><video loop poster='$thumb' controls webkit-playsinline><source src='$video' codecs='avc1, mp4a' height=100% width=100% ></source></video></div>";
 echo "<div class='vineMessage'><h4>" . $description;
-echo "</h4></div><div class='vineStats'>";
+echo "</h4></div>";
+if($vines['liked'] == '1'){
+  echo " <button class='button small round deletVineLike alert'>Like</button>";
+}else{
+  echo " <button class='button small round vineLike'>Like</button>";
+}
+echo " <button class='button small round vineComment'>Comment</button>";
+echo " <button class='button small round vineRevine'>Revine</button>";
+echo "<div class='vineStats'>";
 if(!empty($likes)){
       $num_likes = (int)str_replace(' ', '', $likes);
       if($num_likes > 1){

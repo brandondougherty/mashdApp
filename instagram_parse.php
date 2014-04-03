@@ -15,7 +15,7 @@
               $location = $media->location->name;
             }
             echo "<div class='stickem'><div class='igAvatar'><img src ='$profilepic' width='55' height='55'/>";
-            echo "<span class='instagramUserName'>" . $igposter . "</span><span class='instagramTime'>" . $created_time . "</span></div></div>";
+            echo "<span class='instagramUserName'>" . $igposter . "</span><span class='instagramTime'>" . $created_time . "</span></div><img src='images/instagram_corner_icon.svg' class='cornerIcon' /></div>";
             echo "<br/>";
             /*if(isset($media->location->name)){
               $location = $media->location->name;
@@ -25,12 +25,9 @@
             // output media
             if ($media->type === 'video') {
               // video
-              $poster = $media->images->low_resolution->url;
-              $source = $media->videos->standard_resolution->url;
-              echo "<div><video  width=\"250\" height=\"250\" controls>
-                             <source src=\"{$source}\" type=\"video/mp4\" />
-                             <object data=\"{$source}\" width=\"250\" height=\"250\"></object>
-                           </video></div>";
+              $poster = $media->images->standard_resolution->url;
+              $source = $media->videos->standard_resolution->url . '?';
+              echo "<div class='newVideo'><video controls poster='$poster' webkit-playsinline ><source src='$source' type='mp4' height=100% width=100%></source></video></div>";
             } else {
               // image
               $image = $media->images->standard_resolution->url;
@@ -49,7 +46,14 @@
               $num_of_comments = '0';}
             echo "<div>Likes " . $likes . " - Comments " . $num_of_comments;
             echo "</div>";
-            echo "<div><textarea rows='1' name='instagramComment' class='instagramComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
+            //echo "<div><textarea rows='1' name='instagramComment' class='instagramComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
+           if(!empty($media->user_has_liked)){
+              echo "<button class='button small round deletInstagramLike alert'>Like</button>";
+           }else{
+              echo "<button class='button small round likeInstagram'>Like</button>";
+           }
+              echo "<button class='button small round commentInstagram'>Comment</button>";
+    
             if(!empty($media->comments->data)){
               echo "<div class='commentsContainer'>";
               echo "<div class='1'>";

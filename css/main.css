@@ -1,6 +1,16 @@
 body{
 	background: #F8ECC2;
 }
+.loginOptions{
+	text-align: center;
+}
+.socialAccounts{
+	margin: 9%;
+}
+.socialAccounts a{
+	width: 60%;
+}
+
 #background {
 	position: absolute;
 	top: 39%;
@@ -119,6 +129,10 @@ padding: 1%;
 	font-weight: 500;
 	margin: 1%;
 }
+.vineHeader{
+	width: 90%;
+	float: left;
+}
 .vineHeader,.twitterUserName{
 	font-weight: 700;
 }
@@ -133,7 +147,7 @@ border-top: 1px solid lightgray;
 }
 .igAvatar{
 	float: left;
-	width:100%;
+	width:92%;
 	margin: 1%
 }
 .instagramUserName{
@@ -142,7 +156,7 @@ border-top: 1px solid lightgray;
 }
 .instagramTime{
 	float: right;
-	margin: 5% 4% 4% 4%;
+	margin: 3% 4% 4% 4%;
 }
 img{
 	/*display: inline-block;*/
@@ -162,6 +176,10 @@ img{
 .comment {
 	font-size: 18px;
 	margin: 1%;
+}
+.twitterHeader{
+	width: 90%;
+	float: left;
 }
 .twitterPost{
 	background-color: #E5F2F7;

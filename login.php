@@ -12,17 +12,11 @@ foreach($incoming as $key => $value) {
 //var_dump($_POST);
 $user_email = $data['username'];
 $pass = $data['password'];
-
-
-if (strpos($user_email,'@') === false) {
-    $user_cond = "user_name='$user_email'";
-} else {
-      $user_cond = "user_email='$user_email'";
-    
-}
+$user_cond = "user_email='$user_email'";
+   
 
 	
-$result = mysql_query("SELECT `id`,`pwd`,`full_name`,`approved`,`user_level` FROM users WHERE 
+$result = mysql_query("SELECT `id`,`pwd` FROM users WHERE 
            $user_cond
 			AND `banned` = '0'
 			") or die (mysql_error()); 
@@ -31,28 +25,17 @@ $num = mysql_num_rows($result);
   // Match row found with more than 1 results  - the user is authenticated. 
     if ( $num > 0 ) { 
 	
-	list($id,$pwd,$full_name,$approved,$user_level) = mysql_fetch_row($result);
-	
-	if(!$approved) {
-	//$msg = urlencode("Account not activated. Please check your email for activation code");
-	$err[] = "Account not activated. Please check your email for activation code";
-	return json_encode($err);
-	//header("Location: login.php?msg=$msg");
-	 //exit();
-	 }
-	 
-		//check against salt
+	list($id,$pwd) = mysql_fetch_row($result);
+	//check against salt
 	if ($pwd === PwdHash($pass,substr($pwd,0,9))) { 
-	if(empty($err)){			
+		if(empty($err)){			
 
      // this sets session and logs user in  
        session_start();
 	   session_regenerate_id (true); //prevent against session fixation attacks.
 
 	   // this sets variables in the session 
-		$_SESSION['user_id']= $id;  
-		$_SESSION['user_name'] = $full_name;
-		$_SESSION['user_level'] = $user_level;
+		$_SESSION['user_id']= $id;
 		$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 		
 		//update the timestamp and key for cookie
@@ -74,14 +57,13 @@ $num = mysql_num_rows($result);
 		else
 		{
 		//$msg = urlencode("Invalid Login. Please try again with correct user email and password. ");
-		$err[] = "Invalid Login. Please try again with correct user email and password.";
-		return json_encode($err);
-		  var_dump($access);
+		$err = "Invalid Login. Please try again with correct user email and password.";
+		echo $err;
 		//header("Location: login.php?msg=$msg");
 		}
 	} else {
-		$err[] = "Error - Invalid login. No such user exists";
-		return json_encode($err);
+		$err = "Error - Invalid login. No such user exists";
+		echo $err;
 
 	  }		
 

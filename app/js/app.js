@@ -20,6 +20,11 @@ var app = angular.module("app", ['ui.router']).config(function( $stateProvider, 
     }).state("vineLogin", {
       url: "/vineLogin",
       templateUrl: "vinelibs/vine_redirect.html"
+    })
+ 	.state("register", {
+      url: "/register",
+      templateUrl: "register.html",
+      controller: "RegisterController",
     });
     $urlRouterProvider
         .otherwise('/login');
@@ -65,8 +70,9 @@ app.controller('MyAccountController', function($http, $rootScope) {
 });
 
 app.controller('SocialController', function($scope, $http, $rootScope) {
-	if($rootScope.facebook ===undefined){
+	if($rootScope.facebook === undefined){
 
+	var alert = new RegExp('Logout');
 	var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
          $rootScope.facebook = data.facebook;
@@ -80,12 +86,32 @@ app.controller('SocialController', function($scope, $http, $rootScope) {
 
          $scope.facebookURL = $rootScope.facebook;
          $scope.facebookURLInOrOut =  'Facebook Log' + $rootScope.facebookIO;
+          console.log(alert.test($scope.facebookURLInOrOut));
+          if(alert.test($scope.facebookURLInOrOut)){
+          	$scope.alertFB = 'alert';
+          	$rootScope.alertFB = 'alert';
+          }
          $scope.twitterURL = $rootScope.twitter;
          $scope.twitterURLInOrOut = 'Twitter Log' + $rootScope.twitterIO;
+          console.log(alert.test($scope.twitterURLInOrOut));
+          if(alert.test($scope.twitterURLInOrOut)){
+          	$scope.alertTW = 'alert';
+          	$rootScope.alertTW = 'alert';
+          }
          $scope.instagramURL = $rootScope.instagram;
          $scope.instagramURLInOrOut = 'Instagram Log' + $rootScope.instagramIO;
+          console.log(alert.test($scope.instagramURLInOrOut));
+          if(alert.test($scope.instagramURLInOrOut)){
+          	$scope.alertIG = 'alert';
+          	$rootScope.alertIG = 'alert';
+          }
          $scope.vineURL = $rootScope.vine;
          $scope.vineURLInOrOut = 'Vine Log' + $rootScope.vineIO;
+          console.log(alert.test($scope.vineURLInOrOut));
+          if(alert.test($scope.vineURLInOrOut)){
+          	$scope.alertVI = 'alert';
+          	$rootScope.alertVI = 'alert';
+          }
 
          console.log($rootScope.facebook);
 		});
@@ -94,31 +120,53 @@ app.controller('SocialController', function($scope, $http, $rootScope) {
        $scope.twitterURL = $rootScope.twitter;
        $scope.instagramURL = $rootScope.instagram;
        $scope.vineURL = $rootScope.vine;
+       $scope.alertFB = $rootScope.alertFB;
+       $scope.alertTW = $rootScope.alertTW;
+       $scope.alertIG = $rootScope.alertIG;
+       $scope.alertVI = $rootScope.alertVI;
+          
         if($rootScope.facebookIO === undefined){
         	$scope.facebookURLInOrOut = 'Facebook';
         }else{
-          $scope.facebookURLInOrOut =  'Facebook Log' + $rootScope.facebookIO;
+          $scope.facebookURLInOrOut =  'Facebook Log' + $rootScope.facebookIO;          
      	}
      	if($rootScope.twitterIO === undefined){
         	$scope.twitterURLInOrOut = 'Twitter';
         }else{
           $scope.twitterURLInOrOut =  'Twitter Log' + $rootScope.twitterIO;
+          
      	}
         if($rootScope.instagramIO === undefined){
         	$scope.instagramURLInOrOut = 'Instagram';
         }else{
           $scope.instagramURLInOrOut =  'Instagram Log' + $rootScope.instagramIO;
+          
      	}
      	if($rootScope.vineIO === undefined){
         	$scope.vineURLInOrOut = 'Vine';
         }else{
           $scope.vineURLInOrOut =  'Vine Log' + $rootScope.vineIO;
+          
      	}
          console.log($rootScope.facebook);
-
+          console.log($scope.facebookURL);
+          console.log($rootScope.facebookIO);
 });
 
+app.controller('RegisterController', function($scope, $http,$location, $rootScope, MashdLogin) {
+	$scope.regCredentials = {email : "", password: ""};
 
+	$scope.register = function(){
+		MashdLogin.register($scope.regCredentials).success(function(response){
+			if(response.user_registered === 'true'){
+				//redirect to social page to start signing into accounts
+				$location.path('/social');
+			}else if(response.user_registered === 'false'){
+				$scope.failPrompt = response.error;
+			}
+		});
+	}
+});
 
 app.factory('MashdLogin', function($http, $location){
 	return{
@@ -132,6 +180,14 @@ app.factory('MashdLogin', function($http, $location){
 		},
 		logout: function(){
 			return $http.get('http://localhost/MashdApp/www/logout.php');
+		},
+		register: function(credentials){
+			return $http({
+				method: 'POST',
+			    url: 'http://localhost/MashdApp/www/register.php',
+			    data: credentials,
+			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			});
 		}
 	};
 });
@@ -154,19 +210,99 @@ app.directive('design', function (){
 			$(document).on('click', '.loadmorefeed', function() {
 		    $.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineajax.php",success:function(result){
 		      $("#myDiv").html(result);
-		      var elem = document.getElementById('ajaxbutton1');
-		    elem.parentNode.removeChild(elem);
+		      
 		    }});
 		  });
+			//fb like
+			$(document).on('click', '.fbLike', function(){
+				var id= $(this).attr('data');
+		    	console.log(id);
+		    
+			$.ajax({url:"http://localhost/MashdApp/www/facebooklibs/fbLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id, 
+			           	  method:'POST'},
+			      success:function(){
+			        console.log('like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "fbLike" ).addClass( "deleteFbLike alert" );
+		    });
+		    $(document).on('click', '.deleteFbLike', function(){
+				var id= $(this).attr('data');
+		    	console.log(id);
+		    
+			$.ajax({url:"http://localhost/MashdApp/www/facebooklibs/fbLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id,
+			           	  method:'DELETE'},
+			      success:function(){
+			        console.log('like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "deleteFbLike alert" ).addClass( "fbLike");
+		    });
+			//INSTAGRAM LIKE/remove likeInstagram--------------------------------------------------------+
+		$(document).on('click', '.likeInstagram', function(){
+				var id= $(this).parent().attr('group');
+		    	console.log(id);
+		    
+			$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/instagramLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			      success:function(){
+			        console.log('like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "likeInstagram" ).addClass( "deletInstagramLike alert" );
+		    });
+		    //REMOVE
+		    $(document).on('click', '.deletInstagramLike', function(){
+				var id= $(this).parent().attr('group');
+		    	console.log(id);
+		    	$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/delete_instagramLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			        success:function(){
+			        	console.log('delete like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "deletInstagramLike alert" ).addClass("likeInstagram");
+		    });
 
-			$(document).on('click', '.loadMoreFeed', function() {
-			    pageNum = parseFloat($('.myDiv').last().attr('data'));
-			    newPageNum = pageNum + 1;
-			    $.ajax({url:"http://localhost/MashdApp/www/instagramlibs/instagram_load_more_feed_ajax.php",success:function(result){
-			      $('div.myDiv[data="' + pageNum + '"]').after("<div class='myDiv' data='" + newPageNum + "'>&nbsp</div>");
-			      $('div.myDiv[data="' + newPageNum + '"]').html(result);
-			    }});
-			  });
+		    //VINE LIKE/COMMENT/REVINE----------------------------
+		    $(document).on('click', '.vineLike', function(){
+				var id= $(this).parent().attr('data');
+		    	console.log(id);
+		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			        success:function(){
+			        	console.log('like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "likeVine" ).addClass( "deletVineLike alert" );
+		    });
+		    //REMOVE
+		    $(document).on('click', '.deletVineLike', function(){
+				var id= $(this).parent().attr('data');
+		    	console.log(id);
+		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineLike.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			        success:function(){
+			        	console.log('delete like sent!');
+			        	//change class of this button to deletInstagramLike
+			        }});
+			    $(this).removeClass( "deletVineLike alert" ).addClass("likeVine");
+		    });
+
 
 			$(document).on('click', '.instaComments', function() {
 			    var currentDiv, pageValue, newPage, newPageid;

@@ -42,7 +42,7 @@ echo "<div timestamp='$twitterCreated' class='stickem-container'>";
       echo "<img src='$img' style='border-radius: 10%;' />";
       echo "<span class='twitterUserName'>" . $user_name;
       echo "</span><span class='twitterRealName'> @" . $user_profile_name;
-      echo "</span></div><div class='twitterTweet'>";
+      echo "</span></div><img src='images/twitter_corner_icon.svg' class='cornerIcon' /><div class='twitterTweet'>";
       echo $tweet;
       echo "</div>";
       if(isset($twitter->entities->media)){
@@ -76,7 +76,7 @@ echo "<div timestamp='$twitterCreated' class='stickem-container'>";
       echo "<div class='twitterHeader stickem'><img src='$img' style='border-radius: 10%;' />";
       echo "<span class='twitterUserName'>" . $user_name;
       echo "</span><span class='twitterRealName'> @" . $user_profile_name;
-      echo "</span></div><div class='twitterTweet'>";
+      echo "</span></div><img src='images/twitter_corner_icon.svg' class='cornerIcon' /><div class='twitterTweet'>";
       echo $tweet;
       echo "</div>";
       if(isset($twitter->entities->media)){

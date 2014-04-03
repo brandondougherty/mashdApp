@@ -24,7 +24,7 @@ if (isset($_SESSION['instagram'])) {
   $data = $instagram->setAccessToken($_SESSION['instagram']);
   // now you have access to all authenticated user methods
   $ig_username = $instagram->getUser();
-  $result = $instagram->getUserFeed(20);
+  $result = $instagram->getUserFeed(10);
   
   $instagram->savePackage($result);
 

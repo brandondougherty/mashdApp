@@ -5,7 +5,12 @@ if(isset($user_id)) {
 
       // We have a user ID, so probably a logged in user.
       // If not, we'll get an exception, which we handle below.
-        foreach($ret_obj['data'] as $the_post){ 
+        $likes = $facebook->api(array(
+            'method' => 'fql.query',
+            'query' => "SELECT object_id FROM like WHERE user_id = me() LIMIT 10"
+        ));
+       
+        foreach($ret_obj['data'] as $the_post){
           $fbCreated = strtotime($the_post['created_time']); 
           echo "<div timestamp='$fbCreated'>";
           echo "<div class='fbPost' >";
@@ -18,6 +23,8 @@ if(isset($user_id)) {
 ###########   Printing USERS PROFILE PICTURE
           echo "<img src='$pic'/>";
 ############
+          //$likeLink = $data['link'];
+          //echo "<div class='fb-like' data-href='" . $likeLink. "' data-width='10px' data-layout='button_count' data-action='like' data-show-faces='false' data-share='true'></div>";
 ###########   Printing TITLE OF POST (POSTERS NAME, OR THE "STORY TITLE")
           if (empty($data['story'])){
               if(isset($data['application']['name']) && $data['application']['name'] === "Instagram"){
@@ -39,8 +46,8 @@ if(isset($user_id)) {
               include 'facebooklibs/likes_a_link.php';##############NOT STARTED
             }elseif(preg_match("/shared a link/",$data['story'])){
               include 'facebooklibs/shared_a_link.php';
-            }elseif(preg_match("/was tagged in a link/",$data['story'])){
-              include 'facebooklibs/was_tagged_in_a_link.php';##############NOT STARTED
+            }elseif(preg_match("/was tagged in /",$data['story'])){
+              include 'facebooklibs/was_tagged.php';
             }elseif(preg_match("/likes a photo/",$data['story'])){
               include 'facebooklibs/likes_a_photo.php';
             }elseif(preg_match("/added/",$data['story']) && preg_match("/photo/",$data['story'])){
@@ -82,7 +89,7 @@ if(isset($user_id)) {
               <meta charset='utf-8'>
             </head>
             <body>
-              <div>
+              <div class='newVideo'>
                 <span>
                   <object type='application/x-shockwave-flash' data=" . $youtube_link2 . " height='224' width='398'>
                   </object>
@@ -94,10 +101,7 @@ if(isset($user_id)) {
 
         }elseif ((isset($data['source'])) && (preg_match("/.3g2|.mp4|.3gp|.gpp|.asf|.avi|.dat|.divx|.dv|.f4v|.flv|.m2ts|.m4v|.mkv|.mod|.mov|.mp4|.mpe|.mpeg|.mpeg4|.mpg|.mts|.nsv|.ogm|.ogv|.qt|.tod|.ts|.vob|.wmv/",$data['source']))){
           $video_up = $data['source'];
-          echo "<video controls >
-            <source src='$video_up' type='video/mp4'/>
-            <object data='$video_up'></object>
-          </video>";
+          echo "<div class='newVideo'><object data='$video_up' type='application/x-shockwave-flash' height=100% width=100%></object></div>";
 
         }elseif(isset($data['picture']) && preg_match('/fbexternal/', $data['picture'])){
               $urlOfExternal = preg_replace('/.*url=/', '', $data['picture']);
@@ -129,7 +133,7 @@ if(isset($user_id)) {
             $big_num = preg_replace('/\_s..../', '', $data['picture']);
             $med_num = preg_replace('/.*[\/]/', '', $big_num);
             $imglink = 'https://scontent-b-pao.xx.fbcdn.net/hphotos-prn1/' .$med_num. '_n.jpg';
-            echo "<img src='$imglink' width='400px'/>";
+            echo "<img src='$imglink' />";
           }
 
         }
@@ -138,7 +142,25 @@ if(isset($user_id)) {
 ###########   END PRINTS THE YOUTUBE VIDEO, OR A DIRECTLY UPLOADED VIDEO, OR PICTURE   
           echo "<br/>";
           $post_time = time_elapsed_string($fbCreated);
-          echo "Like - Comment - Share - " . $post_time . " <br />";
+          if(isset($data['object_id'])){
+            $obj_id = $data['object_id'];
+          }else{
+            $obj_id = preg_replace('/.*_/', '', $data['id']);
+          }
+          $true='0';
+          foreach($likes as $checkLike){
+            if($checkLike['object_id'] === $obj_id){
+              $true = '1';
+            }
+          } 
+          if($true=='1'){
+            echo "<button class='deleteFbLike button round alert' data='".$obj_id."'>Like</button>";
+          }else{
+            echo "<button class='fbLike button round' data='".$obj_id."'>Like</button>";
+          }
+          echo " <button class='fbComment button round' data='".$obj_id."'>Comment</button>";
+          echo "<button class='fbShare button round' data='".$obj_id."'>Share</button>";
+          echo $post_time . " <br />";
           //echo "<textarea rows='1' name='fbComment' class='fbComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
           if(isset($data['comments'])){
             $i = 0;
@@ -153,7 +175,7 @@ if(isset($user_id)) {
             $i++;
             }
           }
-          //print_r($data);
+         //print_r($data);
           echo "</div>";
           echo "</div>";
 

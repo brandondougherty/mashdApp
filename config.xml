@@ -23,7 +23,6 @@
     <feature name="Media">
         <param name="ios-package" value="CDVSound" />
     </feature>
-    <preference name="AllowInlineMediaPlayback" value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="true"/>
-    
+    <preference name="allowsInlineMediaPlayback" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false"/>
 </widget>
