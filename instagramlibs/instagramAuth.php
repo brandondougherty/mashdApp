@@ -26,7 +26,7 @@ if (isset($_SESSION['instagram'])) {
   $ig_username = $instagram->getUser();
   $result = $instagram->getUserFeed(10);
   
-  $instagram->savePackage($result);
+  $instagram->savePackage($result->pagination);
 
   $_SESSION['igObject'] = $instagram->getPackage();    
   

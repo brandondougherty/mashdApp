@@ -33,6 +33,41 @@ function vineAuth($username,$password)
 
         curl_close($ch);
 }
+function vineTwitterAuth($twitterOauthToken,$twitterOauthSecret)
+{
+        $loginUrl = "https://vine.co/api/users/authenticate/twitter";
+        $twitterOauthToken = urlencode($twitterOauthToken);
+        $twitterOauthSecret = urlencode($twitterOauthSecret);
+        //$token = sha1($username); // I believe this field is currently optional, but always sent via the app
+        
+        $postFields = "twitterOauthToken=$twitterOauthToken&twitterOauthSecret=$twitterOauthSecret"; 
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $loginUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.01',
+                                            'x-vine-client: vinewww/1.0',
+                                         'X-Requested-With: XMLHttpRequest'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = json_decode(curl_exec($ch));
+
+        if (!$result)
+        {
+                curl_error($ch);
+        }
+        else
+        {
+                // Key aLso contains numeric userId as the portion of the string preceding the first dash
+                return $result; 
+        }
+
+        curl_close($ch);
+}
 
 function vineTimeline($key)
 {

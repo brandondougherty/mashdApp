@@ -1,7 +1,4 @@
 <?php 
-
-if (isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
-
 foreach($records['data']['records'] as $vines){
   if(isset($vines['repost']['username']) && isset($vines['repost']['created']))
   {
@@ -94,6 +91,4 @@ if(!empty($num_comments)){
 
     echo "</div></div></div></div>";
 }
-
-}#End If isset
 ?>

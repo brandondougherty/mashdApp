@@ -5,8 +5,8 @@
 <section>
 <div class="stickem-container">
 <div class="stickem">
-<ul class="left options ">
-  <a data-dropdown="drop2" class="menu-icon"><span></span></a><br>
+<ul class="left options menubar">
+  <a data-dropdown="drop2" class="menu-icon radius"><span></span></a><br>
   <ul id="drop2" class="f-dropdown" data-dropdown-content>
   <li><a href="mysettings.php">Settings</a></li>
   <li><a ui-sref="social">Social Accounts</a></li>
@@ -14,7 +14,8 @@
   </ul> 
 </ul>
 
-     <h3 id="mashdUser">Mash'D</h3>
+    <span id="mashdUser">Mash'D</span>
+<a ng-click="reload()" class="button radius reload"><img src="images/reload.svg"/></a>
  </div>
 </div>
 <!--<?php 

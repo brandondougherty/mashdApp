@@ -45,7 +45,10 @@ app.controller('LoginController', function($scope, $location, MashdLogin) {
 	}
 });
 
-app.controller('MyAccountController', function($http, $rootScope) {
+app.controller('MyAccountController', function($http, $rootScope, $scope,$window) {
+	$scope.reload =function(){
+               $window.location.reload(); 
+           }
 	$http.get('http://localhost/MashdApp/www/social_accounts_include.php').success(function(result){
 				$('.brandon').html(result);
 	});
@@ -208,8 +211,8 @@ app.directive('design', function (){
   			});
 
 			$(document).on('click', '.loadmorefeed', function() {
-		    $.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineajax.php",success:function(result){
-		      $("#myDiv").html(result);
+		    $.ajax({url:"http://localhost/MashdApp/www/twitterlibs/twitterMoreFeed.php",success:function(result){
+		      $(".mainContainer").append(result);
 		      
 		    }});
 		  });

@@ -1,12 +1,11 @@
 <?php 
-if (isset ($_SESSION['access_token'])){
-$access_token = $_SESSION['access_token'];
-
-$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-$method = 'statuses/home_timeline.json?count=10';
-$the_response = $connection->get($method);
-
+//var_dump($the_response);
+$m=0;
 foreach ($the_response as $twitter){
+  $m++;
+  if($m==11){
+    //do nothing
+  }else{
   $poster_id = $twitter->user->screen_name;
   $post_id = $twitter->id_str;
   $method =$poster_id . '/status/' . $post_id;
@@ -96,6 +95,5 @@ echo "<div timestamp='$twitterCreated' class='stickem-container'>";
     
     echo "</div></div>";
   }
-}
-
+  }
 ?>

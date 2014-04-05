@@ -1,6 +1,17 @@
 body{
 	background: #F8ECC2;
 }
+a.menu-icon{
+	border-radius: 15%;
+}
+.menubar{
+	height: 45px;
+}
+.reload{
+	width: 2.8125rem;
+padding: 10px;
+float: right;
+}
 .loginOptions{
 	text-align: center;
 }
@@ -62,13 +73,10 @@ background-color:rgba(7, 7, 7, 0.93);
 
 }
 #mashdUser{
-	text-align: center;
-	line-height: 2;
-	font-weight: 800;
-	float: right;
-	margin-right: 20%;
-	height: 35px;
-	width: 10%;
+font-weight: bolder;
+font-size: 34px;
+line-height: 1.3;
+padding-left: 4%;
 }
 .cornerIcon{
 	float: right;
@@ -230,6 +238,13 @@ video embed {
 div > dl > a.faceBookToggle.tiny.small.large.button{
 	margin-left: 0;
 }
+.fbButton{
+	padding: 1% 2%;
+}
+.igButton{
+	padding: 1% 2%;
+	background-color: grey;
+}
 .brandon{
 	display: none;
 	clear: both;
@@ -237,9 +252,9 @@ div > dl > a.faceBookToggle.tiny.small.large.button{
 #pic1
 {
    content: url(../images/loader.gif);
-   height: 200px;
-   width: 200px;
-   margin: 20%% auto;
+   margin: 30% 45%;
+	position: absolute;
+	width: 40px;
 }
 .pleaseLogIn{
 	background-color: #f7f7f9;

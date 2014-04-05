@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include (__DIR__.'/vine.php');
+include (__DIR__.'/twitterauth.php');
 function time_elapsed_string($ptime){
     $etime = time() - $ptime;
     if ($etime < 1){
@@ -20,17 +20,13 @@ foreach ($a as $secs => $str){
         $r = round($d);
         return $r . ' ' . $str . ' ago';
 }}}
-$vine = new Vine;
-$key = $_SESSION['vine_key'];
-$obj = $_SESSION['vine_object'];
-	$page = $obj['page'];
-	$timelineId = $obj['timelineId'];
-//var_dump($obj);
-$records= $vine->nextSetofTimelines($key,$page,$timelineId);
-	 $page = $records['data']['nextPage'];
-     $timelineId = $records['data']['anchorStr'];
-     $package = array('page'=>$page, 'timelineId'=>$timelineId);
+$id= $_SESSION['twitter_object']['max_id'];
+$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+$method = 'statuses/home_timeline.json?count=11&max_id='.$id;
+$the_response = $connection->get($method);
+$max_id = $the_response[10]->id_str;
+$twitterObj = array('max_id'=>$max_id);
+$_SESSION['twitter_object'] = $twitterObj;
 
-    $_SESSION['vine_object'] = $package; 
-include 'vine_parse.php';
+include '../twitter_parse.php';
 ?>

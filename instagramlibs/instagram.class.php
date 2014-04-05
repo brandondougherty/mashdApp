@@ -1,16 +1,5 @@
 <?php
 
-/**
- * Instagram API class
- * API Documentation: http://instagram.com/developer/
- * Class Documentation: https://github.com/cosenary/Instagram-PHP-API/tree/dev
- * 
- * @author Christian Metz
- * @since 30.10.2011
- * @copyright Christian Metz - MetzWeb Networks 2011-2014
- * @version 2.0
- * @license BSD http://www.opensource.org/licenses/bsd-license.php
- */
 class Instagram {
 
   /**
@@ -377,17 +366,17 @@ private $expire;
    * @return mixed
    */
   public function pagination($obj, $limit = 0) {
-    if (true === is_object($obj) && !is_null($obj->pagination)) {
-      if (!isset($obj->pagination->next_url)) {
+    if (true === is_object($obj) && !is_null($obj)) {
+      if (!isset($obj->next_url)) {
         return;
       }
-      $apiCall = explode('?', $obj->pagination->next_url);
+      $apiCall = explode('?', $obj->next_url);
       if (count($apiCall) < 2) {
         return;
       }
       $function = str_replace(self::API_URL, '', $apiCall[0]);
       $auth = (strpos($apiCall[1], 'access_token') !== false);
-      return $this->_makeCall($function, $auth, array('max_id' => $obj->pagination->next_max_id, 'count' => $limit));
+      return $this->_makeCall($function, $auth, array('max_id' => $obj->next_max_id, 'count' => $limit));
     } else {
       throw new Exception("Error: pagination() | This method doesn't support pagination.");
     }

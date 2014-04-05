@@ -1,15 +1,12 @@
   <!--/***********************************************facebook stuff*****/-->    
  <?php 
- 
-if(isset($user_id)) {
-
       // We have a user ID, so probably a logged in user.
       // If not, we'll get an exception, which we handle below.
         $likes = $facebook->api(array(
             'method' => 'fql.query',
             'query' => "SELECT object_id FROM like WHERE user_id = me() LIMIT 10"
         ));
-       
+       var_dump($ret_obj);
         foreach($ret_obj['data'] as $the_post){
           $fbCreated = strtotime($the_post['created_time']); 
           echo "<div timestamp='$fbCreated'>";
@@ -43,7 +40,7 @@ if(isset($user_id)) {
             }elseif(preg_match("/commented on ... own photo/",$data['story'])){
               include 'facebooklibs/commented_on_own_photo.php';
             }elseif(preg_match("/likes a link/",$data['story'])){
-              include 'facebooklibs/likes_a_link.php';##############NOT STARTED
+              //include 'facebooklibs/likes_a_link.php';##############NOT STARTED
             }elseif(preg_match("/shared a link/",$data['story'])){
               include 'facebooklibs/shared_a_link.php';
             }elseif(preg_match("/was tagged in /",$data['story'])){
@@ -154,12 +151,12 @@ if(isset($user_id)) {
             }
           } 
           if($true=='1'){
-            echo "<button class='deleteFbLike button round alert' data='".$obj_id."'>Like</button>";
+            echo "<button class='deleteFbLike button fbButton radius alert' data='".$obj_id."'>Like</button>";
           }else{
-            echo "<button class='fbLike button round' data='".$obj_id."'>Like</button>";
+            echo "<button class='fbLike button fbButton radius' data='".$obj_id."'>Like</button>";
           }
-          echo " <button class='fbComment button round' data='".$obj_id."'>Comment</button>";
-          echo "<button class='fbShare button round' data='".$obj_id."'>Share</button>";
+          echo " <button class='fbComment button fbButton radius' data='".$obj_id."'>Comment</button>";
+          echo "<button class='fbShare button fbButton radius' data='".$obj_id."'>Share</button>";
           echo $post_time . " <br />";
           //echo "<textarea rows='1' name='fbComment' class='fbComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
           if(isset($data['comments'])){
@@ -180,10 +177,4 @@ if(isset($user_id)) {
           echo "</div>";
 
          }
-       
-          ##figure out how to loop through because if the post has multiple photos i
-          ##it will only upload one
-        }
-    
-
 ?>
