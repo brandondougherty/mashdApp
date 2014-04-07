@@ -1,16 +1,115 @@
-<?php
-session_start();
+<?php 
+include 'facebooklibs/auth.php';
+include 'instagramlibs/instagramAuth.php';
+include 'twitterlibs/twitterauth.php';
+include 'vinelibs/vine.php';
+function time_elapsed_string($ptime){
+    $etime = time() - $ptime;
+    if ($etime < 1){
+        return '0 seconds';
+    }
+    $a = array( 12 * 30 * 24 * 60 * 60  =>  'y',
+                30 * 24 * 60 * 60       =>  'month',
+                24 * 60 * 60 * 7        =>  'wk',
+                24 * 60 * 60            =>  'd',
+                60 * 60                 =>  'h',
+                60                      =>  'min',
+                1                       =>  's'
+                );
+    foreach ($a as $secs => $str){
+        $d = $etime / $secs;
+        if ($d >= 1){
+            $r = round($d);
+            return $r . ' ' . $str . ' ago';
+        }
+    }
+}  
 
-require 'instagram.class.php';
-$instagram = new Instagram(array(
-  'apiKey'      => 'af0092092bd347f2948940ef30261dcc',
-  'apiSecret'   => '12b2d103aa884b9c9a4bf377ad4cf279',
-  'apiCallback' => 'http://localhost/MashdApp/www/instagramredirect.php' // must point to success.php
-));
 
-	$package = $_SESSION['igObject'];
-	$result = $instagram->pagination($package, 10);
-	$_SESSION['igObject'] = $result; 
-	include 'instagram_more_feed_ajax_parse.php';
+ if(isset($user)||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
+ {
+ 	//Calls
+ 	if(isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
+       	$vine = new Vine;
+		$key = $_SESSION['vine_key'];
+		$obj = $_SESSION['vine_object'];
+			$page = $obj['page'];
+			$timelineId = $obj['timelineId'];
+		//var_dump($obj);
+		$records= $vine->nextSetofTimelines($key,$page,$timelineId);
+			$page = $records['data']['nextPage'];
+		    $timelineId = $records['data']['anchorStr'];
+		    $package = array('page'=>$page, 'timelineId'=>$timelineId);
+		    $_SESSION['vine_object'] = $package; 
+      }
+     if(isset($user)) {
+      	$nextPage = $_SESSION['fb_object']['next'];
+		$nextPage = preg_replace('/https:\/\/graph.facebook.com/', '', $nextPage); 
+		$ret_obj = $facebook->api($nextPage,'GET');
+		$_SESSION['fb_object'] = $ret_obj['paging'];
+     }
+     if(isset($ig_username)){ 
+       	$package = $_SESSION['igObject'];
+		$result = $instagram->pagination($package, 10);
+		$_SESSION['igObject'] = $result->pagination; 
+     }
+     if (isset ($_SESSION['access_token'])){
+       	$id= $_SESSION['twitter_object']['max_id'];
+		$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+		$method = 'statuses/home_timeline.json?count=11&max_id='.$id;
+		$the_response = $connection->get($method);
+		$max_id = $the_response[10]->id_str;
+		$twitterObj = array('max_id'=>$max_id);
+		$_SESSION['twitter_object'] = $twitterObj;
+     }
+     //Parsing
+     if(isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
+        include 'vinelibs/vine_parse.php'; 
+      }
+     if(isset($user)) {
+        include 'facebook_parse.php';
+     }
+     if(isset($ig_username)){ 
+        include 'instagram_parse.php';
+     }
+     if (isset ($_SESSION['access_token'])){
+        include 'twitter_parse.php';
+     }
+   // echo "<button type='button' class='loadMoreFeed'>Request data</button>";
 
-?>
+   /* echo "<script>$(document).ready(function(){
+      // get array of elements
+      var myArray = $('.brandon > div');
+      var count = 0;
+
+      // sort based on timestamp attribute
+      myArray.sort(function (a, b) {
+          
+          // convert to integers from strings
+          a = parseInt($(a).attr('timestamp'));
+          b = parseInt($(b).attr('timestamp'));
+          count += 2;
+          // compare
+          if(a < b) {
+              return 1;
+          } else if(a > b) {
+              return -1;
+          } else {
+              return 0;
+          }
+      });
+      // put sorted results back on page
+      $('.brandon').append(myArray);
+      });
+  /*$(document).ready(function() {
+      $('section').stickem();
+    });
+$(document).on('click', '.external', function (e) {
+    e.preventDefault();
+    var targetURL = $(this).attr('href');
+
+    window.open(targetURL, '_system');
+});
+</script>";*/
+  }   
+  ?>

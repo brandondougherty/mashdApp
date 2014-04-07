@@ -6,7 +6,7 @@
             'method' => 'fql.query',
             'query' => "SELECT object_id FROM like WHERE user_id = me() LIMIT 10"
         ));
-       var_dump($ret_obj);
+       //var_dump($ret_obj);
         foreach($ret_obj['data'] as $the_post){
           $fbCreated = strtotime($the_post['created_time']); 
           echo "<div timestamp='$fbCreated'>";

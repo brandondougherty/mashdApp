@@ -211,7 +211,8 @@ app.directive('design', function (){
   			});
 
 			$(document).on('click', '.loadmorefeed', function() {
-		    $.ajax({url:"http://localhost/MashdApp/www/twitterlibs/twitterMoreFeed.php",success:function(result){
+			$('.tempScript').remove();
+		    $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",success:function(result){
 		      $(".mainContainer").append(result);
 		      
 		    }});

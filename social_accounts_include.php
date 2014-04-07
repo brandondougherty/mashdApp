@@ -25,8 +25,9 @@ function time_elapsed_string($ptime){
     }
 }  
 if ($user){
-  $user_id = $facebook->getUser();
   $ret_obj = $facebook->api('/me/home?limit=10','GET');
+  $_SESSION['fb_object'] = $ret_obj['paging'];
+  //the paging works but it is kinda wonky, look into this more
 }
 if (isset($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
   $vine = new Vine;
@@ -49,14 +50,14 @@ $twitterObj = array('max_id'=>$max_id);
 $_SESSION['twitter_object'] = $twitterObj;
 
 }  
-  var_dump($_SESSION);
+  //var_dump($_SESSION);
   
-    if($user||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram'])||isset($user_id))
+    if(isset($user)||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
     {
       if (isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
         include 'vinelibs/vine_parse.php'; 
       }
-     if(isset($user_id)) {
+     if(isset($user)) {
         include 'facebook_parse.php';
      }
      if(isset($ig_username)){ 
