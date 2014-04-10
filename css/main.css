@@ -7,10 +7,14 @@ a.menu-icon{
 .menubar{
 	height: 45px;
 }
+.vineLogin{
+	float: right;
+}
 .reload{
 	width: 2.8125rem;
 padding: 10px;
 float: right;
+border-radius: 15%;
 }
 .loginOptions{
 	text-align: center;
@@ -62,6 +66,9 @@ background-color:rgba(7, 7, 7, 0.93);
 
 .brandon{
 	margin-bottom: 24%;
+}
+.loadmorefeed{
+	display: none;	
 }
 .top-bar{
 	height: auto;

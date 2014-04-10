@@ -25,6 +25,11 @@ var app = angular.module("app", ['ui.router']).config(function( $stateProvider, 
       url: "/register",
       templateUrl: "register.html",
       controller: "RegisterController",
+    })
+    .state("twitter", {
+      url: "/twitter",
+      templateUrl: "twitter.html",
+      controller: "TwitterController",
     });
     $urlRouterProvider
         .otherwise('/login');
@@ -44,16 +49,45 @@ app.controller('LoginController', function($scope, $location, MashdLogin) {
 		});
 	}
 });
+app.controller('TwitterController', function(Comments, $rootScope, $scope) {
+	 var posterScreenName = $rootScope.posterScreenName;
+	 var postId = $rootScope.postId;
+	 var extra = $rootScope.extra;
+	 $scope.postId = postId;
+	 $scope.posterName = posterScreenName + extra;
+	Comments.twitter(posterScreenName,postId).success(function(response){
+		$('.comment').append(response);
+	});
+});
 
-app.controller('MyAccountController', function($http, $rootScope, $scope,$window) {
+app.controller('MyAccountController', function($http, $rootScope, $scope,$window,$location,$compile) {
 	$scope.reload =function(){
                $window.location.reload(); 
            }
 	$http.get('http://localhost/MashdApp/www/social_accounts_include.php').success(function(result){
-				$('.brandon').html(result);
+		$('.brandon').html($compile(result)($scope));
 	});
-        	if($rootScope.facebook ===undefined){
-
+	$scope.getTwComments = function(posterScreenName, postId, extraId){
+		console.log(posterScreenName);
+		console.log(postId);
+		$rootScope.posterScreenName = posterScreenName;
+		$rootScope.postId = postId;
+		$rootScope.extra = '';
+		if(extraId){
+			$rootScope.extra = ' @' + extraId;	
+		}
+		$location.path('/twitter');
+	}
+	$scope.getIgComments = function(postId){
+		
+	}
+	$scope.getFbComments = function(postId){
+		
+	}
+	$scope.getViComments = function(postId){
+		
+	}
+       if($rootScope.facebook ===undefined){
 	var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
          $rootScope.facebook = data.facebook;
@@ -154,6 +188,7 @@ app.controller('SocialController', function($scope, $http, $rootScope) {
          console.log($rootScope.facebook);
           console.log($scope.facebookURL);
           console.log($rootScope.facebookIO);
+
 });
 
 app.controller('RegisterController', function($scope, $http,$location, $rootScope, MashdLogin) {
@@ -195,28 +230,118 @@ app.factory('MashdLogin', function($http, $location){
 	};
 });
 
-
-/*app.controller('MyAccountController', function($scope){
-	$scope.$watch( AuthService.isLoggedIn, function (isLoggedIn) {
-    	$scope.isLoggedIn = isLoggedIn;
-	});
-});*/
+app.factory('Comments', function($http, $location){
+	return{
+		twitter: function(posterScreenName, postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/twitterlibs/twittercommentsajax.php',
+					    data: {poster: posterScreenName,
+			                  post: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
+		}
+	};
+});
 
 app.directive('design', function (){
 	return{
 		restrict: "C",
+		controller: function($scope, $compile) {
+			$(document).on('click', '.loadmorefeed', function() {
+			$('.loadmorefeed').remove();
+		    $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",
+		    	success:function(result){
+		      $('.new1').append($compile(result)($scope));
+		      }});
+		  });
+		},
 		link: function(scope,element,attributes){
 			$(function(){
     			$(document).foundation();    
   			});
-
-			$(document).on('click', '.loadmorefeed', function() {
-			$('.tempScript').remove();
-		    $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",success:function(result){
-		      $(".mainContainer").append(result);
-		      
+			
+			
+			//twitter comment on post
+			$(document).on('click', '.send', function() {
+			var id = $(this).attr('data');
+			var message = $('.textarea').val();
+			console.log(id);
+			console.log(message);
+		    $.ajax({url:"http://localhost/MashdApp/www/twitterlibs/comment.php",
+	    			type:'POST',              
+		       dataType:'text',
+		           data: {id: id,
+		           		  status: message},
+		    	success:function(result){
+		      		console.log('comment sent');
 		    }});
 		  });
+			//twitter favorite
+			$(document).on('click', '.twitterFav', function(){
+				var id= $(this).attr('data');
+		    	console.log(id);		    
+			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/favorite.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id,
+			           		  method: 'create'},
+			      success:function(){
+			        console.log('favorite sent!');
+			        }});
+			    $(this).removeClass( "twitterFav" ).addClass( "deleteTwitterFav alert" );
+		    });
+		    //twitter delete favorite
+			$(document).on('click', '.deleteTwitterFav', function(){
+				var id= $(this).attr('data');
+		    	console.log(id);		    
+			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/favorite.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id,
+			           		  method: 'destroy'},
+			      success:function(){
+			        console.log('remove favorite sent!');
+			        }});
+			    $(this).removeClass( "deleteTwitterFav alert" ).addClass( "twitterFav" );
+		    });
+		    //retweet
+		    $(document).on('click', '.twitterRetweet', function(){
+		    	var $this = $(this);
+				var id= $this.attr('data');
+		    	console.log(id);		    
+			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/retweet.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id,
+			           		  method: 'retweet'},
+			      success:function(data){
+			        console.log('retweet sent!');
+			        var response = $.parseJSON(data);
+			        	var repostId = response.id_str;
+			        	console.log(response.id_str);
+			        	$this.attr('data', repostId);
+			        }});
+			    $this.removeClass( "twitterRetweet" ).addClass( "deleteTwitterRetweet alert" );
+		    });
+		     //un-retweet
+		    /*$(document).on('click', '.deleteTwitterRetweet', function(){
+		    	var $this = $(this);
+				var id= $this.attr('data');
+		    	console.log(id);		    
+			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/unRetweet.php",
+			           type:'POST',              
+			       dataType:'text',
+			           data: {id: id},
+			      success:function(data){
+			        console.log('unretweet sent!');
+			        var response = $.parseJSON(data);
+			        	var repostId = response.id_str;
+			        	console.log(repostId);
+			        	$this.attr('data', repostId);
+			       }});
+			    $this.removeClass( "deleteTwitterRetweet alert" ).addClass( "twitterRetweet" );
+		    });*/
 			//fb like
 			$(document).on('click', '.fbLike', function(){
 				var id= $(this).attr('data');
@@ -384,7 +509,7 @@ app.directive('design', function (){
 			    }});
 			});
 
-			$(document).on('click', '.twitterComments', function() {
+			/*$(document).on('click', '.twitterComments', function() {
 			    var currentDiv, pageValue, newPage, newPageid;
 			    posterScreenName = $(this).attr('data');
 			    postId = $(this).attr('data-id');
@@ -397,7 +522,9 @@ app.directive('design', function (){
 			          $('div[data-id="' + postId + '"] .twitterCommentContainer').html(result);
 			          
 			    }});
-			});
+			});*/
+
+			
 
 			$(document).on('click', '.faceBookToggle', function() {
 			    	$('.fbPost').parent().toggle();

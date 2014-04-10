@@ -26,7 +26,7 @@ function time_elapsed_string($ptime){
 }  
 
 
- if(isset($user)||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
+ if(isset($_SESSION['fb_object'])||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
  {
  	//Calls
  	if(isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
@@ -42,7 +42,7 @@ function time_elapsed_string($ptime){
 		    $package = array('page'=>$page, 'timelineId'=>$timelineId);
 		    $_SESSION['vine_object'] = $package; 
       }
-     if(isset($user)) {
+     if(isset($_SESSION['fb_object'])) {
       	$nextPage = $_SESSION['fb_object']['next'];
 		$nextPage = preg_replace('/https:\/\/graph.facebook.com/', '', $nextPage); 
 		$ret_obj = $facebook->api($nextPage,'GET');
@@ -77,9 +77,10 @@ function time_elapsed_string($ptime){
      }
    // echo "<button type='button' class='loadMoreFeed'>Request data</button>";
 
-   /* echo "<script>$(document).ready(function(){
+    echo "<script>$(document).ready(function(){
+      $('.loadmorefeed').show();
       // get array of elements
-      var myArray = $('.brandon > div');
+      var myArray = $('.new1 > div');
       var count = 0;
 
       // sort based on timestamp attribute
@@ -99,8 +100,11 @@ function time_elapsed_string($ptime){
           }
       });
       // put sorted results back on page
-      $('.brandon').append(myArray);
+      $('.new1').append(myArray);
       });
+    $('.new1').addClass('old').removeClass('new1');
+        $('.mainContainer').append('<div class='new1'></div>');
+        $('.mainContainer').append('<button class='loadmorefeed'>Load More</button>');
   /*$(document).ready(function() {
       $('section').stickem();
     });
@@ -110,6 +114,6 @@ $(document).on('click', '.external', function (e) {
 
     window.open(targetURL, '_system');
 });
-</script>";*/
+</script>";
   }   
   ?>

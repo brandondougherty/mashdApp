@@ -1,12 +1,14 @@
 <div>
     <a class="tiny small button radius" href="#/social"><</a>
 <div>
-<h2>Vine Login</h2>
+<div class="large-5 large-centered columns">
+<h2>Vine</h2>
 <!--<a href="http://localhost/MashdApp/www/vinelibs/vineTwitterLogin.php">Login with Twitter?</a><br>-->
 <form action="http://localhost/MashdApp/www/vinelibs/vinelogin.php" method="post" name="vinelogform" >
-	<span>Email</span><input name="vineEmail" type="text" class="required" size=40 placeholder="email address"/>
+	<input name="vineEmail" type="text" class="radius required" size=40 placeholder="Email"/>
 	<br/>
-	<span>Password</span><input name="password" type="password" size=40 placeholder="password"/>
+	<input name="password" type="password" class="radius" size=40 placeholder="Password"/>
 	<br/>
-	<input name="doLogin" type="submit" value="login with Vine"/>
+	<button class="round vineLogin" name="doLogin" type="submit" value="login with Vine">Sign In</button>
 </form>
+</div>

@@ -1,0 +1,48 @@
+.header{
+	height: 50px;
+	background-color: #fff;
+	border-bottom: 1px solid #e8e8e8;
+	width: 100%;
+}
+.comments{
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-left: 10%;
+	position: absolute;
+	margin: 4% 10%;
+}
+.comment{
+	margin-bottom: 60px;
+}
+.back{
+	margin: 2%;
+}
+.icon > img{
+	width: 50px;
+	padding: 2%;
+	float: right;
+}
+.textarea{
+	width: 78%;
+	margin: 0;
+	display: inline;
+}
+.send{
+	width: 20%;
+	display: inline;
+	float: right;
+	margin: 0;
+	height: 50px;
+	
+}
+.one .bottom-bar > button{
+	padding: 0;
+}
+.one >.bottom-bar{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	margin-bottom: 10px;
+	background-color: #fff;
+	padding: 8px;
+}

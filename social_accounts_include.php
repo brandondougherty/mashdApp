@@ -52,7 +52,7 @@ $_SESSION['twitter_object'] = $twitterObj;
 }  
   //var_dump($_SESSION);
   
-    if(isset($user)||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
+    if(isset($_SESSION['fb_object'])||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
     {
       if (isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
         include 'vinelibs/vine_parse.php'; 
@@ -66,12 +66,12 @@ $_SESSION['twitter_object'] = $twitterObj;
      if (isset ($_SESSION['access_token'])){
         include 'twitter_parse.php';
      }
-   // echo "<button type='button' class='loadMoreFeed'>Request data</button>";
 
     echo "<script>$(document).ready(function(){
       $('#pic1').hide();
        $('#background').css( 'display', 'block');
-      $('.brandon').show();
+       $('.brandon').show();
+      $('.loadmorefeed').show();
 
       // get array of elements
       var myArray = $('.brandon > div');

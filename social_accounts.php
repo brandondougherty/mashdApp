@@ -16,7 +16,7 @@ class AccountsLoggedIn {
    $e = new AccountsLoggedIn();
 //fb
 if($user){
-    $e->facebook = $logoutUrl;
+    $e->facebook = 'http://localhost/MashdApp/www/facebooklibs/logout.php';
     $e->facebookIO = 'out';
 }else{
      $e->facebook = $loginUrl;  

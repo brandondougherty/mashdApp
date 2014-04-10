@@ -7,6 +7,7 @@
             'query' => "SELECT object_id FROM like WHERE user_id = me() LIMIT 10"
         ));
        //var_dump($ret_obj);
+        if(isset($ret_obj)){
         foreach($ret_obj['data'] as $the_post){
           $fbCreated = strtotime($the_post['created_time']); 
           echo "<div timestamp='$fbCreated'>";
@@ -40,7 +41,7 @@
             }elseif(preg_match("/commented on ... own photo/",$data['story'])){
               include 'facebooklibs/commented_on_own_photo.php';
             }elseif(preg_match("/likes a link/",$data['story'])){
-              //include 'facebooklibs/likes_a_link.php';##############NOT STARTED
+              include 'facebooklibs/likes_a_link.php';
             }elseif(preg_match("/shared a link/",$data['story'])){
               include 'facebooklibs/shared_a_link.php';
             }elseif(preg_match("/was tagged in /",$data['story'])){
@@ -177,4 +178,5 @@
           echo "</div>";
 
          }
+       }
 ?>
