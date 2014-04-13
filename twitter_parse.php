@@ -9,6 +9,7 @@ foreach ($the_response as $twitter){
   $poster_id = $twitter->user->screen_name;
   $post_id = $twitter->id_str;
   $id = $twitter->id;
+  $retweeter_sn = '';
   $method =$poster_id . '/status/' . $post_id;
 $twitterCreated = strtotime($twitter->created_at);
 $the_comments = $connection->get($method);
@@ -42,11 +43,11 @@ $the_comments = $connection->get($method);
         }
 
       }
-      echo "<div class='twitterHeader stickem'>Retweeted by " . $retweeter . "<br/>";
-      echo "<img src='$img' style='border-radius: 10%;' />";
-      echo "<span class='twitterUserName'>" . $user_name;
-      echo "</span><span class='twitterRealName'> @" . $user_profile_name;
-      echo "</span></div><img src='images/twitter_corner_icon.svg' class='cornerIcon' /><div class='twitterTweet'>";
+      echo "<span class='retweeted'>Retweeted by " . $retweeter . "</span><br/>";
+      echo "<div class='twImg'><img src='$img' style='border-radius: 10%;' /></div><div class='twitterHeader stickem'>";
+      echo "<span class='twitterUserName'>" . $user_name."</span>";
+      echo "<span class='twitterRealName'> @" . $user_profile_name."</span>";
+      echo "</div><img src='images/twitter_corner_icon.svg' class='cornerIcon' /><div class='twitterTweet'>";
       echo $tweet;
       echo "</div>";
       if(isset($twitter->entities->media)){
@@ -80,7 +81,7 @@ $the_comments = $connection->get($method);
         }
         
       }
-      echo "<div class='twitterHeader stickem'><img src='$img' style='border-radius: 10%;' />";
+      echo "<div class='twImg'><img src='$img' style='border-radius: 10%;' /></div><div class='twitterHeader stickem'>";
       echo "<span class='twitterUserName'>" . $user_name;
       echo "</span><span class='twitterRealName'> @" . $user_profile_name;
       echo "</span></div><img src='images/twitter_corner_icon.svg' class='cornerIcon' /><div class='twitterTweet'>";
@@ -100,25 +101,25 @@ $the_comments = $connection->get($method);
     $num_favorites = $twitter->favorite_count;
     $post_time = time_elapsed_string($twitterCreated);
     if($twitter->retweeted == true){
-      echo "<div><button class='button igButton radius deleteTwitterRetweet alert' data='".$post_id."'>Retweet</button> ";
+      echo "<div class='twitterActions'><button class='button igButton radius deleteTwitterRetweet alert' data='".$post_id."'>Retweet</button>";
     }else{
-      echo "<div><button class='button igButton radius twitterRetweet' data='".$post_id."'>Retweet</button> ";
+      echo "<div class='twitterActions'><button class='button igButton radius twitterRetweet' data='".$post_id."'>Retweet</button>";
     }
     echo $num_retweets;
     if($twitter->favorited == true){
-      echo "<div><button class='button igButton radius deleteTwitterFav alert' data='".$post_id."'>Favorite</button> ";
+      echo "<button class='button igButton radius deleteTwitterFav alert' data='".$post_id."'>Favorite</button>";
 
     }else{
-      echo "<div><button class='button igButton radius twitterFav' data='".$post_id."'>Favorite</button> ";
+      echo "<button class='button igButton radius twitterFav' data='".$post_id."'>Favorite</button>";
     }
     echo $num_favorites;
     if(isset($retweeter_sn)){
-      echo "</div><button class=\"button igButton radius twitterComments\" ng-click=\"getTwComments('$poster_id','$post_id', '$retweeter_sn')\">Reply</button> ";
+      echo "<button class=\"button igButton radius twitterComments\" ng-click=\"getTwComments('$poster_id','$post_id', '$retweeter_sn')\">Reply</button>";
     }else{
-      echo "</div><button class=\"button igButton radius twitterComments\" ng-click=\"getTwComments('$poster_id','$post_id')\">Reply</button> ";
+      echo "<button class=\"button igButton radius twitterComments\" ng-click=\"getTwComments('$poster_id','$post_id')\">Reply</button>";
 
     }
-     echo " - " . $post_time;
+     echo " - " . $post_time . "</div>";
     //echo "</div><div><textarea rows='1' name='twitterComment' class='twitterComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
     echo "<div class='twitterCommentContainer'></div>";
     echo "<button class='twitterComments round' data='$poster_id' data-id='$post_id'>Expand Comments</button>";

@@ -28,7 +28,7 @@ function vineAuth($username,$password)
         else
         {
                 // Key aLso contains numeric userId as the portion of the string preceding the first dash
-                return $result->data->key; 
+                return $result; 
         }
 
         curl_close($ch);
@@ -135,6 +135,61 @@ function nextSetofComments($key,$postid,$page){
                                          'X-Requested-With: XMLHttpRequest'));
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = json_decode(curl_exec($ch), true);
+
+        if (!$result)
+        {
+                echo curl_error($ch);
+        }
+        else
+        {
+                return $result;
+        }
+
+        curl_close($ch);
+}
+function getComments($key,$postid){
+    $url = "https://api.vineapp.com/posts/" . $postid . "/comments";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.01',
+                                            'x-vine-client: vinewww/1.0',
+                                          'vine-session-id: '.$key,
+                                         'X-Requested-With: XMLHttpRequest'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = json_decode(curl_exec($ch), true);
+
+        if (!$result)
+        {
+                echo curl_error($ch);
+        }
+        else
+        {
+                return $result;
+        }
+
+        curl_close($ch);
+}
+function postComments($key,$id,$message)
+{
+        $url = "https://api.vineapp.com/posts/" . $id . "/comments";
+        $comment = urlencode($message);
+        $postFields = "comment=$comment";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.01',
+                                            'x-vine-client: vinewww/1.0',
+                                          'vine-session-id: '.$key,
+                                         'X-Requested-With: XMLHttpRequest'));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+         curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+
         $result = json_decode(curl_exec($ch), true);
 
         if (!$result)

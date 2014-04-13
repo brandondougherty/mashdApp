@@ -23,14 +23,16 @@ $pass = $data['password'];
 
 session_start();
 $vine = new Vine;
-$key = $vine->vineAuth($user_email,$pass);
-
+$response= $vine->vineAuth($user_email,$pass);
+$key = $response->data->key;
 $userId = strtok($key,'-');
 
 $_SESSION['vine_key']= $key;  
 $_SESSION['vine_userid'] = $userId;
+$_SESSION['vine_userName'] = $response->data->username;
+$_SESSION['vine_avatar'] = preg_replace('/\A.*\/\//', "",$response->data->avatarUrl);
 
-
+var_dump($response);
 header("Location: http://localhost/MashdApp/www/#/social");
 
 ?>

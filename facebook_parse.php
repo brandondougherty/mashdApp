@@ -19,7 +19,7 @@
           $pic = $usr_post_pic['picture']['data']['url'];
 
 ###########   Printing USERS PROFILE PICTURE
-          echo "<img src='$pic'/>";
+          echo "<div class='fbPostHeadSuper'><img class='fbProfImg' src='$pic'/>";
 ############
           //$likeLink = $data['link'];
           //echo "<div class='fb-like' data-href='" . $likeLink. "' data-width='10px' data-layout='button_count' data-action='like' data-show-faces='false' data-share='true'></div>";
@@ -38,8 +38,12 @@
               include 'facebooklibs/commented_on_own_link.php';
             }elseif(preg_match("/commented on a video/",$data['story'])){
               include 'facebooklibs/commented_on_a_video.php';
+            }elseif(preg_match("/commented on a link/",$data['story'])){
+              include 'facebooklibs/commented_on_a_link.php';
             }elseif(preg_match("/commented on ... own photo/",$data['story'])){
               include 'facebooklibs/commented_on_own_photo.php';
+            }elseif(preg_match("/is going to an event/",$data['story'])){
+              include 'facebooklibs/going_to_an_event.php';//NEED TO WORK ON THIS
             }elseif(preg_match("/likes a link/",$data['story'])){
               include 'facebooklibs/likes_a_link.php';
             }elseif(preg_match("/shared a link/",$data['story'])){
@@ -51,27 +55,17 @@
             }elseif(preg_match("/added/",$data['story']) && preg_match("/photo/",$data['story'])){
               include 'facebooklibs/added_x_photos.php';
             }else{ 
-              echo $data['story'];
+              $name = $data['from']['name'];
+              $story = preg_replace('/'.$name.'/', "", $data['story']);
+              $id = $data['from']['id'];
+              echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
+              echo " ".$story;
             if (isset($data['message'])){
               echo $data['message'];
               echo "<br/>";
             }
-          if(!empty($data['likes'])){
-          echo "<br/>";
-          $like_count = count($data['likes']['data']);
-          echo "Likes: " . $like_count;
-          $y = 0;
-          /*$like_count = count($data['likes']['data']);
-          while($y < $like_count){
-              echo $data['likes']['data'][$y]['name'];
-              echo "<br/>";
-              $y++;
-          }*/
-          }
-          if(!empty($data['comments'])){
-            $comment_count = count($data['comments']['data']);
-            echo "Comments: " . $comment_count;
-          }
+            echo "</div></div>";
+
 ############
 ###########   EITHER PRINTS THE YOUTUBE VIDEO, OR A DIRECTLY UPLOADED VIDEO, OR PICTURE              ###### ------> WHAT IF USER UPLOADED VIDEO AND PICTURE??
         if ((isset($data['source'])) && (preg_match("/youtube/",$data['source']))){
@@ -150,14 +144,38 @@
             if($checkLike['object_id'] === $obj_id){
               $true = '1';
             }
+          }
+           if(!empty($data['likes'])){
+           $like_count = count($data['likes']['data']);
+            if($like_count >= 25){
+              $like_count = $like_count."+";
+            }
+          }else{
+            $like_count = 0;
+          }
+          /*$like_count = count($data['likes']['data']);
+          while($y < $like_count){
+              echo $data['likes']['data'][$y]['name'];
+              echo "<br/>";
+              $y++;
+          }*/
+          if(!empty($data['comments'])){
+            $comment_count = count($data['comments']['data']);
+            if($comment_count >= 25){
+              $comment_count = $comment_count."+";
+            }
+          }else{
+            $comment_count = 0;
           } 
           if($true=='1'){
             echo "<button class='deleteFbLike button fbButton radius alert' data='".$obj_id."'>Like</button>";
           }else{
             echo "<button class='fbLike button fbButton radius' data='".$obj_id."'>Like</button>";
           }
-          echo " <button class='fbComment button fbButton radius' data='".$obj_id."'>Comment</button>";
-          echo "<button class='fbShare button fbButton radius' data='".$obj_id."'>Share</button>";
+          echo "<a ng-click=\"getFbLikes('$obj_id')\">".$like_count."</a>";
+          echo " <button class=\"fbComment button fbButton radius\" ng-click=\"getFbComments('$obj_id')\">Comment</button>";
+          echo "<span class='numFbLikes'>".$comment_count."</span>";
+          echo "<button class=\"fbShare button fbButton radius\" ng-click=\"fbShare('$obj_id')\">Share</button>";
           echo $post_time . " <br />";
           //echo "<textarea rows='1' name='fbComment' class='fbComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
           if(isset($data['comments'])){

@@ -20,7 +20,7 @@ function time_elapsed_string($ptime){
         $d = $etime / $secs;
         if ($d >= 1){
             $r = round($d);
-            return $r . ' ' . $str . ' ago';
+            return $r . ' ' . $str;
         }
     }
 }  
@@ -45,9 +45,9 @@ $access_token = $_SESSION['access_token'];
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 $method = 'statuses/home_timeline.json?count=11';
 $the_response = $connection->get($method);
-$max_id = $the_response[10]->id_str;
-$twitterObj = array('max_id'=>$max_id);
-$_SESSION['twitter_object'] = $twitterObj;
+//$max_id = $the_response[10]->id_str;
+//$twitterObj = array('max_id'=>$max_id);
+//$_SESSION['twitter_object'] = $twitterObj;
 
 }  
   //var_dump($_SESSION);

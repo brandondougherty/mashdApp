@@ -36,7 +36,7 @@ if($vines['liked'] == '1'){
 }else{
   echo " <button class='button small round vineLike'>Like</button>";
 }
-echo " <button class='button small round vineComment'>Comment</button>";
+echo " <button class=\"button small round vineComment\" ng-click=\"getViComments('$postId')\">Comment</button>";
 if($vines['myRepostIdStr'] != '0'){
   $repostId = $vines['myRepostIdStr'];
   echo " <button class='button small round deletVineRevine alert' data='" .$repostId. "'>Revine</button>";

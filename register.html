@@ -5,10 +5,9 @@
       <div class="large-5 large-centered columns">
 <form ng-submit="register()" src="" >
 <h1>New Account</h1>
-    Email
     <input name="usr_email" type="text" placeholder="your email" ng-model="regCredentials.email" required> 
-    Password
     <input name="pwd" type="password" placeholder="password" ng-model="regCredentials.password" required minlength="5" >   
+    <input name="pwd" type="password" placeholder="Re-Type password" ng-model="regCredentials.password" required minlength="5" > 
     <p><small>By creating an account with Mash'D you agree to the terms and conditions.</small></p>     
   <input class="round button expand" type="submit" value="Create Account">
 </form>

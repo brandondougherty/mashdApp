@@ -6,15 +6,15 @@
   'secret' => 'cc0dfb735ef12d40c59dc83fa7493efd'
 ));
 
-foreach($_POST as $key => $value) {
-      $data[$key] = filter($value); // post variables are filtered
+$incoming = json_decode(file_get_contents('php://input'));
+foreach($incoming as $key => $value) {
+	$data[$key] = filter($value); // post variables are filtered
 }
-
 $id = $data['id'];
-$method = $data['method'];
 $response = $facebook->api(
-    "/".$id."/likes",
-    $method
+    "/".$id,
+    'DELETE'
 );
 
+echo json_encode($response);
 ?>

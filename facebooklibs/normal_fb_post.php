@@ -1,7 +1,9 @@
 <?php
 
-echo $data['from']['name'];
-                if (isset($data['to'])){
+$name = $data['from']['name'];
+$id = $data['from']['id'];
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
+             if (isset($data['to'])){
               echo " to " . $data['to']['data']['0']['name'];
               }     
 ############
@@ -11,7 +13,7 @@ echo $data['from']['name'];
               echo $data['message'];
               echo "<br/>";
             }
-          
+          echo "</div></div>";
 ############
 ###########   EITHER PRINTS THE YOUTUBE VIDEO, OR A DIRECTLY UPLOADED VIDEO, OR PICTURE              ###### ------> WHAT IF USER UPLOADED VIDEO AND PICTURE??
         if ((isset($data['source'])) && (preg_match("/youtube/",$data['source']))){
@@ -74,22 +76,6 @@ echo $data['from']['name'];
             $imglink = 'https://scontent-b-pao.xx.fbcdn.net/hphotos-prn1/' .$med_num. '_n.jpg';
             echo "<img src='$imglink' />";
           }
-        }
-         if(!empty($data['likes'])){
-          echo "<br/>";
-          $like_count = count($data['likes']['data']);
-          echo "Likes: " . $like_count;
-          $y = 0;
-          /*$like_count = count($data['likes']['data']);
-          while($y < $like_count){
-              echo $data['likes']['data'][$y]['name'];
-              echo "<br/>";
-              $y++;
-          }*/
-        }
-        if(!empty($data['comments'])){
-          $comment_count = count($data['comments']['data']);
-          echo "Comments: " . $comment_count;
         }
       
 ?>

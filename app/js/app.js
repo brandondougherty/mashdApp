@@ -30,6 +30,36 @@ var app = angular.module("app", ['ui.router']).config(function( $stateProvider, 
       url: "/twitter",
       templateUrl: "twitter.html",
       controller: "TwitterController",
+    })
+    .state("instagram", {
+      url: "/instagram",
+      templateUrl: "instagram.html",
+      controller: "InstagramController",
+    })
+    .state("facebookComments", {
+      url: "/facebookComments",
+      templateUrl: "facebookComments.html",
+      controller: "FacebookCommentsController",
+    })
+    .state("facebookLikes", {
+      url: "/facebookLikes",
+      templateUrl: "facebookLikes.html",
+      controller: "FacebookLikesController",
+    })
+    .state("facebookShare", {
+      url: "/facebookShare",
+      templateUrl: "facebookShare.html",
+      controller: "FacebookShareController",
+    })
+    .state("facebookAlbum", {
+      url: "/facebookAlbum",
+      templateUrl: "facebookAlbum.html",
+      controller: "FacebookAlbumController",
+    })
+    .state("vineComment", {
+      url: "/vineComment",
+      templateUrl: "vineComment.html",
+      controller: "VineController",
     });
     $urlRouterProvider
         .otherwise('/login');
@@ -49,24 +79,175 @@ app.controller('LoginController', function($scope, $location, MashdLogin) {
 		});
 	}
 });
-app.controller('TwitterController', function(Comments, $rootScope, $scope) {
+app.controller('TwitterController', function(Comments, $rootScope, $scope,$http) {
 	 var posterScreenName = $rootScope.posterScreenName;
 	 var postId = $rootScope.postId;
 	 var extra = $rootScope.extra;
 	 $scope.postId = postId;
-	 $scope.posterName = posterScreenName + extra;
+	  $scope.twitterMessage = "@" + posterScreenName + extra;
 	Comments.twitter(posterScreenName,postId).success(function(response){
 		$('.comment').append(response);
 	});
+	//twitter comment on post
+	$scope.sendMessage= function(){
+		var message = $scope.twitterMessage;
+		console.log(postId);
+		console.log(message);
+		$http.post('http://localhost/MashdApp/www/twitterlibs/comment.php', 
+					{id: postId,
+		         status: message}).success(function(response){
+		         	console.log('comment sent');
+		         	//response = $.parseJSON(response);
+			       	var profileImg = response.user.profile_image_url;
+			      	var realName = response.user.name;
+			      	var twitterName = response.user.screen_name;
+			      	var message = response.text;
+			      	var names = '';
+		      		response.entities.user_mentions.forEach(function(obj) {
+		      											 names = names + " @" + obj.screen_name; 
+		      											});  //"@" + .screen_name
+		      	//add comment in to list.
+		      	$('.comment').append("<div class='listComment'><img src='" 
+		      		+ profileImg + "' style='border-radius: 10%'/><span class='twitterusername'>" 
+		      		+ realName + "</span><span class='twitterRealName'> @" 
+		      		+ twitterName + "</span><br>" + message + "</div>");
+		      //clear textarea
+		      	$('.textarea').val(names);	
+		       });
+		  }
 });
 
-app.controller('MyAccountController', function($http, $rootScope, $scope,$window,$location,$compile) {
-	$scope.reload =function(){
-               $window.location.reload(); 
-           }
-	$http.get('http://localhost/MashdApp/www/social_accounts_include.php').success(function(result){
-		$('.brandon').html($compile(result)($scope));
+app.controller('InstagramController', function(Comments, $rootScope, $scope,$http) {
+	 var postId = $rootScope.postId;
+	 $scope.postId = postId;
+	Comments.instagram(postId).success(function(response){
+		$('.comment').append(response);
 	});
+
+	$scope.sendMessage= function(){
+		var message = $scope.instagramMessage;
+		var iGuser = 'TEST';
+		console.log(message);
+		$http.post('http://localhost/MashdApp/www/instagramlibs/comments.php', 
+					{id: postId,
+		         status: message}).success(function(response){
+		         	console.log('comment sent');
+		         	
+		      	$('.comment').append("<div class='listComment'><span class='userName'>" + iGuser +
+		      	"</span>" + message + "</div>");
+		      //clear textarea
+		      	$('.textarea').val('');	
+		       });
+	}
+});
+
+app.controller('FacebookCommentsController', function(Comments, $rootScope, $scope,$http,$compile) {
+	 var postId = $rootScope.postId;
+	 $scope.postId = postId;
+	Comments.facebookComments(postId).success(function(response){
+		$('.comment').append($compile(response)($scope));
+	});
+
+	$scope.sendMessage= function(){
+		var message = $scope.facebookMessage;
+		console.log(message);
+		$http.post('http://localhost/MashdApp/www/facebooklibs/postComment.php', 
+					{id: postId,
+		         status: message}).success(function(response){
+		         	console.log('comment sent');
+		         	var responseId = response.id;
+		         	var name  = response.name;
+		         	var nameId = response.userId;
+		      	$('.comment').append($compile("<div class=\"listComment\"><a class=\"user\" ng-click=\"goToUser('" + nameId + "')\">" + name + "</a> " + message + "<br/><a class=\"fbremove\" ng-click=\"removeComment('" + responseId + "')\">remove</a></div>")($scope));
+		      //clear textarea
+		      	$('.textarea').val('');	
+		       });
+	}
+
+	$scope.goToUser = function(postId){
+		console.log(postId);
+	}
+	$scope.removeComment = function(postId){
+		console.log(postId)
+		$http.post('http://localhost/MashdApp/www/facebooklibs/removeComment.php', 
+					{id: postId}
+					).success(function(response){
+						console.log(response);
+						$("a[ng-click=\"removeComment('" + postId + "')\"]").parent().remove();
+		         });
+	}
+});
+
+app.controller('FacebookLikesController', function(Comments, $rootScope, $scope,$http,$compile) {
+	 var postId = $rootScope.postId;
+	 //$scope.postId = postId;
+	Comments.facebookLikes(postId).success(function(response){
+		$('.comment').append($compile(response)($scope));
+	});
+
+	$scope.goToUser = function(postId){
+		console.log(postId);
+	}
+});
+
+app.controller('FacebookShareController', function(Comments, $rootScope, $scope,$http,$compile) {
+	
+});
+app.controller('FacebookAlbumController', function(Comments, $rootScope, $scope,$http,$compile) {
+	 var postId = $rootScope.postId;
+	Comments.facebookAlbum(postId).success(function(response){
+		$('.comment').append($compile(response)($scope));
+	});
+	$scope.goToPhoto = function(){
+		console.log('like photo');
+	}
+});
+
+app.controller('VineController', function(Comments, $rootScope, $scope,$http,$compile) {
+	 var postId = $rootScope.postId;
+	Comments.vineComments(postId).success(function(response){
+		$('.comment').append($compile(response)($scope));
+	});
+
+	$scope.sendMessage= function(){
+		var message = $scope.vineMessage;
+		console.log(message);
+		$http.post('http://localhost/MashdApp/www/vinelibs/postComment.php', 
+					{id: postId,
+		         status: message}).success(function(response){
+		         	console.log('comment sent');
+		         	console.log(response);
+		         var nameId = response.id;
+		         var name = response.name;
+		         var avatar = response.avatar;
+		      	$('.comment').append($compile("<div class=\"listComment\"><img src=\"http://" + avatar + "\"height = 15px width = 15px/><a class=\"user\" ng-click=\"goToUser('" + nameId + "')\">" + name + "</a> " + message + "</div>")($scope));
+		      //clear textarea
+		      	$('.textarea').val('');	
+		       });
+	}
+
+});
+
+
+app.controller('MyAccountController', function($http, $rootScope, $scope,$window,$location,$compile,$cacheFactory) {
+	$scope.reload =function(){
+        $window.location.reload(); 
+    }
+    //Caching feed so it doesnt have to laod every time.BALLLLIN
+     if($rootScope.cache == undefined){
+      console.log('caching');
+      $rootScope.cache = $cacheFactory('feedCacheID');
+      $http.get('http://localhost/MashdApp/www/social_accounts_include.php').success(function(result){
+			$('.brandon').html($compile(result)($scope));
+			$rootScope.cache.put('feed', result);
+	  	});
+	  //console.log($rootScope.cache);
+  	 }else{
+  	 	console.log('already cached');
+  	 	//console.log($rootScope.cache.get('feed'));
+  	 	result = $rootScope.cache.get('feed');
+  	 	$('.brandon').html($compile(result)($scope));
+  	 }
 	$scope.getTwComments = function(posterScreenName, postId, extraId){
 		console.log(posterScreenName);
 		console.log(postId);
@@ -79,13 +260,30 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 		$location.path('/twitter');
 	}
 	$scope.getIgComments = function(postId){
-		
+		$rootScope.postId = postId;
+		$location.path('/instagram');
 	}
 	$scope.getFbComments = function(postId){
-		
+		$rootScope.postId = postId;
+		$location.path('/facebookComments');
 	}
+	$scope.goToFBAlbum = function(postId){
+		$rootScope.postId = postId;
+		$location.path('/facebookAlbum');
+	}
+
+	$scope.getFbLikes = function(postId){
+		$rootScope.postId = postId;
+		$location.path('/facebookLikes');
+	}
+
+	$scope.fbShare = function(){
+		$location.path('/facebookShare');
+	}
+
 	$scope.getViComments = function(postId){
-		
+		$rootScope.postId = postId;
+		$location.path('/vineComment');
 	}
        if($rootScope.facebook ===undefined){
 	var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
@@ -240,6 +438,46 @@ app.factory('Comments', function($http, $location){
 			                  post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
+		},
+		instagram: function(postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/instagramlibs/commentsajax.php',
+					    data: {postId: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
+		},
+		facebookComments: function(postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/facebooklibs/getComments.php',
+					    data: {postId: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
+		},
+		facebookLikes: function(postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/facebooklibs/getLikes.php',
+					    data: {postId: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
+		},
+		facebookAlbum: function(postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/facebooklibs/facebookAlbum.php',
+					    data: {post: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
+		},
+		vineComments: function(postId){
+			return $http({
+					    method: 'POST',
+					    url: 'http://localhost/MashdApp/www/vinelibs/getComments.php',
+					    data: {post: postId},
+					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+					    });
 		}
 	};
 });
@@ -247,12 +485,16 @@ app.factory('Comments', function($http, $location){
 app.directive('design', function (){
 	return{
 		restrict: "C",
-		controller: function($scope, $compile) {
+		controller: function($scope, $compile,$rootScope) {
 			$(document).on('click', '.loadmorefeed', function() {
 			$('.loadmorefeed').remove();
 		    $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",
 		    	success:function(result){
-		      $('.new1').append($compile(result)($scope));
+		      $('.new1').html($compile(result)($scope));
+		       var old = $rootScope.cache.get('feed');
+		       $rootScope.cache.put('feed', old + result);
+		       console.log('new cache');
+		      // console.log(old + 'old ^^^^ new below---------------------------' + result);
 		      }});
 		  });
 		},
@@ -262,21 +504,7 @@ app.directive('design', function (){
   			});
 			
 			
-			//twitter comment on post
-			$(document).on('click', '.send', function() {
-			var id = $(this).attr('data');
-			var message = $('.textarea').val();
-			console.log(id);
-			console.log(message);
-		    $.ajax({url:"http://localhost/MashdApp/www/twitterlibs/comment.php",
-	    			type:'POST',              
-		       dataType:'text',
-		           data: {id: id,
-		           		  status: message},
-		    	success:function(result){
-		      		console.log('comment sent');
-		    }});
-		  });
+			
 			//twitter favorite
 			$(document).on('click', '.twitterFav', function(){
 				var id= $(this).attr('data');
@@ -356,6 +584,11 @@ app.directive('design', function (){
 			        console.log('like sent!');
 			        	//change class of this button to deletInstagramLike
 			        }});
+				$(this).text('Unlike');
+				var count = $(this).next().text();
+				count = parseInt(count);
+				count=count+1;
+				$(this).next().text(count);
 			    $(this).removeClass( "fbLike" ).addClass( "deleteFbLike alert" );
 		    });
 		    $(document).on('click', '.deleteFbLike', function(){
@@ -371,6 +604,11 @@ app.directive('design', function (){
 			        console.log('like sent!');
 			        	//change class of this button to deletInstagramLike
 			        }});
+				$(this).text('Like');
+				var count = $(this).next().text();
+				count = parseInt(count);
+				count=count-1;
+				$(this).next().text(count);
 			    $(this).removeClass( "deleteFbLike alert" ).addClass( "fbLike");
 		    });
 			//INSTAGRAM LIKE/remove likeInstagram--------------------------------------------------------+

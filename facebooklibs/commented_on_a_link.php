@@ -1,17 +1,15 @@
 <?php
 $id_of_origin_post = preg_replace('/.*_/', '', $data['id']);
-  $post_url = '/' .$id_of_origin_post;
-  $origin_post = $facebook->api($post_url,'GET');
+$post_url = '/' .$id_of_origin_post;
+$origin_post = $facebook->api($post_url,'GET');
 
 $name = $data['from']['name'];
 $story = preg_replace('/'.$name.'/', "", $data['story']);
 $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 echo " ".$story."</div></div>";
-echo "<br/>";
-//image
-//name
-echo $origin_post['from']['name'];
+echo "<hr>";
+echo $origin_post['from']['name']." ";
 //mesage
 echo $origin_post['message'];
 //media

@@ -25,12 +25,35 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
    return $feed;
  
 }
+function time_elapsed_string($ptime){
+    $etime = time() - $ptime;
+    if ($etime < 1){
+        return '0 seconds';
+    }
+    $a = array( 12 * 30 * 24 * 60 * 60  =>  'y',
+                30 * 24 * 60 * 60       =>  'month',
+                24 * 60 * 60 * 7        =>  'wk',
+                24 * 60 * 60            =>  'd',
+                60 * 60                 =>  'h',
+                60                      =>  'min',
+                1                       =>  's'
+                );
+foreach ($a as $secs => $str){
+    $d = $etime / $secs;
+    if ($d >= 1){
+        $r = round($d);
+        return $r . ' ' . $str;
+}}}
 $poster = $data['poster'];
 $post = $data['post'];
 $comments= get_conversation($post, $poster);
 //var_dump($comments);
-foreach ($comments->statuses as $post_comment){
+
+$comments = array_reverse($comments->statuses);
+foreach ($comments as $post_comment){
 	if($post == $post_comment->in_reply_to_status_id_str){
+		$twitterCreated = strtotime($post_comment->created_at);
+		$created = time_elapsed_string($twitterCreated);
 		$the_comment = $post_comment->text;
 		$name = $post_comment->user->name;
 		$username = $post_comment->user->screen_name;
@@ -52,11 +75,11 @@ foreach ($comments->statuses as $post_comment){
 	        }
     	}
         
-		echo "<br/>";
+		echo "<div class='listComment'>";
 		echo "<img src='$img' style='border-radius: 10%;/><span class='twitterUserName'>";
-		echo $name . "</span><span class='twitterRealName'> @" . $username . '</span><br/>';
+		echo $name . "</span><span class='twitterRealName'> @" . $username . '</span> '.$created.'<br/>';
 		echo $the_comment;
-		echo "<br/><br/>";
+		echo "</div>";
 		//var_dump($post_comment);
 	}
 }

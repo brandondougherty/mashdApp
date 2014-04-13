@@ -11,6 +11,11 @@
 	position: absolute;
 	margin: 4% 10%;
 }
+.listComment {
+border-bottom: 1px solid #D1D1D1;
+background-color: rgba(232, 232, 232, 0.28);
+padding: 2%;
+}
 .comment{
 	margin-bottom: 60px;
 }

@@ -1,5 +1,9 @@
 <?php
-	echo $data['story'];
+	$name = $data['from']['name'];
+$story = preg_replace('/'.$name.'/', "", $data['story']);
+$id = $data['from']['id'];
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
+echo " ".$story."</div></div>";
       echo "<br/>";
 	 if(preg_match('/fbexternal/', $data['picture'])){
               $urlOfExternal = preg_replace('/.*url=/', '', $data['picture']);

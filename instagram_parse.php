@@ -49,7 +49,7 @@
    }else{
       echo "<button class='button igButton radius likeInstagram'>Like</button>";
    }
-      echo "<button class='button igButton radius commentInstagram'>Comment</button>";
+      echo "<button class=\"button igButton radius commentInstagram\" ng-click=\"getIgComments('$postId')\">Comment</button>";
 
     if(!empty($media->comments->data)){
       echo "<div class='commentsContainer'>";

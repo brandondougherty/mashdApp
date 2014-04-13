@@ -19,7 +19,7 @@ function time_elapsed_string($ptime){
         $d = $etime / $secs;
         if ($d >= 1){
             $r = round($d);
-            return $r . ' ' . $str . ' ago';
+            return $r . ' ' . $str;
         }
     }
 } 

@@ -6,7 +6,11 @@
     $origin_aname = $origin_post['from']['id'];
     $origin_usr_post_pic = $facebook->api('/' . $origin_aname . '?fields=picture','GET');
     $origin_pic = $origin_usr_post_pic['picture']['data']['url'];
-      echo $data['story'];
+      $name = $data['from']['name'];
+$story = preg_replace('/'.$name.'/', "", $data['story']);
+$id = $data['from']['id'];
+echo "<a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a></div>";
+echo " ".$story;
       echo "<br/>";
       echo "-------------------><img src='$origin_pic'/>";
       echo "<br/>";

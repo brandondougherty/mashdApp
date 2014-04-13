@@ -5,7 +5,11 @@ $self_origin_post = $facebook->api($self_post_url,'GET');
 $vidoProfileImageId = $self_origin_post['from']['id'];
 $videoProfileURL = $facebook->api('/' . $vidoProfileImageId . '?fields=picture','GET');
 $videoProfileImg = $videoProfileURL['picture']['data']['url'];
-  echo $data['story'];
+  $name = $data['from']['name'];
+$story = preg_replace('/'.$name.'/', "", $data['story']);
+$id = $data['from']['id'];
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
+echo " ".$story."</div></div>";
   echo "<br/>";
                 echo "<img src='$videoProfileImg'/> ";
                 

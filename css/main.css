@@ -56,6 +56,11 @@ font-size: .7em;
 margin-bottom: 0;
 }
 
+.retweeted{
+	font-size: 12px;
+	color: #999;
+	margin: 1%;
+}
 .bottom-bar{
 position: fixed;
 bottom: 0px;
@@ -108,12 +113,27 @@ border-radius: 10px;
 border-top: 1px solid lightgray;
 
 }
+.fbPostHead{
+	padding-top: 2%;
+	margin-right: 5%;
+	margin-left: 18%;
+}
+.fbUser{
+	margin: 1% 0 1% 1%;
+	font-weight: bold;
+}
 .fbComment,.instagramComment,.vineComment,.twitterComment{
 	border: 0px;
 	box-sizing: border-box;
 	outline: 0px;
 	resize: none;
 }
+.fbProfImg{
+	margin: 1%;
+	border-radius: 15%;
+	float: left;
+}
+
 .vinepost{
 	background-color: rgba(40, 226, 77, 0.29);
 border-radius: 10px;
@@ -155,6 +175,25 @@ padding: 1%;
 	color: #acb0b2;
 	font-weight: 400;
 }
+.vineLoginHead{
+	background-color: rgba(255,255,255,.2);
+}
+.vineLoginLogo{
+	margin-left: 28%;
+	width: 35%;
+}
+.vineLoginLogo img{
+	margin: 10%;
+}
+.vineLogin{
+	background: #00bf8f;
+}
+.vineForm{
+	padding: 3%;
+	background-color: #000;
+	padding: 10% 3% 3% 3%;
+	margin-top: 15%;
+}
 .instagramPost{
 	background-color: #FFFFFF;
 border-radius: 10px;
@@ -193,8 +232,12 @@ img{
 	margin: 1%;
 }
 .twitterHeader{
-	width: 90%;
+	width: 75%;
 	float: left;
+}
+.twImg{
+	float: left;
+	margin: 1%;
 }
 .twitterPost{
 	background-color: #E5F2F7;
@@ -203,6 +246,14 @@ border-top: 1px solid lightgray;
 }
 .twitterRealName{
 	color: #acb0b2;
+}
+.twitterTweet{
+	width: 90%;
+}
+.twitterActions{
+	float: left;
+	margin: 1%;
+	width: 100%;
 }
 hr{
 	margin: 6px;

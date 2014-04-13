@@ -3,11 +3,13 @@ if(isset($data['object_id'])){
 $self_post_url = '/' .$data['object_id'];
 $self_origin_post = $facebook->api($self_post_url,'GET');
 
-echo $data['from']['name'];
-echo "<br/>";
+$name = $self_origin_post['from']['name'];
+$id = $self_origin_post['from']['id'];
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 if(isset($self_origin_post['name'])){
   echo $self_origin_post['name'];
 }
+echo "</div>";
 echo "<br/>";
 if ((isset($self_origin_post['source'])) && (preg_match("/.3g2|.mp4|.3gp|.gpp|.asf|.avi|.dat|.divx|.dv|.f4v|.flv|.m2ts|.m4v|.mkv|.mod|.mov|.mp4|.mpe|.mpeg|.mpeg4|.mpg|.mts|.nsv|.ogm|.ogv|.qt|.tod|.ts|.vob|.wmv/",$self_origin_post['source']))){
           $video_up = $self_origin_post['source'];
@@ -17,31 +19,15 @@ $image = $self_origin_post['source'];
 echo "<img src='$image'/>";
 }
 echo "<br />";
-  if(!empty($self_origin_post['likes'])){
-  echo "<br/>";
-  $like_count = count($self_origin_post['likes']['data']);
-  echo "Likes: " . $like_count;
-  $y = 0;
-  /*$like_count = count($data['likes']['data']);
-  while($y < $like_count){
-      echo $data['likes']['data'][$y]['name'];
-      echo "<br/>";
-      $y++;
-  }*/
-  }
-  
-  if(!empty($self_origin_post['comments'])){
-    $comment_count = count($self_origin_post['comments']['data']);
-    echo "Comments: " . $comment_count;
-  }
-
 
 }else{
 
 $id_of_self_post = preg_replace('/.*_/', '', $data['id']);
 $self_post_url = '/' .$id_of_self_post;
 $self_origin_post = $facebook->api($self_post_url,'GET');
-echo $data['from']['name'] . " liked this Instagram post.";
+$name = $data['from']['name'];
+$id = $data['from']['id'];
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name </a>liked this Instagram post.</div></div>";
 if(isset($data['mesage'])){
   echo $data['message'];
   echo "<br />";
@@ -61,33 +47,7 @@ echo "<img src='$photo' />";
 echo "<br/>";echo "<br/>";
 echo $instagram_photo_url['description'];
 }
-  if(!empty($self_origin_post['likes'])){
-  echo "<br/>";
-  if(isset($self_origin_post['likes']['count'])){
-     $like_count = $self_origin_post['likes']['count'];
-    echo "Likes: " . $like_count;
-  }else{
-    $like_count = count($self_origin_post['likes']['data']);
-    echo "Likes: " . $like_count;
-}
-  $y = 0;
-  /*$like_count = count($data['likes']['data']);
-  while($y < $like_count){
-      echo $data['likes']['data'][$y]['name'];
-      echo "<br/>";
-      $y++;
-  }*/
-  }
-  
-  if(!empty($self_origin_post['comments'])){
-    if(isset($self_origin_post['comments']['count'])){
-      $like_count = $self_origin_post['comments']['count'];
-      echo "Likes: " . $like_count;
-    }else{
-     $comment_count = count($self_origin_post['comments']['data']);
-      echo "Comments: " . $comment_count;
-    }
-  }
+ 
 }
 
  ?>
