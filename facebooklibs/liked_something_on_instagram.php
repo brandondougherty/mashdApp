@@ -29,7 +29,9 @@ $name = $data['from']['name'];
 $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name </a>liked this Instagram post.</div></div>";
 if(isset($data['mesage'])){
+  echo "<div class='fbcontent'>";
   echo $data['message'];
+  echo "</div>";
   echo "<br />";
 }
 if(!empty($self_origin_post['image'])){

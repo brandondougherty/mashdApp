@@ -1,19 +1,56 @@
-<div>
-    <a class="tiny small button radius" href="#/myaccount"><</a>
-<div>
-<div class="large-5 large-centered columns" style="text-align: center;">
-    <div class="socialAccounts">
-      <a class="tiny small button {{alertFB}} radius" href="{{facebookURL}}">{{facebookURLInOrOut}}</a>
+<div class="settingsHead row">
+    <a class="settingsButton" href="#/myaccount"><img src="images/back.svg"/></a>
+    <!--<img src="images/stache.svg"/>-->
+</div>
+<div class="socials">
+<div class="row socialAccounts">facebook
+  <div class="onOff switch round">
+    <input id="x1" name="switch-x" type="radio" class="fbCheckedin" ng-click="aLogout(facebookURL)">
+    <label for="x1"  onclick="">On</label>
+    <input id="x" name="switch-x" type="radio" class="fbCheckedout" ng-click="aLogin(facebookURL)">
+    <label for="x"  class="socialLabel" onclick="">Off</label>
+    <span></span>
+  </div>
+</div><hr>
+<div class="row socialAccounts">Vine
+  <div class="onOff switch round">
+    <input id="y" name="switch-y" type="radio" class="checkedinvi" ng-click="aLogout(vineURL)">
+    <label for="y"  onclick="">On</label>
+    <input id="y1" name="switch-y" type="radio" class="checkedoutvi" ng-click="aLogin(vineURL)">
+    <label for="y1"  class="socialLabel" onclick="">Off</label>
+    <span></span>
+  </div>
+</div><hr>
+<div class="row socialAccounts">twitter
+   <div class="onOff switch round">
+    <input id="z" name="switch-z" type="radio" class="checkedintw" ng-click="aLogout(twitterURL)">
+    <label for="z"  onclick="">On</label>
+    <input id="z1" name="switch-z" type="radio" class="checkedouttw" ng-click="aLogin(twitterURL)">
+    <label for="z1" class="socialLabel" onclick="">Off</label>
+    <span></span>
+  </div>
+</div><hr>
+    <div class="row socialAccounts">Instagram
+      <div class="onOff switch round">
+    <input id="w" name="switch-w" type="radio" class="checkedinig" ng-click="aLogout(instagramURL)">
+    <label for="w"  onclick="">On</label>
+    <input id="w1" name="switch-w" type="radio" class="checkedoutig" ng-click="aLogin(instagramURL)">
+    <label for="w1"  class="socialLabel" onclick="">Off</label>
+    <span></span>
+  </div>
     </div>
-    <div class="socialAccounts">
-      <a class="tiny small button {{alertVI}} radius" href="{{vineURL}}">{{vineURLInOrOut}}</a>
-    </div>
-    <div class="socialAccounts">
-      <a class="tiny small button {{alertTW}} radius" href="{{twitterURL}}">{{twitterURLInOrOut}}</a>
-    </div>
-    <div class="socialAccounts">
-      <a class="tiny small button {{alertIG}} radius" href="{{instagramURL}}">{{instagramURLInOrOut}}</a>
     </div>
     <!--<p><a href="#">Reddit Login</a></p>-->
- 
+<div class="row changeSettings">
+  <div class="large-5 large-centered columns">
+<input type="password" class="socialSettings" ng-model="newCredentials.password" placeholder="New Password"/><br/>
+<input type="password" class="socialSettings"ng-model="newCredentials.retype" placeholder="Re-Type New Password"/><br/>
+<input type="text" class="socialSettings" ng-model="newCredentials.email" placeholder="Change Email"/><br/>
+<a ng-click="changeSettings()" class="changesSaved button round expand">Save Changes</a>
+</div>
+</div>
+<dic class="row">
+<div class="large-5 large-centered columns">
+<a href="logout.php"  class="button round expand alert">Logout</a>
+</div>
 </div>

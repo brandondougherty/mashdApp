@@ -15,8 +15,9 @@ echo " ".$story."</div></div>";
       ############
       ###########  PRINTS THE MESSAGE OF THE POST IF ANY        
                 if (isset($self_origin_post['message'])){
+                  echo "<div class='fbcontent'>";
                     echo $self_origin_post['message'];
-                    echo "<br/>";
+                   echo "</div>";
                   }
                
       ############

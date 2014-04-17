@@ -43,6 +43,7 @@ echo " ".$story."</div></div>";
 
               echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
               echo "<br/>";
+              echo "<div class='fbcontent'>";
               if(isset($data['name']))
               {
                 $articleName = $data['name'];
@@ -60,6 +61,7 @@ echo " ".$story."</div></div>";
                 $articleDescription = $data['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }else{ 
               ###regular post
           if(isset($data['picture'])){
@@ -73,6 +75,7 @@ echo " ".$story."</div></div>";
         		$imglink = 'https://scontent-b-pao.xx.fbcdn.net/hphotos-prn1/' .$med_num. '_n.jpg';
         		echo "<img src='$imglink' />";
         	}
+          echo "<div class='fbcontent'>";
         	if(isset($data['name']))
               {
                 $articleName = $data['name'];
@@ -90,6 +93,7 @@ echo " ".$story."</div></div>";
                 $articleDescription = $data['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }
       }
 ?>

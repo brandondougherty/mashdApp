@@ -13,11 +13,13 @@
 }
 .listComment {
 border-bottom: 1px solid #D1D1D1;
-background-color: rgba(232, 232, 232, 0.28);
+background-color: #fff;
 padding: 2%;
+margin-top: 2%;
 }
 .comment{
 	margin-bottom: 60px;
+	margin-top: 52px;
 }
 .back{
 	margin: 2%;

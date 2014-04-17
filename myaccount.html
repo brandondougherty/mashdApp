@@ -6,17 +6,12 @@
 <div class="stickem-container">
 <div class="stickem">
 <div class="head">
-<ul class="left options menubar">
-  <a data-dropdown="drop2" class="menu-icon radius"><span></span></a><br>
-  <ul id="drop2" class="f-dropdown" data-dropdown-content>
-  <li><a href="mysettings.php">Settings</a></li>
-  <li><a ui-sref="social">Social Accounts</a></li>
-  <li><a href="logout.php">Logout</a></li>
-  </ul> 
-</ul>
+
+ <a ui-sref="social" class="settingsButton"><img src="images/settins.svg"/></a>
+
 
     <span id="mashdUser">Mash'D</span>
-<a ng-click="reload()" class="reload button radius"><img src="images/reload.svg"/></a>
+<a ng-click="reload()" class="reload"><img src="images/reload.svg"/></a>
  </div>
 </div>
 </div>
@@ -39,8 +34,7 @@ $mashdUser = $_SESSION['user_name'];
   
     <div id="pic1"></div>
     <div class="brandon"></div>
-    <div class="new1"></div>
-    <button class='loadmorefeed'>Load More</button>
+    <div id="loadmoreajaxloader"><img src="images/loader.gif"/></div>
   </div>
 </div>
   </section>

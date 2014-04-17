@@ -12,7 +12,7 @@ $id = $data['from']['id'];
 echo "<a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a></div>";
 echo " ".$story;
       echo "<br/>";
-      echo "-------------------><img src='$origin_pic'/>";
+      echo "<img src='$origin_pic'/>";
       echo "<br/>";
                    if (isset($origin_post['to'])){
                        echo " to " . $origin_post['to']['data']['0']['name'];
@@ -21,7 +21,9 @@ echo " ".$story;
           ###########  PRINTS THE MESSAGE OF THE POST IF ANY        
                     echo "<br/>";
                     if (isset($origin_post['message'])){
+                      echo "<div class='fbcontent'>";
                         echo $origin_post['message'];
+                        echo "</div>";
                       }
                     
           ############

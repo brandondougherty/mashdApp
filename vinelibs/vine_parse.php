@@ -31,50 +31,38 @@ $thumb = $vines['thumbnailUrl'];
 echo "<div class='newVideo'><video loop poster='$thumb' controls webkit-playsinline><source src='$video' codecs='avc1, mp4a' height=100% width=100% ></source></video></div>";
 echo "<div class='vineMessage'><h4>" . $description;
 echo "</h4></div>";
+ echo "<hr><div class='igActions'>";
 if($vines['liked'] == '1'){
-  echo " <button class='button small round deletVineLike alert'>Like</button>";
+  echo "<span class='vineButton'><a class='deletVineLike alert'>Like</a></span>";
 }else{
-  echo " <button class='button small round vineLike'>Like</button>";
+  echo "<span class='vineButton'><a class='vineLike'>Like</a></span>";
 }
-echo " <button class=\"button small round vineComment\" ng-click=\"getViComments('$postId')\">Comment</button>";
+echo "<span class='vineButton'><a class=\"vineComment\" ng-click=\"getViComments('$postId')\">Comment</a></span>";
 if($vines['myRepostIdStr'] != '0'){
   $repostId = $vines['myRepostIdStr'];
-  echo " <button class='button small round deletVineRevine alert' data='" .$repostId. "'>Revine</button>";
+  echo "<span class='vineButton'><a class='deletVineRevine' data='" .$repostId. "'>Revine</a></span>";
 }else{
-  echo " <button class='button small round vineRevine'>Revine</button>";
+  echo "<a class='vineRevine igcommentStat'>Revine</a>";
 }
+echo "</div>";
 echo "<div class='vineStats'>";
 if(!empty($likes)){
-      $num_likes = (int)str_replace(' ', '', $likes);
-      if($num_likes > 1){
-  echo $likes . " Likes ";
-  }else{
-    echo $likes . 'like';
-  }
+     echo "<img class='igStats' src='images/igLike.svg'/>".$likes;
 }
 if(!empty($revines)){
-  $num_revines = (int)str_replace(' ', '', $revines);
-      if($num_revines > 1){
-  echo $revines . " Revines ";
-  }else{
-    echo $revines . ' Revine';
-  }
+   echo "<img class='vineStatscomment' src='images/revine.svg'/>".$revines;
 }
 if(!empty($num_comments)){
-  $num_of_comments = (int)str_replace(' ', '', $num_comments);
-  if($num_of_comments > 1){
-  echo $num_comments . " Comments ";
-  }else{
-    echo $num_comments . ' Comment';
-  }
+    echo "<img class='vineStatscomment' src='images/igcomment.svg'/>".$num_comments ;
 }
+  
     echo "</div><div class='vineCommentButton'>";
-    echo "<button type='button' class='ajaxcommentbutton1 round' group='$postId' data='2'>Load previous comments</button>";
+    //echo "<button type='button' class='ajaxcommentbutton1 round' group='$postId' data='2'>Load previous comments</button>";
     echo "</div>";
     echo "<div class='commentsContainer'>";
     echo "<div class='1'>";
      $vineI=0;
-    while($vineI < 6){
+    while($vineI < 4){
       if(isset($vines['comments']['records'][$vineI])){
       $actual_comments = $vines['comments']['records'][$vineI];
       $comment_profile_img = $actual_comments['avatarUrl'];

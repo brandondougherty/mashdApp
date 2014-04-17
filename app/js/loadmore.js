@@ -20,10 +20,5 @@ $(document).ready(function(){
       }
   });
   // put sorted results back on page
-  $('.new1').append(myArray);
-
-$(".new1").addClass("old").removeClass("new1");
-$(".mainContainer").append("<div class='new1'></div>");
-$(".mainContainer").append("<button class='loadmorefeed'>Load More</button>");
-$(".loadmorefeed").show();
+  $('.brandon').append(myArray);
 });

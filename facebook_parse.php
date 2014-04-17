@@ -102,6 +102,7 @@
 
               echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
               echo "<br/>";
+              echo "<div class='fbcontent'>";
               if(isset($data['name']))
               {
                 $articleName = $data['name'];
@@ -119,6 +120,7 @@
                 $articleDescription = $data['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }else{ 
               ###regular post
           if(isset($data['picture'])){
@@ -167,18 +169,19 @@
           }else{
             $comment_count = 0;
           } 
+          echo "<hr><div class='igActions'>";
           if($true=='1'){
-            echo "<button class='deleteFbLike button fbButton radius alert' data='".$obj_id."'>Like</button>";
+            echo "<span class='fbButton'><a class='deleteFbLike' data='".$obj_id."'>Unlike</a></span>";
           }else{
-            echo "<button class='fbLike button fbButton radius' data='".$obj_id."'>Like</button>";
+            echo "<span class='fbButton'><a class='fbLike' data='".$obj_id."'>Like</a></span>";
           }
-          echo "<a ng-click=\"getFbLikes('$obj_id')\">".$like_count."</a>";
-          echo " <button class=\"fbComment button fbButton radius\" ng-click=\"getFbComments('$obj_id')\">Comment</button>";
-          echo "<span class='numFbLikes'>".$comment_count."</span>";
-          echo "<button class=\"fbShare button fbButton radius\" ng-click=\"fbShare('$obj_id')\">Share</button>";
-          echo $post_time . " <br />";
+          echo "<span class='fbButton'><a ng-click=\"getFbLikes('$obj_id')\"><img class=\"igStats\" src=\"images/thumbs.svg\"/>".$like_count."</a></span>";
+          echo "<span class='fbButton'><a class=\"fbComment\" ng-click=\"getFbComments('$obj_id')\">Comment</a></span>";
+          echo "<span class='numFbLikes igcommentStat'><img class ='igStats' src='images/igcomment.svg'/>".$comment_count."</span>";
+          //echo "<span class=''><a class=\"fbShare\" ng-click=\"fbShare('$obj_id')\">Share</a></span>";
+          echo "</div><hr><br/><br/>";
           //echo "<textarea rows='1' name='fbComment' class='fbComment' title='Write a comment...' placeholder='Write a comment...' style='height: 10px;' >Write a comment..</textarea>";
-          if(isset($data['comments'])){
+         /* if(isset($data['comments'])){
             $i = 0;
            while($i<5) {
               if(isset($data['comments']['data'][$i])){
@@ -190,7 +193,7 @@
               }
             $i++;
             }
-          }
+          }*/
          //print_r($data);
           echo "</div>";
           echo "</div>";

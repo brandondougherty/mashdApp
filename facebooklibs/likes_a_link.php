@@ -13,8 +13,11 @@ echo "<br/>";
 //name
 echo $origin_post['from']['name'];
 //mesage
+echo "<div class='fbcontent'>";
 echo $origin_post['message'];
+echo "</div>";
 //media
+if(isset($origin_post['picture'])){
 if(preg_match('/fbexternal/', $origin_post['picture'])){
               $urlOfExternal = preg_replace('/.*url=/', '', $origin_post['picture']);
               $newUrlimg = urldecode($urlOfExternal);
@@ -22,6 +25,7 @@ if(preg_match('/fbexternal/', $origin_post['picture'])){
 
               echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
               echo "<br/>";
+              echo "<div class='fbcontent'>";
               if(isset($origin_post['name']))
               {
                 $articleName = $origin_post['name'];
@@ -39,5 +43,16 @@ if(preg_match('/fbexternal/', $origin_post['picture'])){
                 $articleDescription = $origin_post['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }
+}else{
+  $eventId = preg_replace('/\D/', '', $origin_post['link']);
+$event_origin_post = $facebook->api($eventId,'GET');
+$videoContent = $event_origin_post['source'];
+                  echo "<div class='newVideo'>";
+                echo "<video controls webkit-playsinline ><source src='$videoContent' type='mp4' height=100% width=100%></source></video>";
+                echo "</div>";
+
+}
+//var_dump($data);
 ?>

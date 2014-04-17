@@ -18,6 +18,7 @@ if(isset($self_origin_post['picture']) && preg_match('/fbexternal/', $self_origi
 
               echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
               echo "<br/>";
+              echo "<div class='fbcontent'>";
               if(isset($self_origin_post['name']))
               {
                 $articleName = $self_origin_post['name'];
@@ -35,5 +36,6 @@ if(isset($self_origin_post['picture']) && preg_match('/fbexternal/', $self_origi
                 $articleDescription = $self_origin_post['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }
 ?>

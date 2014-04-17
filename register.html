@@ -1,13 +1,14 @@
-<div>
-    <a class="newSocial tiny small button radius" href="#/login"><</a>
-<div>
+<div class="settingsHead row">
+    <a class="settingsButton" href="#/login"><img src="images/back.svg"/></a>
+    <!--<img src="images/stache.svg"/>-->
+</div>
 <div class="row">
       <div class="large-5 large-centered columns">
 <form ng-submit="register()" src="" >
 <h1>New Account</h1>
-    <input name="usr_email" type="text" placeholder="your email" ng-model="regCredentials.email" required> 
-    <input name="pwd" type="password" placeholder="password" ng-model="regCredentials.password" required minlength="5" >   
-    <input name="pwd" type="password" placeholder="Re-Type password" ng-model="regCredentials.password" required minlength="5" > 
+    <input name="usr_email" type="text" class="socialSettings" placeholder="your email" ng-model="regCredentials.email" required> <br/>
+    <input name="pwd" type="password" class="socialSettings" placeholder="password" ng-model="regCredentials.password" required minlength="5" >   <br/>
+    <input name="pwd" type="password" class="socialSettings" placeholder="Re-Type password" ng-model="regCredentials.retype" required minlength="5" > <br/>
     <p><small>By creating an account with Mash'D you agree to the terms and conditions.</small></p>     
   <input class="round button expand" type="submit" value="Create Account">
 </form>

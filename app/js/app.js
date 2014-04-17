@@ -119,20 +119,20 @@ app.controller('TwitterController', function(Comments, $rootScope, $scope,$http)
 
 app.controller('InstagramController', function(Comments, $rootScope, $scope,$http) {
 	 var postId = $rootScope.postId;
-	 $scope.postId = postId;
+	 $rootScope.scrollId = postId;
 	Comments.instagram(postId).success(function(response){
 		$('.comment').append(response);
 	});
 
 	$scope.sendMessage= function(){
 		var message = $scope.instagramMessage;
-		var iGuser = 'TEST';
+		
 		console.log(message);
 		$http.post('http://localhost/MashdApp/www/instagramlibs/comments.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
-		         	
+		         	var iGuser = response.username;
 		      	$('.comment').append("<div class='listComment'><span class='userName'>" + iGuser +
 		      	"</span>" + message + "</div>");
 		      //clear textarea
@@ -246,7 +246,21 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
   	 	console.log('already cached');
   	 	//console.log($rootScope.cache.get('feed'));
   	 	result = $rootScope.cache.get('feed');
-  	 	$('.brandon').html($compile(result)($scope));
+  	 	$('.brandon').html($compile(result)($scope))
+  	 		console.log('done');
+		        
+  	 	$(document).on('click', '.faceBookToggle', function() {
+		    	$('.fbPost').parent().toggle();
+		});
+		$(document).on('click', '.twitterToggle', function() {
+		    	$('.twitterPost').parent().toggle();
+		});
+		$(document).on('click', '.instaToggle', function() {
+		    	$('.instagramPost').parent().toggle();
+		});
+		$(document).on('click', '.vineToggle', function() {
+		    	$('.vinepost').parent().toggle();
+		});
   	 }
 	$scope.getTwComments = function(posterScreenName, postId, extraId){
 		console.log(posterScreenName);
@@ -304,12 +318,12 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 
 });
 
-app.controller('SocialController', function($scope, $http, $rootScope) {
+app.controller('SocialController', function($scope, $http, $rootScope,$window,$location,MashdLogin) {
+	console.log($rootScope.facebook);
 	if($rootScope.facebook === undefined){
-
-	var alert = new RegExp('Logout');
-	var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
+		var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
+		var logout = new RegExp('logout');
          $rootScope.facebook = data.facebook;
          $rootScope.facebookIO = data.facebookIO;
          $rootScope.twitter = data.twitter;
@@ -320,87 +334,127 @@ app.controller('SocialController', function($scope, $http, $rootScope) {
          $rootScope.vineIO = data.vineIO;
 
          $scope.facebookURL = $rootScope.facebook;
-         $scope.facebookURLInOrOut =  'Facebook Log' + $rootScope.facebookIO;
-          console.log(alert.test($scope.facebookURLInOrOut));
-          if(alert.test($scope.facebookURLInOrOut)){
-          	$scope.alertFB = 'alert';
-          	$rootScope.alertFB = 'alert';
-          }
+         
          $scope.twitterURL = $rootScope.twitter;
-         $scope.twitterURLInOrOut = 'Twitter Log' + $rootScope.twitterIO;
-          console.log(alert.test($scope.twitterURLInOrOut));
-          if(alert.test($scope.twitterURLInOrOut)){
-          	$scope.alertTW = 'alert';
-          	$rootScope.alertTW = 'alert';
-          }
+        
          $scope.instagramURL = $rootScope.instagram;
-         $scope.instagramURLInOrOut = 'Instagram Log' + $rootScope.instagramIO;
-          console.log(alert.test($scope.instagramURLInOrOut));
-          if(alert.test($scope.instagramURLInOrOut)){
-          	$scope.alertIG = 'alert';
-          	$rootScope.alertIG = 'alert';
-          }
+         
          $scope.vineURL = $rootScope.vine;
-         $scope.vineURLInOrOut = 'Vine Log' + $rootScope.vineIO;
-          console.log(alert.test($scope.vineURLInOrOut));
-          if(alert.test($scope.vineURLInOrOut)){
-          	$scope.alertVI = 'alert';
-          	$rootScope.alertVI = 'alert';
-          }
+         
+       var fbIO = $rootScope.facebookIO;
+       var twIO = $rootScope.twitterIO;
+       var igIO = $rootScope.instagramIO;
+       var viIO = $rootScope.vineIO;
 
-         console.log($rootScope.facebook);
+      if(logout.test($rootScope.facebook)){
+      	$('.fbCheckedout').attr('checked','checked');
+      }else{
+      	$('.fbCheckedin').attr('checked','checked');
+      }
+      if(logout.test($rootScope.vine)){
+      	$('#y1').attr('checked','checked');
+      }else{
+      	$('#y').attr('checked','checked');
+      }
+      if(logout.test($rootScope.instagram)){
+      	$('.checkedoutig').attr('checked','checked');
+      }else{
+      	$('.checkedinig').attr('checked','checked');
+      }
+      if(logout.test($rootScope.twitter)){
+      	$('.checkedouttw').attr('checked','checked');
+      }else{
+      	$('.checkedintw').attr('checked','checked');
+      }
+	       console.log($scope.facebookURL);
+          console.log(fbIO);
+          console.log(twIO);
+          console.log(igIO);
+          console.log(viIO);
 		});
-	}
+	}else{
+		var logout = new RegExp('logout');
        $scope.facebookURL = $rootScope.facebook;
        $scope.twitterURL = $rootScope.twitter;
        $scope.instagramURL = $rootScope.instagram;
        $scope.vineURL = $rootScope.vine;
-       $scope.alertFB = $rootScope.alertFB;
-       $scope.alertTW = $rootScope.alertTW;
-       $scope.alertIG = $rootScope.alertIG;
-       $scope.alertVI = $rootScope.alertVI;
-          
-        if($rootScope.facebookIO === undefined){
-        	$scope.facebookURLInOrOut = 'Facebook';
-        }else{
-          $scope.facebookURLInOrOut =  'Facebook Log' + $rootScope.facebookIO;          
-     	}
-     	if($rootScope.twitterIO === undefined){
-        	$scope.twitterURLInOrOut = 'Twitter';
-        }else{
-          $scope.twitterURLInOrOut =  'Twitter Log' + $rootScope.twitterIO;
-          
-     	}
-        if($rootScope.instagramIO === undefined){
-        	$scope.instagramURLInOrOut = 'Instagram';
-        }else{
-          $scope.instagramURLInOrOut =  'Instagram Log' + $rootScope.instagramIO;
-          
-     	}
-     	if($rootScope.vineIO === undefined){
-        	$scope.vineURLInOrOut = 'Vine';
-        }else{
-          $scope.vineURLInOrOut =  'Vine Log' + $rootScope.vineIO;
-          
-     	}
-         console.log($rootScope.facebook);
-          console.log($scope.facebookURL);
-          console.log($rootScope.facebookIO);
-
+       var fbIO = $rootScope.facebookIO;
+       var twIO = $rootScope.twitterIO;
+       var igIO = $rootScope.instagramIO;
+       var viIO = $rootScope.vineIO;
+	  if(logout.test($rootScope.facebook)){
+      	$('.fbCheckedout').attr('checked','checked');
+      }else{
+      	$('.fbCheckedin').attr('checked','checked');
+      }
+      if(logout.test($rootScope.vine)){
+      	$('#y1').attr('checked','checked');
+      }else{
+      	$('#y').attr('checked','checked');
+      }
+      if(logout.test($rootScope.instagram)){
+      	$('.checkedoutig').attr('checked','checked');
+      }else{
+      	$('.checkedinig').attr('checked','checked');
+      }
+      if(logout.test($rootScope.twitter)){
+      	$('.checkedouttw').attr('checked','checked');
+      }else{
+      	$('.checkedintw').attr('checked','checked');
+      }
+	       console.log($scope.facebookURL);
+          console.log(twIO);
+          console.log(igIO);
+          console.log('else');
+      }
+          $scope.aLogin = function(url){
+          	console.log('login');
+          	console.log(url);
+          	$window.location.href = url;
+          }
+          $scope.aLogout = function(url){
+          	console.log('logout');
+          	console.log(url);
+          	$http.get(url);
+          }
+           $scope.newCredentials={email: "", password: "", retype: ""};
+          $scope.changeSettings=function(){
+          	 console.log($scope.newCredentials.password);
+          	 console.log($scope.newCredentials.email);
+          	 console.log($scope.newCredentials.retype);
+          	 if($scope.newCredentials.password != $scope.newCredentials.retype){
+				$scope.failPrompt = "Passwords do not match."
+			 }else if(!$scope.newCredentials.password && !$scope.newCredentials.email){
+			 	console.log('nothing has been entered');
+			 }else{
+			 	MashdLogin.changeSettings($scope.newCredentials).success(function(response){
+			 		console.log(response);
+			 		$('.changesSaved').attr('disabled','true');
+			 		$('.changesSaved').addClass('success');
+			 		$('.changesSaved').removeAttr('ng-click');
+			 		$('.changesSaved').text('Changes Saved!')
+			 	});
+			 }
+          }
+    
 });
 
 app.controller('RegisterController', function($scope, $http,$location, $rootScope, MashdLogin) {
-	$scope.regCredentials = {email : "", password: ""};
+	$scope.regCredentials = {email : "", password: "", retype: ""};
 
 	$scope.register = function(){
-		MashdLogin.register($scope.regCredentials).success(function(response){
-			if(response.user_registered === 'true'){
-				//redirect to social page to start signing into accounts
-				$location.path('/social');
-			}else if(response.user_registered === 'false'){
-				$scope.failPrompt = response.error;
-			}
-		});
+		if($scope.regCredentials.password != $scope.regCredentials.retype){
+			$scope.failPrompt = "Passwords do not match."
+		}else{
+			MashdLogin.register($scope.regCredentials).success(function(response){
+				if(response.user_registered === 'true'){
+					//redirect to social page to start signing into accounts
+					$location.path('/social');
+				}else if(response.user_registered === 'false'){
+					$scope.failPrompt = response.error;
+				}
+			});
+		}
 	}
 });
 
@@ -421,6 +475,14 @@ app.factory('MashdLogin', function($http, $location){
 			return $http({
 				method: 'POST',
 			    url: 'http://localhost/MashdApp/www/register.php',
+			    data: credentials,
+			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			});
+		},
+		changeSettings: function(credentials){
+			return $http({
+				method: 'POST',
+			    url: 'http://localhost/MashdApp/www/changeSettings.php',
 			    data: credentials,
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
@@ -486,17 +548,23 @@ app.directive('design', function (){
 	return{
 		restrict: "C",
 		controller: function($scope, $compile,$rootScope) {
-			$(document).on('click', '.loadmorefeed', function() {
-			$('.loadmorefeed').remove();
-		    $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",
+		/*	$(window).scroll(function()
+			{		
+			    if($(window).scrollTop() == $(document).height() - ($(window).height()))
+			    {	$('div#loadmoreajaxloader').show();
+			        console.log('1');
+			        $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",
 		    	success:function(result){
-		      $('.new1').html($compile(result)($scope));
-		       var old = $rootScope.cache.get('feed');
-		       $rootScope.cache.put('feed', old + result);
-		       console.log('new cache');
-		      // console.log(old + 'old ^^^^ new below---------------------------' + result);
-		      }});
-		  });
+			      $('.brandon').append($compile(result)($scope));
+			       var old = $rootScope.cache.get('feed');
+			       $rootScope.cache.put('feed', old + result);
+			       console.log('new cache');
+			      // console.log(old + 'old ^^^^ new below---------------------------' + result);
+			      $('div#loadmoreajaxloader').hide();
+			      }});
+			    }
+			});*/
+			
 		},
 		link: function(scope,element,attributes){
 			$(function(){
@@ -613,7 +681,7 @@ app.directive('design', function (){
 		    });
 			//INSTAGRAM LIKE/remove likeInstagram--------------------------------------------------------+
 		$(document).on('click', '.likeInstagram', function(){
-				var id= $(this).parent().attr('group');
+				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
 		    
 			$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/instagramLike.php",
@@ -624,11 +692,12 @@ app.directive('design', function (){
 			        console.log('like sent!');
 			        	//change class of this button to deletInstagramLike
 			        }});
-			    $(this).removeClass( "likeInstagram" ).addClass( "deletInstagramLike alert" );
+				$(this).text('Unlike');
+			    $(this).removeClass( "likeInstagram" ).addClass( "deletInstagramLike" );
 		    });
 		    //REMOVE
 		    $(document).on('click', '.deletInstagramLike', function(){
-				var id= $(this).parent().attr('group');
+				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
 		    	$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/delete_instagramLike.php",
 			           type:'POST',              
@@ -638,12 +707,14 @@ app.directive('design', function (){
 			        	console.log('delete like sent!');
 			        	//change class of this button to deletInstagramLike
 			        }});
-			    $(this).removeClass( "deletInstagramLike alert" ).addClass("likeInstagram");
+				$(this).text('Like');
+
+			    $(this).removeClass( "deletInstagramLike" ).addClass("likeInstagram");
 		    });
 
 		    //VINE LIKE/COMMENT/REVINE----------------------------
 		    $(document).on('click', '.vineLike', function(){
-				var id= $(this).parent().attr('data');
+				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
 		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineLike.php",
 			           type:'POST',              
@@ -657,7 +728,7 @@ app.directive('design', function (){
 		    });
 		    //REMOVE
 		    $(document).on('click', '.deletVineLike', function(){
-				var id= $(this).parent().attr('data');
+				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
 		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineLike.php",
 			           type:'POST',              
@@ -672,7 +743,7 @@ app.directive('design', function (){
 		    //REVINE
 		     $(document).on('click', '.vineRevine', function(){
 		     	 var $this = $(this);
-				var id= $this.parent().attr('data');
+				var id= $this.parent().parent().attr('data');
 		    	console.log(id);
 		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineRevine.php",
 			           type:'POST',              
@@ -686,12 +757,12 @@ app.directive('design', function (){
 			        	console.log(repostId);
 			        	$this.attr('data', repostId);
 			        }});
-			        	$this.removeClass( "vineRevine" ).addClass( "deletVineRevine alert" );
+			        	$this.removeClass( "vineRevine" ).addClass( "deletVineRevine" );
 		      });
 
 		     //UNDO-REVINE
 		     $(document).on('click', '.deletVineRevine', function(){
-				var id= $(this).parent().attr('data');
+				var id= $(this).parent().parent().attr('data');
 				var repostId = $(this).attr('data');
 		    	console.log(id);
 		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineRevine.php",
@@ -705,7 +776,7 @@ app.directive('design', function (){
 			        	//change class of this button to deletInstagramLike
 			        }});
 		    	 $(this).removeAttr('data');
-			    $(this).removeClass( "deletVineRevine alert" ).addClass("vineRevine");
+			    $(this).removeClass( "deletVineRevine" ).addClass("vineRevine");
 			   
 		    });
 
@@ -761,7 +832,7 @@ app.directive('design', function (){
 			          
 			    }});
 			});*/
-
+			
 			
 
 			$(document).on('click', '.faceBookToggle', function() {

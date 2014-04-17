@@ -10,7 +10,9 @@ echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$
 ###########  PRINTS THE MESSAGE OF THE POST IF ANY        
           echo "<br/>";
           if (isset($data['message'])){
+            echo "<div class='fbcontent'>";
               echo $data['message'];
+              echo "</div>";
               echo "<br/>";
             }
           echo "</div></div>";
@@ -51,6 +53,7 @@ echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$
 
               echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
               echo "<br/>";
+              echo "<div class='fbcontent'>";
               if(isset($data['name']))
               {
                 $articleName = $data['name'];
@@ -68,6 +71,7 @@ echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$
                 $articleDescription = $data['description'];
                 echo $articleDescription;
               }
+              echo "</div>";
           }else{ 
               ###regular post
         	if(isset($data['picture'])){

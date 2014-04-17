@@ -19,27 +19,12 @@ echo " ".$story."</div></div>";
                 if(isset($self_origin_post['description']))
                 {
                   $videoMessage = $self_origin_post['description'];
-                  echo $videoMessage;
-                  echo "<br/>";
+                  echo "<div class='fbcontent'>".$videoMessage."</div>";
                 }
                   $videoContent = $self_origin_post['embed_html'];
+                  echo "<div class='newVideo'>";
                 echo $videoContent;
-                if(!empty($self_origin_post['likes'])){
-                echo "<br/>";
-                $likes_count1 = count($self_origin_post['likes']['data']);
-                echo "Likes: " . $likes_count1;
-                /* $x=0;
-                $likes_count1 = count($self_origin_post['likes']['data']);
-                while($x < $likes_count1){
-                    echo $self_origin_post['likes']['data'][$x]['name'];
-                    echo "<br/>";
-                    $x++;
-                }*/
-              }
-              if(!empty($self_origin_post['comments'])){
-                $comment_count = count($self_origin_post['comments']['data']);
-                echo "Comments: " . $comment_count;
-              }
-      echo "<br/>";
+                echo "</div>";
+               
 //var_dump($self_origin_post);
 ?>

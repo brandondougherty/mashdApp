@@ -14,9 +14,11 @@ $instagram = new Instagram(array(
   'apiSecret'   => '12b2d103aa884b9c9a4bf377ad4cf279',
   'apiCallback' => 'http://localhost/MashdApp/www/instagramredirect.php' // must point to success.php
 ));
+$name =$_SESSION['ig_user'];
 
 $response = $instagram->addMediaComment($id, $status);
+print_r($response);
 
-echo json_encode($response);
+echo json_encode($name);
 
 ?>
