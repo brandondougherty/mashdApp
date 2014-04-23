@@ -1,12 +1,13 @@
 <?php 
-include 'facebooklibs/auth.php';
+session_start();
+include 'facebooklibs/src/facebook.php';
 include 'instagramlibs/instagramAuth.php';
 include 'twitterlibs/twitterauth.php';
 include 'vinelibs/vine.php';
 function time_elapsed_string($ptime){
     $etime = time() - $ptime;
     if ($etime < 1){
-        return '0 seconds';
+        return '0 s';
     }
     $a = array( 12 * 30 * 24 * 60 * 60  =>  'y',
                 30 * 24 * 60 * 60       =>  'month',
@@ -24,10 +25,17 @@ function time_elapsed_string($ptime){
         }
     }
 }  
-if ($user){
+if (isset($_SESSION['fb_user_id'])){
+  $facebook = new Facebook(array(
+    'appId'  => '464235817026185',
+    'secret' => 'cc0dfb735ef12d40c59dc83fa7493efd'
+  ));
   $ret_obj = $facebook->api('/me/home?limit=10','GET');
-  $_SESSION['fb_object'] = $ret_obj['paging'];
+  if(!empty($ret_obj) && isset($ret_obj['paging'])){
+    $_SESSION['fb_object'] = $ret_obj['paging'];
+  }
   //the paging works but it is kinda wonky, look into this more
+  //var_dump($ret_obj);
 }
 if (isset($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
   $vine = new Vine;
@@ -53,13 +61,14 @@ $_SESSION['twitter_object'] = $twitterObj;
 
 }  
   //var_dump($_SESSION);
+  //var_dump($_COOKIE);
   
     if(isset($_SESSION['fb_object'])||isset($_SESSION['vine_key'])||isset($_SESSION['vine_userid'])||isset($_SESSION['access_token'])||isset($_SESSION['instagram']))
     {
       if (isset ($_SESSION['vine_key']) && isset($_SESSION['vine_userid'])){
         include 'vinelibs/vine_parse.php'; 
       }
-     if(isset($user)) {
+     if(isset($_SESSION['fb_object'])) {
         include 'facebook_parse.php';
      }
      if(isset($ig_username)){ 
@@ -72,8 +81,6 @@ $_SESSION['twitter_object'] = $twitterObj;
     echo "<script>$(document).ready(function(){
       $('#pic1').hide();
        $('#background').css( 'display', 'block');
-       $('.brandon').show();
-      $('.loadmorefeed').show();
 
       // get array of elements
       var myArray = $('.brandon > div');
@@ -108,6 +115,7 @@ $(document).on('click', '.external', function (e) {
     window.open(targetURL, '_system');
 });
 </script><!--<script type='text/javascript' src='facebooklibs/fb.js'></script>-->";
+
   }else{
     echo "<div class='pleaseLogIn'>Please Log into one of your Social accounts!</div>";
    echo "<script>$(document).ready(function(){

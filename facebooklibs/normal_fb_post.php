@@ -51,7 +51,7 @@ echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $data['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              echo "<a href='$urlLink'><img src=\"$newUrlimg\" /></a>";
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($data['name']))

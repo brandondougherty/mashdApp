@@ -8,6 +8,9 @@ $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 echo " ".$story."</div></div>";
   echo "<br/>";
+  if(isset($self_origin_post['error'])){
+
+}else{
                if (isset($self_origin_post['to'])){
                    echo " to " . $self_origin_post['to']['data']['0']['name'];
                    echo "<br/>";
@@ -74,4 +77,5 @@ echo " ".$story."</div></div>";
       ############
       ###########   END PRINTS THE YOUTUBE VIDEO, OR A DIRECTLY UPLOADED VIDEO, OR PICTURE   
 //var_dump($self_origin_post);
+            }
 ?>

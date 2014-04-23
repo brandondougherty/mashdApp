@@ -10,7 +10,9 @@ echo " ".$story."</div></div>";
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $data['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              //echo "<a class='external' href='$urlLink'><img src='$newUrlimg' /></a>";
+              echo "<a window.open('$urlLink', '_blank', 'location=yes');><img src=\"$newUrlimg\" /></a>";
+
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($data['name']))

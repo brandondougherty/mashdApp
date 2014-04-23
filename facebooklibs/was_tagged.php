@@ -41,7 +41,7 @@ echo " ".$story."</div></div>";
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $data['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              echo "<a class='external' href='$urlLink'><img src='$newUrlimg' /></a>";
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($data['name']))
@@ -70,7 +70,8 @@ echo " ".$story."</div></div>";
             if(isset($data['link'])){
             $urlLink =  $data['link'];
             $imglink = 'https://scontent-b-pao.xx.fbcdn.net/hphotos-prn1/' .$med_num. '_n.jpg';
-            echo "<a href='$urlLink' target='_blank'><img src='$imglink' width='400px'/></a>";
+              echo "<a href=\"$urlLink\" ><img src=\"$imglink\" /></a>";
+
         	}else{
         		$imglink = 'https://scontent-b-pao.xx.fbcdn.net/hphotos-prn1/' .$med_num. '_n.jpg';
         		echo "<img src='$imglink' />";

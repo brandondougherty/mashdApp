@@ -362,7 +362,7 @@ margin: 0 5px 0 -4px;
 	margin: 0 10px;
 }
 .brandon{
-	display: none;
+	
 	clear: both;
 }
 #pic1
@@ -420,6 +420,7 @@ margin: 0 !important;
 	padding-left: 130px;
 	padding-top: 20px;
 	background-color: #F1E5E5;
+	display: none;
 }
 #loadmoreajaxloader img{
 	width: 40px;

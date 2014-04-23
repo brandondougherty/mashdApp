@@ -2,6 +2,9 @@
 $id_of_self_post = preg_replace('/.*_/', '', $data['id']);
 $self_post_url = '/' .$id_of_self_post;
 $self_origin_post = $facebook->api($self_post_url,'GET');
+if(isset($self_origin_post['error'])){
+
+}else{
   $original_poster = $self_origin_post['from']['name'];
   $photo = $self_origin_post['source'];
  $name = $data['from']['name'];
@@ -13,6 +16,6 @@ echo " ".$story."</div></div>";
   echo $original_poster . '<br/>';
   echo "<img src='$photo'/>";
 
-
+}
 
  ?>

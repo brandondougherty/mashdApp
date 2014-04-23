@@ -14,6 +14,9 @@ echo " ".$story;
       echo "<br/>";
       echo "<img src='$origin_pic'/>";
       echo "<br/>";
+      if(isset($self_origin_post['error'])){
+
+}else{
                    if (isset($origin_post['to'])){
                        echo " to " . $origin_post['to']['data']['0']['name'];
                     }     
@@ -84,4 +87,5 @@ echo " ".$story;
                     $comment_count = count($origin_post['comments']['data']);
                     echo "Comments: " . $comment_count;
                   }
+                }
 ?>

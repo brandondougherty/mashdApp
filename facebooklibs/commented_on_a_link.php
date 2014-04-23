@@ -9,6 +9,9 @@ $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 echo " ".$story."</div></div>";
 echo "<hr>";
+if(isset($self_origin_post['error'])){
+
+}else{
 echo $origin_post['from']['name']." ";
 //mesage
 echo "<div class='fbcontent'>";
@@ -20,7 +23,7 @@ if(preg_match('/fbexternal/', $origin_post['picture'])){
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $origin_post['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              echo "<a window.open('$urlLink', '_blank', 'location=yes');><img src='$newUrlimg' /></a>";
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($origin_post['name']))
@@ -42,4 +45,5 @@ if(preg_match('/fbexternal/', $origin_post['picture'])){
               }
               echo "</div>";
           }
+        }
 ?>

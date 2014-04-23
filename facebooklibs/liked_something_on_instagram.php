@@ -2,7 +2,9 @@
 if(isset($data['object_id'])){
 $self_post_url = '/' .$data['object_id'];
 $self_origin_post = $facebook->api($self_post_url,'GET');
+if(isset($self_origin_post['error'])){
 
+}else{
 $name = $self_origin_post['from']['name'];
 $id = $self_origin_post['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
@@ -19,7 +21,7 @@ $image = $self_origin_post['source'];
 echo "<img src='$image'/>";
 }
 echo "<br />";
-
+}
 }else{
 
 $id_of_self_post = preg_replace('/.*_/', '', $data['id']);
@@ -34,6 +36,9 @@ if(isset($data['mesage'])){
   echo "</div>";
   echo "<br />";
 }
+if(isset($self_origin_post['error'])){
+
+}else{
 if(!empty($self_origin_post['image'])){
   echo "<br/>";
   $picture = $self_origin_post['image']['0']['url'];
@@ -51,5 +56,5 @@ echo $instagram_photo_url['description'];
 }
  
 }
-
+}
  ?>

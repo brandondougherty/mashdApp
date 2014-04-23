@@ -94,13 +94,14 @@
         }elseif ((isset($data['source'])) && (preg_match("/.3g2|.mp4|.3gp|.gpp|.asf|.avi|.dat|.divx|.dv|.f4v|.flv|.m2ts|.m4v|.mkv|.mod|.mov|.mp4|.mpe|.mpeg|.mpeg4|.mpg|.mts|.nsv|.ogm|.ogv|.qt|.tod|.ts|.vob|.wmv/",$data['source']))){
           $video_up = $data['source'];
           echo "<div class='newVideo'><object data='$video_up' type='application/x-shockwave-flash' height=100% width=100%></object></div>";
+                echo "<div class='newVideo'><video loop webkit-playsinline=true><source src='$video_up' codecs='avc1, mp4a' height=100% width=100% ></source></video></div>";    
 
         }elseif(isset($data['picture']) && preg_match('/fbexternal/', $data['picture'])){
               $urlOfExternal = preg_replace('/.*url=/', '', $data['picture']);
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $data['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              echo "<a window.open('$urlLink', '_blank', 'location=yes');><img src='$newUrlimg' /></a>";
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($data['name']))

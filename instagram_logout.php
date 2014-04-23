@@ -2,5 +2,5 @@
 session_start();
 unset($_SESSION['instagram']);
 unset($_SESSION['igObject']);
-header("Location: http://localhost/MashdApp/www/#/social");
+header("Location: http://mashd.it/#/social");
 ?>

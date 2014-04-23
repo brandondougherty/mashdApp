@@ -2,9 +2,12 @@
 session_start();
 foreach ($_SESSION as $name => $value)
 {
-    if(preg_match('/fb_.*/', $name)){
-    	unset($_SESSION[$name]);
-    }
+   if(strpos($name,'fb_') === 0){
+   	//var_dump($_SESSION[$name]);
+   	unset($_SESSION[$name]);
+
+   }
 }
-header("Location: http://localhost/MashdApp/www/#/social");
+
+header("Location: http://mashd.it/#/social");
 ?>

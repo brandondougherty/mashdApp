@@ -4,6 +4,11 @@
 	border-bottom: 1px solid #e8e8e8;
 	width: 100%;
 }
+.loadcomments{
+	width: 40px;
+	margin: 290px auto;
+	display: block;
+}
 .comments{
 	font-size: 1.4em;
 	font-weight: bold;
@@ -20,6 +25,7 @@ margin-top: 2%;
 .comment{
 	margin-bottom: 60px;
 	margin-top: 52px;
+	display: none;
 }
 .back{
 	margin: 2%;

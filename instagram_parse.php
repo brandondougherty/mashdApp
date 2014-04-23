@@ -25,7 +25,8 @@
       // video
       $poster = $media->images->standard_resolution->url;
       $source = $media->videos->standard_resolution->url . '?';
-      echo "<div class='newVideo'><video controls poster='$poster' webkit-playsinline ><source src='$source' type='mp4' height=100% width=100%></source></video></div>";
+      //echo "<div class='newVideo'><video controls poster='$poster' webkit-playsinline ><source src='$source' type='mp4' height=100% width=100%></source></video></div>";
+      echo "<div class='newVideo'><video loop poster='$poster' webkit-playsinline=true><source src='$source' codecs='avc1, mp4a' height=100% width=100% ></source></video></div>";    
     } else {
       // image
       $image = $media->images->standard_resolution->url;

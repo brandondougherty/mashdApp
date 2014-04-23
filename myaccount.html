@@ -33,8 +33,10 @@ $mashdUser = $_SESSION['user_name'];
   <div class="mainContainer">
   
     <div id="pic1"></div>
-    <div class="brandon"></div>
-    <div id="loadmoreajaxloader"><img src="images/loader.gif"/></div>
+    <div class="brandon" infinite-scroll="morefeed.nextPage()" infinite-scroll-disabled='morefeed.busy' infinite-scroll-distance="1"></div>
+   <div ng-show='morefeed.busy'>
+             <img src="images/loader.gif"/> 
+      </div>
   </div>
 </div>
   </section>

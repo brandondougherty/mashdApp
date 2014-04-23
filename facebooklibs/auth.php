@@ -3,7 +3,8 @@
 	
 	$facebook = new Facebook(array(
   'appId'  => '464235817026185',
-  'secret' => 'cc0dfb735ef12d40c59dc83fa7493efd'
+  'secret' => 'cc0dfb735ef12d40c59dc83fa7493efd',
+  'sharedSession'=>false
 ));
 
 // Get User ID
@@ -22,7 +23,7 @@ if ($user) {
   $statusUrl = $facebook->getLoginStatusUrl();
   $loginUrl = $facebook->getLoginUrl($params=array(
   	'scope' => 'read_stream, read_friendlists, friends_videos, user_videos, friends_photos, publish_actions, read_insights, user_likes, user_status, user_photos, friends_status, friends_likes, user_actions.news, friends_actions.news, friends_actions:instapp, user_actions:instapp',
-    'redirect_uri' => 'http://localhost/MashdApp/www/fbredirect.php'
+    'redirect_uri' => 'http://mashd.it/fbredirect.php'
   ));
 }
 

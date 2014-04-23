@@ -9,6 +9,9 @@ $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 echo " ".$story."</div></div>";
   echo "<br/>";
+  if(isset($self_origin_post['error'])){
+
+}else{
   echo $self_origin_post['message'];
   echo "<br/>";
 if(isset($self_origin_post['picture']) && preg_match('/fbexternal/', $self_origin_post['picture'])){
@@ -38,4 +41,5 @@ if(isset($self_origin_post['picture']) && preg_match('/fbexternal/', $self_origi
               }
               echo "</div>";
           }
+        }
 ?>

@@ -9,6 +9,9 @@ $id = $data['from']['id'];
 echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name</a>";
 echo " ".$story."</div></div>";
   echo "<br/>";
+  if(isset($self_origin_post['error'])){
+
+}else{
  if(isset($self_origin_post['name']))
   {
     $articleName = $self_origin_post['name'];
@@ -17,4 +20,5 @@ echo " ".$story."</div></div>";
   }$photo = $self_origin_post['source'];
   echo "<img src='$photo'/>";
   echo "<br/>";
+}
 ?>

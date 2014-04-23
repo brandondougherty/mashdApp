@@ -2,7 +2,7 @@
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '464235817026185',
-    channelUrl : 'http://localhost/MashdApp/www/channel.php',
+    channelUrl : 'http://mashd.it/channel.php',
     status     : true,
     cookie     : true,
     xfbml      : true

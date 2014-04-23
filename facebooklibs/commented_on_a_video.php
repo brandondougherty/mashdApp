@@ -2,6 +2,9 @@
 $id_of_self_post = preg_replace('/.*_/', '', $data['id']);
 $self_post_url = '/' .$id_of_self_post;
 $self_origin_post = $facebook->api($self_post_url,'GET');
+if(isset($self_origin_post['error'])){
+
+}else{
 $vidoProfileImageId = $self_origin_post['from']['id'];
 $videoProfileURL = $facebook->api('/' . $vidoProfileImageId . '?fields=picture','GET');
 $videoProfileImg = $videoProfileURL['picture']['data']['url'];
@@ -27,4 +30,5 @@ echo " ".$story."</div></div>";
                 echo "</div>";
                
 //var_dump($self_origin_post);
+              }
 ?>

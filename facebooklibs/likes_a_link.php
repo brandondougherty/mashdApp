@@ -11,10 +11,15 @@ echo " ".$story."</div></div>";
 echo "<br/>";
 //image
 //name
+if(isset($origin_post['error'])){
+
+}else{
 echo $origin_post['from']['name'];
 //mesage
 echo "<div class='fbcontent'>";
+if(isset($origin_post['message'])){
 echo $origin_post['message'];
+}
 echo "</div>";
 //media
 if(isset($origin_post['picture'])){
@@ -23,7 +28,7 @@ if(preg_match('/fbexternal/', $origin_post['picture'])){
               $newUrlimg = urldecode($urlOfExternal);
               $urlLink =  $origin_post['link'];
 
-              echo "<a href='$urlLink' target='_blank'><img src='$newUrlimg' /></a>";
+              echo "<a window.open('$urlLink', '_blank', 'location=yes');><img src='$newUrlimg' /></a>";
               echo "<br/>";
               echo "<div class='fbcontent'>";
               if(isset($origin_post['name']))
@@ -55,4 +60,5 @@ $videoContent = $event_origin_post['source'];
 
 }
 //var_dump($data);
+}
 ?>

@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ui.router']).config(function( $stateProvider, $urlRouterProvider){
+var app = angular.module("app", ['ui.router','infinite-scroll']).config(function( $stateProvider, $urlRouterProvider){
   $stateProvider
     .state("myaccount", {
       url: "/myaccount",
@@ -87,13 +87,15 @@ app.controller('TwitterController', function(Comments, $rootScope, $scope,$http)
 	  $scope.twitterMessage = "@" + posterScreenName + extra;
 	Comments.twitter(posterScreenName,postId).success(function(response){
 		$('.comment').append(response);
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 	//twitter comment on post
 	$scope.sendMessage= function(){
 		var message = $scope.twitterMessage;
 		console.log(postId);
 		console.log(message);
-		$http.post('http://localhost/MashdApp/www/twitterlibs/comment.php', 
+		$http.post('http://mashd.it/twitterlibs/comment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -118,17 +120,20 @@ app.controller('TwitterController', function(Comments, $rootScope, $scope,$http)
 });
 
 app.controller('InstagramController', function(Comments, $rootScope, $scope,$http) {
+	console.log('hi');
 	 var postId = $rootScope.postId;
 	 $rootScope.scrollId = postId;
 	Comments.instagram(postId).success(function(response){
 		$('.comment').append(response);
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 
 	$scope.sendMessage= function(){
 		var message = $scope.instagramMessage;
 		
 		console.log(message);
-		$http.post('http://localhost/MashdApp/www/instagramlibs/comments.php', 
+		$http.post('http://mashd.it/instagramlibs/comments.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -146,12 +151,14 @@ app.controller('FacebookCommentsController', function(Comments, $rootScope, $sco
 	 $scope.postId = postId;
 	Comments.facebookComments(postId).success(function(response){
 		$('.comment').append($compile(response)($scope));
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 
 	$scope.sendMessage= function(){
 		var message = $scope.facebookMessage;
 		console.log(message);
-		$http.post('http://localhost/MashdApp/www/facebooklibs/postComment.php', 
+		$http.post('http://mashd.it/facebooklibs/postComment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -169,7 +176,7 @@ app.controller('FacebookCommentsController', function(Comments, $rootScope, $sco
 	}
 	$scope.removeComment = function(postId){
 		console.log(postId)
-		$http.post('http://localhost/MashdApp/www/facebooklibs/removeComment.php', 
+		$http.post('http://mashd.it/facebooklibs/removeComment.php', 
 					{id: postId}
 					).success(function(response){
 						console.log(response);
@@ -183,6 +190,8 @@ app.controller('FacebookLikesController', function(Comments, $rootScope, $scope,
 	 //$scope.postId = postId;
 	Comments.facebookLikes(postId).success(function(response){
 		$('.comment').append($compile(response)($scope));
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 
 	$scope.goToUser = function(postId){
@@ -197,6 +206,8 @@ app.controller('FacebookAlbumController', function(Comments, $rootScope, $scope,
 	 var postId = $rootScope.postId;
 	Comments.facebookAlbum(postId).success(function(response){
 		$('.comment').append($compile(response)($scope));
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 	$scope.goToPhoto = function(){
 		console.log('like photo');
@@ -207,12 +218,14 @@ app.controller('VineController', function(Comments, $rootScope, $scope,$http,$co
 	 var postId = $rootScope.postId;
 	Comments.vineComments(postId).success(function(response){
 		$('.comment').append($compile(response)($scope));
+		$('.loadcomments').hide();
+		$('.comment').show();
 	});
 
 	$scope.sendMessage= function(){
 		var message = $scope.vineMessage;
 		console.log(message);
-		$http.post('http://localhost/MashdApp/www/vinelibs/postComment.php', 
+		$http.post('http://mashd.it/vinelibs/postComment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -230,6 +243,7 @@ app.controller('VineController', function(Comments, $rootScope, $scope,$http,$co
 
 
 app.controller('MyAccountController', function($http, $rootScope, $scope,$window,$location,$compile,$cacheFactory) {
+	
 	$scope.reload =function(){
         $window.location.reload(); 
     }
@@ -237,16 +251,38 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
      if($rootScope.cache == undefined){
       console.log('caching');
       $rootScope.cache = $cacheFactory('feedCacheID');
-      $http.get('http://localhost/MashdApp/www/social_accounts_include.php').success(function(result){
+      $http.get('http://mashd.it/social_accounts_include.php').success(function(result){
 			$('.brandon').html($compile(result)($scope));
 			$rootScope.cache.put('feed', result);
+			$scope.morefeed = new MoreFeed();
 	  	});
+
 	  //console.log($rootScope.cache);
   	 }else{
   	 	console.log('already cached');
   	 	//console.log($rootScope.cache.get('feed'));
   	 	result = $rootScope.cache.get('feed');
+
+  	 	
   	 	$('.brandon').html($compile(result)($scope))
+			var MoreFeed = function() {
+	    this.busy = false;
+	   };
+
+	MoreFeed.prototype.nextPage = function() {
+	    if (this.busy) return;
+	    this.busy = true;
+	console.log('inside');
+	    var url = "http://mashd.it/multiCall_for_more_feed.php";
+	    $http.get(url).success(function(result) {
+	      	$('.brandon').append($compile(result)($scope));
+		       var old = $rootScope.cache.get('feed');
+		       $rootScope.cache.put('feed', old + result);
+		       console.log('new cache');
+	      	   this.busy = false;
+	    }.bind(this));
+	  };
+	  $scope.morefeed = new MoreFeed();
   	 		console.log('done');
 		        
   	 	$(document).on('click', '.faceBookToggle', function() {
@@ -299,8 +335,10 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 		$rootScope.postId = postId;
 		$location.path('/vineComment');
 	}
-       if($rootScope.facebook ===undefined){
-	var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
+	//if the user just logged in, or refreshed the page
+	//find out there log in statuses
+       if($rootScope.facebook === undefined){
+	var responsePromise = $http.get('http://mashd.it/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
          $rootScope.facebook = data.facebook;
          $rootScope.facebookIO = data.facebookIO;
@@ -312,16 +350,69 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
          $rootScope.vineIO = data.vineIO;
 
          console.log($rootScope.facebook);
+         console.log($rootScope.facebookIO);
+         
+         //if logged in,else leave it cause they are not signed in
+         if($rootScope.facebookIO==0){
+        	$('.faceBookNav').css( "fill", "blue" );//make this the fb blue
+         }
+         if($rootScope.twitterIO==0){
+        	$('.twitterNav').css( "fill", "blue" );//make this the tw blue
+         }
+         if($rootScope.instagramIO==0){
+        	$('.instaNav').css( "fill", "blue" );//make this the ig blue
+         }
+         if($rootScope.vineIO==0){
+        	$('.vineNav').css( "fill", "blue" );//make this the vi blue
+         }
 		});
+		//set nav buttons 
+	}else{//if rootscope.social is defined dont worry about it we know the state..
+		//set nav buttons
+		console.log($rootScope.facebook);
+        console.log($rootScope.facebookIO);
+        //if logged in,else leave it cause they are not signed in
+         if($rootScope.facebookIO==0){
+        	$('.faceBookNav').css( "fill", "blue" );//make this the fb blue
+         }
+         if($rootScope.twitterIO==0){
+        	$('.twitterNav').css( "fill", "blue" );//make this the tw blue
+         }
+         if($rootScope.instagramIO==0){
+        	$('.instaNav').css( "fill", "blue" );//make this the ig blue
+         }
+         if($rootScope.vineIO==0){
+        	$('.vineNav').css( "fill", "blue" );//make this the vi blue
+         }
 	}
-         console.log($rootScope.facebook);
+         
+    
+    	
+    var MoreFeed = function() {
+	    this.busy = false;
+	   };
 
-});
+	MoreFeed.prototype.nextPage = function() {
+	    if (this.busy) return;
+	    this.busy = true;
+	console.log('inside');
+	    var url = "http://mashd.it/multiCall_for_more_feed.php";
+	    $http.get(url).success(function(result) {
+	      	$('.brandon').append($compile(result)($scope));
+		       var old = $rootScope.cache.get('feed');
+		       $rootScope.cache.put('feed', old + result);
+		       console.log('new cache');
+	      	   this.busy = false;
+	    }.bind(this));
+	  };
+	  
+		
+	});
 
 app.controller('SocialController', function($scope, $http, $rootScope,$window,$location,MashdLogin) {
 	console.log($rootScope.facebook);
 	if($rootScope.facebook === undefined){
-		var responsePromise = $http.get('http://localhost/MashdApp/www/social_accounts.php');
+		var responsePromise = $http.get('http://mashd.it/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
 		var logout = new RegExp('logout');
          $rootScope.facebook = data.facebook;
@@ -463,18 +554,18 @@ app.factory('MashdLogin', function($http, $location){
 		login: function(credentials){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/login.php',
+					    url: 'http://mashd.it/login.php',
 					    data: credentials,
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
 		},
 		logout: function(){
-			return $http.get('http://localhost/MashdApp/www/logout.php');
+			return $http.get('http://mashd.it/logout.php');
 		},
 		register: function(credentials){
 			return $http({
 				method: 'POST',
-			    url: 'http://localhost/MashdApp/www/register.php',
+			    url: 'http://mashd.it/register.php',
 			    data: credentials,
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
@@ -482,7 +573,7 @@ app.factory('MashdLogin', function($http, $location){
 		changeSettings: function(credentials){
 			return $http({
 				method: 'POST',
-			    url: 'http://localhost/MashdApp/www/changeSettings.php',
+			    url: 'http://mashd.it/changeSettings.php',
 			    data: credentials,
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
@@ -495,7 +586,7 @@ app.factory('Comments', function($http, $location){
 		twitter: function(posterScreenName, postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/twitterlibs/twittercommentsajax.php',
+					    url: 'http://mashd.it/twitterlibs/twittercommentsajax.php',
 					    data: {poster: posterScreenName,
 			                  post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -504,7 +595,7 @@ app.factory('Comments', function($http, $location){
 		instagram: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/instagramlibs/commentsajax.php',
+					    url: 'http://mashd.it/instagramlibs/commentsajax.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -512,7 +603,7 @@ app.factory('Comments', function($http, $location){
 		facebookComments: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/facebooklibs/getComments.php',
+					    url: 'http://mashd.it/facebooklibs/getComments.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -520,7 +611,7 @@ app.factory('Comments', function($http, $location){
 		facebookLikes: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/facebooklibs/getLikes.php',
+					    url: 'http://mashd.it/facebooklibs/getLikes.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -528,7 +619,7 @@ app.factory('Comments', function($http, $location){
 		facebookAlbum: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/facebooklibs/facebookAlbum.php',
+					    url: 'http://mashd.it/facebooklibs/facebookAlbum.php',
 					    data: {post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -536,7 +627,7 @@ app.factory('Comments', function($http, $location){
 		vineComments: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://localhost/MashdApp/www/vinelibs/getComments.php',
+					    url: 'http://mashd.it/vinelibs/getComments.php',
 					    data: {post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -547,25 +638,7 @@ app.factory('Comments', function($http, $location){
 app.directive('design', function (){
 	return{
 		restrict: "C",
-		controller: function($scope, $compile,$rootScope) {
-		/*	$(window).scroll(function()
-			{		
-			    if($(window).scrollTop() == $(document).height() - ($(window).height()))
-			    {	$('div#loadmoreajaxloader').show();
-			        console.log('1');
-			        $.ajax({url:"http://localhost/MashdApp/www/multiCall_for_more_feed.php",
-		    	success:function(result){
-			      $('.brandon').append($compile(result)($scope));
-			       var old = $rootScope.cache.get('feed');
-			       $rootScope.cache.put('feed', old + result);
-			       console.log('new cache');
-			      // console.log(old + 'old ^^^^ new below---------------------------' + result);
-			      $('div#loadmoreajaxloader').hide();
-			      }});
-			    }
-			});*/
-			
-		},
+		
 		link: function(scope,element,attributes){
 			$(function(){
     			$(document).foundation();    
@@ -577,7 +650,7 @@ app.directive('design', function (){
 			$(document).on('click', '.twitterFav', function(){
 				var id= $(this).attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/favorite.php",
+			$.ajax({url:"http://mashd.it/twitterlibs/favorite.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -591,7 +664,7 @@ app.directive('design', function (){
 			$(document).on('click', '.deleteTwitterFav', function(){
 				var id= $(this).attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/favorite.php",
+			$.ajax({url:"http://mashd.it/twitterlibs/favorite.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -606,7 +679,7 @@ app.directive('design', function (){
 		    	var $this = $(this);
 				var id= $this.attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/retweet.php",
+			$.ajax({url:"http://mashd.it/twitterlibs/retweet.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -625,7 +698,7 @@ app.directive('design', function (){
 		    	var $this = $(this);
 				var id= $this.attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://localhost/MashdApp/www/twitterlibs/unRetweet.php",
+			$.ajax({url:"http://mashd.it/twitterlibs/unRetweet.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -643,7 +716,7 @@ app.directive('design', function (){
 				var id= $(this).attr('data');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://localhost/MashdApp/www/facebooklibs/fbLike.php",
+			$.ajax({url:"http://mashd.it/facebooklibs/fbLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id, 
@@ -663,7 +736,7 @@ app.directive('design', function (){
 				var id= $(this).attr('data');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://localhost/MashdApp/www/facebooklibs/fbLike.php",
+			$.ajax({url:"http://mashd.it/facebooklibs/fbLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -684,7 +757,7 @@ app.directive('design', function (){
 				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/instagramLike.php",
+			$.ajax({url:"http://mashd.it/instagramlibs/instagramLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -699,7 +772,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.deletInstagramLike', function(){
 				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
-		    	$.ajax({url:"http://localhost/MashdApp/www/instagramlibs/delete_instagramLike.php",
+		    	$.ajax({url:"http://mashd.it/instagramlibs/delete_instagramLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -716,7 +789,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.vineLike', function(){
 				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineLike.php",
+		    	$.ajax({url:"http://mashd.it/vinelibs/vineLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -730,7 +803,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.deletVineLike', function(){
 				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineLike.php",
+		    	$.ajax({url:"http://mashd.it/vinelibs/delete_vineLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -745,7 +818,7 @@ app.directive('design', function (){
 		     	 var $this = $(this);
 				var id= $this.parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/vineRevine.php",
+		    	$.ajax({url:"http://mashd.it/vinelibs/vineRevine.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -765,7 +838,7 @@ app.directive('design', function (){
 				var id= $(this).parent().parent().attr('data');
 				var repostId = $(this).attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://localhost/MashdApp/www/vinelibs/delete_vineRevine.php",
+		    	$.ajax({url:"http://mashd.it/vinelibs/delete_vineRevine.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -786,7 +859,7 @@ app.directive('design', function (){
 			    pageValue = parseFloat($(this).attr('data'));
 			    newPage = pageValue + 5 ;
 			    newPageid =  '.' + pageValue;
-			    $.ajax({url:"http://localhost/MashdApp/www/instagramlibs/instagramcommentsajax.php",
+			    $.ajax({url:"http://mashd.it/instagramlibs/instagramcommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: currentDiv,
@@ -805,7 +878,7 @@ app.directive('design', function (){
 			    pageValue = parseFloat($(this).attr('data'));
 			    newPage = pageValue + 1;
 			    newPageid =  '.' + newPage;
-			    $.ajax({url:"http://localhost/MashdApp/www/vinelibs/vinecommentsajax.php",
+			    $.ajax({url:"http://mashd.it/vinelibs/vinecommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: currentDiv,
@@ -822,7 +895,7 @@ app.directive('design', function (){
 			    var currentDiv, pageValue, newPage, newPageid;
 			    posterScreenName = $(this).attr('data');
 			    postId = $(this).attr('data-id');
-			    $.ajax({url:"http://localhost/MashdApp/www/twitterlibs/twittercommentsajax.php",
+			    $.ajax({url:"http://mashd.it/twitterlibs/twittercommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {poster: posterScreenName,
