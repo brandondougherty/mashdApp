@@ -24,7 +24,7 @@ echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$
           $youtube_link2 = 'https://www.youtube.com/v/' . $med_youtube2 . '?version=3&amp;autohide=1&amp;autoplay=1';
           $youtube_embed_link2 = 'https://www.youtube.com/embed/' . $med_youtube2;
 
-          echo "<iframe width='398' height='224' frameborder='0' scrolling='no' src =" . $youtube_embed_link2 . ">
+          echo "<iframe width='320' frameborder='0' scrolling='no' src =" . $youtube_embed_link2 . ">
           <!DOCTYPE html>
           <html>
             <head>

@@ -2,5 +2,5 @@
 session_start();
 include 'instagramlibs/instagramAuth.php';
 
-header("Location: http://mashd.it/#/social");
+header("Location: http://mashdapp.mashd.it/#/social");
 ?>

@@ -33,6 +33,6 @@ $_SESSION['vine_userName'] = $response->data->username;
 $_SESSION['vine_avatar'] = preg_replace('/\A.*\/\//', "",$response->data->avatarUrl);
 
 //var_dump($response);
-header("Location: http://mashd.it/#/social");
+header("Location: http://mashdapp.mashd.it/#/social");
 
 ?>

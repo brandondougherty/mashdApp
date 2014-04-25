@@ -197,7 +197,7 @@
           }*/
          //print_r($data);
           echo "</div>";
-          echo "</div>";
+          echo "</div></div>";
 
          }
        }

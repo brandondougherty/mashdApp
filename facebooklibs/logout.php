@@ -9,5 +9,5 @@ foreach ($_SESSION as $name => $value)
    }
 }
 
-header("Location: http://mashd.it/#/social");
+header("Location: http://mashdapp.mashd.it/#/social");
 ?>

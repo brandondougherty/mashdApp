@@ -17,7 +17,11 @@ var app = angular.module("app", ['ui.router','infinite-scroll']).config(function
       templateUrl: "social.html",
       controller: "SocialController",
       authenticate: false
-    }).state("vineLogin", {
+    }).state("info", {
+      url: "/info",
+      templateUrl: "info.html"
+    })
+    .state("vineLogin", {
       url: "/vineLogin",
       templateUrl: "vinelibs/vine_redirect.html"
     })
@@ -95,7 +99,7 @@ app.controller('TwitterController', function(Comments, $rootScope, $scope,$http)
 		var message = $scope.twitterMessage;
 		console.log(postId);
 		console.log(message);
-		$http.post('http://mashd.it/twitterlibs/comment.php', 
+		$http.post('http://mashdapp.mashd.it/twitterlibs/comment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -133,7 +137,7 @@ app.controller('InstagramController', function(Comments, $rootScope, $scope,$htt
 		var message = $scope.instagramMessage;
 		
 		console.log(message);
-		$http.post('http://mashd.it/instagramlibs/comments.php', 
+		$http.post('http://mashdapp.mashd.it/instagramlibs/comments.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -158,7 +162,7 @@ app.controller('FacebookCommentsController', function(Comments, $rootScope, $sco
 	$scope.sendMessage= function(){
 		var message = $scope.facebookMessage;
 		console.log(message);
-		$http.post('http://mashd.it/facebooklibs/postComment.php', 
+		$http.post('http://mashdapp.mashd.it/facebooklibs/postComment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -176,7 +180,7 @@ app.controller('FacebookCommentsController', function(Comments, $rootScope, $sco
 	}
 	$scope.removeComment = function(postId){
 		console.log(postId)
-		$http.post('http://mashd.it/facebooklibs/removeComment.php', 
+		$http.post('http://mashdapp.mashd.it/facebooklibs/removeComment.php', 
 					{id: postId}
 					).success(function(response){
 						console.log(response);
@@ -225,7 +229,7 @@ app.controller('VineController', function(Comments, $rootScope, $scope,$http,$co
 	$scope.sendMessage= function(){
 		var message = $scope.vineMessage;
 		console.log(message);
-		$http.post('http://mashd.it/vinelibs/postComment.php', 
+		$http.post('http://mashdapp.mashd.it/vinelibs/postComment.php', 
 					{id: postId,
 		         status: message}).success(function(response){
 		         	console.log('comment sent');
@@ -251,7 +255,7 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
      if($rootScope.cache == undefined){
       console.log('caching');
       $rootScope.cache = $cacheFactory('feedCacheID');
-      $http.get('http://mashd.it/social_accounts_include.php').success(function(result){
+      $http.get('http://mashdapp.mashd.it/social_accounts_include.php').success(function(result){
 			$('.brandon').html($compile(result)($scope));
 			$rootScope.cache.put('feed', result);
 			$scope.morefeed = new MoreFeed();
@@ -273,7 +277,7 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 	    if (this.busy) return;
 	    this.busy = true;
 	console.log('inside');
-	    var url = "http://mashd.it/multiCall_for_more_feed.php";
+	    var url = "http://mashdapp.mashd.it/multiCall_for_more_feed.php";
 	    $http.get(url).success(function(result) {
 	      	$('.brandon').append($compile(result)($scope));
 		       var old = $rootScope.cache.get('feed');
@@ -284,19 +288,6 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 	  };
 	  $scope.morefeed = new MoreFeed();
   	 		console.log('done');
-		        
-  	 	$(document).on('click', '.faceBookToggle', function() {
-		    	$('.fbPost').parent().toggle();
-		});
-		$(document).on('click', '.twitterToggle', function() {
-		    	$('.twitterPost').parent().toggle();
-		});
-		$(document).on('click', '.instaToggle', function() {
-		    	$('.instagramPost').parent().toggle();
-		});
-		$(document).on('click', '.vineToggle', function() {
-		    	$('.vinepost').parent().toggle();
-		});
   	 }
 	$scope.getTwComments = function(posterScreenName, postId, extraId){
 		console.log(posterScreenName);
@@ -338,7 +329,7 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 	//if the user just logged in, or refreshed the page
 	//find out there log in statuses
        if($rootScope.facebook === undefined){
-	var responsePromise = $http.get('http://mashd.it/social_accounts.php');
+	var responsePromise = $http.get('http://mashdapp.mashd.it/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
          $rootScope.facebook = data.facebook;
          $rootScope.facebookIO = data.facebookIO;
@@ -354,16 +345,16 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
          
          //if logged in,else leave it cause they are not signed in
          if($rootScope.facebookIO==0){
-        	$('.faceBookNav').css( "fill", "blue" );//make this the fb blue
+        	$('.faceBookNav').css( "fill", "#3b5998" );//hidden use rgba(59, 89, 152, 0.46);
          }
          if($rootScope.twitterIO==0){
-        	$('.twitterNav').css( "fill", "blue" );//make this the tw blue
+        	$('.twitterNav').css( "fill", "#55acee" );//hidden use rgba(85, 172, 238, 0.46);
          }
          if($rootScope.instagramIO==0){
-        	$('.instaNav').css( "fill", "blue" );//make this the ig blue
+        	$('.instaNav').css( "fill", "black" );//hidden use rgba(0, 0, 0, 0.46);
          }
          if($rootScope.vineIO==0){
-        	$('.vineNav').css( "fill", "blue" );//make this the vi blue
+        	$('.vineNav').css( "fill", "#00d9a3" );//hidden use rgba(0, 217, 163, 0.46)
          }
 		});
 		//set nav buttons 
@@ -371,22 +362,90 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 		//set nav buttons
 		console.log($rootScope.facebook);
         console.log($rootScope.facebookIO);
-        //if logged in,else leave it cause they are not signed in
+         //if logged in,else leave it cause they are not signed in
          if($rootScope.facebookIO==0){
-        	$('.faceBookNav').css( "fill", "blue" );//make this the fb blue
+        	$('.faceBookNav').css( "fill", "#3b5998" );
+         }else if($rootScope.facebookIO==2){
+         	$('.fbPost').parent().hide();
+        	$('.faceBookNav').css( "fill", "rgba(59, 89, 152, 0.46)" );
          }
          if($rootScope.twitterIO==0){
-        	$('.twitterNav').css( "fill", "blue" );//make this the tw blue
+        	$('.twitterNav').css( "fill", "#55acee" );
+         }else if($rootScope.twitterIO==2){
+         	$('.twitterPost').parent().hide();
+         	$('.twitterNav').css( "fill", "rgba(85, 172, 238, 0.46)" );
          }
          if($rootScope.instagramIO==0){
-        	$('.instaNav').css( "fill", "blue" );//make this the ig blue
+        	$('.instaNav').css( "fill", "black" );
+         }else if($rootScope.instagramIO==2){
+         	$('.instagramPost').parent().hide();
+        	$('.instaNav').css( "fill", "rgba(0, 0, 0, 0.46)" );
          }
          if($rootScope.vineIO==0){
-        	$('.vineNav').css( "fill", "blue" );//make this the vi blue
+        	$('.vineNav').css( "fill", "#00d9a3" );
+         }else if($rootScope.vineIO==2){
+         	$('.vinepost').parent().hide();
+	    	$('.vineNav').css( "fill", "rgba(0, 217, 163, 0.46)" );
          }
 	}
-         
-    
+	//0 = logged in
+	//1 = logged out 
+	//2 = toggled off
+    $scope.vineNav = function(){
+    	//hide things
+    	if($rootScope.vineIO == 0){
+			$('.vinepost').parent().hide();
+	    	//change nav appearance
+	    	$rootScope.vineIO = 2;
+	    	$('.vineNav').css( "fill", "rgba(0, 217, 163, 0.46)" );
+    	}else if($rootScope.vineIO == 2){
+    		$rootScope.vineIO = 0;
+    		$('.vinepost').parent().show();
+    		$('.vineNav').css( "fill", "#00d9a3" );
+    	}
+    }
+
+    $scope.facebookNav = function(){
+		//hide things
+    	if($rootScope.facebookIO == 0){
+			$('.fbPost').parent().hide();
+	    	//change nav appearance
+	    	$rootScope.facebookIO = 2;
+	    	$('.faceBookNav').css( "fill", "rgba(59, 89, 152, 0.46)" );
+    	}else if($rootScope.facebookIO == 2){
+    		$rootScope.facebookIO = 0;
+    		$('.fbPost').parent().show();
+    		$('.faceBookNav').css( "fill", "#3b5998" );
+    	}
+    }
+
+    $scope.twitterNav = function(){
+		//hide things
+    	if($rootScope.twitterIO == 0){
+			$('.twitterPost').parent().hide();
+	    	//change nav appearance
+	    	$rootScope.twitterIO = 2;
+	    	$('.twitterNav').css( "fill", "rgba(85, 172, 238, 0.46)" );
+    	}else if($rootScope.twitterIO == 2){
+    		$rootScope.twitterIO = 0;
+    		$('.twitterPost').parent().show();
+    		$('.twitterNav').css( "fill", "#55acee" );
+    	}
+    }
+
+    $scope.instaNav = function(){
+		//hide things
+    	if($rootScope.instagramIO == 0){
+			$('.instagramPost').parent().hide();
+	    	//change nav appearance
+	    	$rootScope.instagramIO = 2;
+	    	$('.instaNav').css( "fill", "rgba(0, 0, 0, 0.46)" );
+    	}else if($rootScope.instagramIO == 2){
+    		$rootScope.instagramIO = 0;
+    		$('.instagramPost').parent().show();
+    		$('.instaNav').css( "fill", "black" );
+    	}
+    }
     	
     var MoreFeed = function() {
 	    this.busy = false;
@@ -396,9 +455,21 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 	    if (this.busy) return;
 	    this.busy = true;
 	console.log('inside');
-	    var url = "http://mashd.it/multiCall_for_more_feed.php";
+	    var url = "http://mashdapp.mashd.it/multiCall_for_more_feed.php";
 	    $http.get(url).success(function(result) {
 	      	$('.brandon').append($compile(result)($scope));
+	      	if($rootScope.vineIO == 2){
+	      		$('.vinepost').parent().hide();
+	      	}
+	      	if($rootScope.twitterIO == 2){
+	      		$('.twitterPost').parent().hide();
+	      	}	
+	      	if($rootScope.instagramIO == 2){
+	      		$('.instagramPost').parent().hide();
+	      	}	
+	      	if($rootScope.facebookIO == 2){
+	      		$('.fbPost').parent().hide();
+	      	}		    	
 		       var old = $rootScope.cache.get('feed');
 		       $rootScope.cache.put('feed', old + result);
 		       console.log('new cache');
@@ -409,10 +480,10 @@ app.controller('MyAccountController', function($http, $rootScope, $scope,$window
 		
 	});
 
-app.controller('SocialController', function($scope, $http, $rootScope,$window,$location,MashdLogin) {
+app.controller('SocialController', function($scope, $http, $rootScope,$window,$location,$timeout,MashdLogin) {
 	console.log($rootScope.facebook);
 	if($rootScope.facebook === undefined){
-		var responsePromise = $http.get('http://mashd.it/social_accounts.php');
+		var responsePromise = $http.get('http://mashdapp.mashd.it/social_accounts.php');
 	responsePromise.success(function(data, status, headers, config) {
 		var logout = new RegExp('logout');
          $rootScope.facebook = data.facebook;
@@ -527,16 +598,20 @@ app.controller('SocialController', function($scope, $http, $rootScope,$window,$l
 			 	});
 			 }
           }
+          $scope.save=function(){
+          	$('.saveCheck').show();
+          		$timeout(($window.location.reload()),1000);
+          }
     
 });
 
 app.controller('RegisterController', function($scope, $http,$location, $rootScope, MashdLogin) {
 	$scope.regCredentials = {email : "", password: "", retype: ""};
-
+	var email = new RegExp('@');
 	$scope.register = function(){
 		if($scope.regCredentials.password != $scope.regCredentials.retype){
-			$scope.failPrompt = "Passwords do not match."
-		}else{
+			$scope.failPrompt = "Passwords do not match.";
+		}else if(email.test($scope.regCredentials.email)){
 			MashdLogin.register($scope.regCredentials).success(function(response){
 				if(response.user_registered === 'true'){
 					//redirect to social page to start signing into accounts
@@ -545,6 +620,8 @@ app.controller('RegisterController', function($scope, $http,$location, $rootScop
 					$scope.failPrompt = response.error;
 				}
 			});
+		}else{
+			$scope.failPrompt = "Please enter a valid email.";
 		}
 	}
 });
@@ -554,18 +631,18 @@ app.factory('MashdLogin', function($http, $location){
 		login: function(credentials){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/login.php',
+					    url: 'http://mashdapp.mashd.it/login.php',
 					    data: credentials,
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
 		},
 		logout: function(){
-			return $http.get('http://mashd.it/logout.php');
+			return $http.get('http://mashdapp.mashd.it/logout.php');
 		},
 		register: function(credentials){
 			return $http({
 				method: 'POST',
-			    url: 'http://mashd.it/register.php',
+			    url: 'http://mashdapp.mashd.it/register.php',
 			    data: credentials,
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
@@ -573,7 +650,7 @@ app.factory('MashdLogin', function($http, $location){
 		changeSettings: function(credentials){
 			return $http({
 				method: 'POST',
-			    url: 'http://mashd.it/changeSettings.php',
+			    url: 'http://mashdapp.mashd.it/changeSettings.php',
 			    data: credentials,
 			    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
@@ -586,7 +663,7 @@ app.factory('Comments', function($http, $location){
 		twitter: function(posterScreenName, postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/twitterlibs/twittercommentsajax.php',
+					    url: 'http://mashdapp.mashd.it/twitterlibs/twittercommentsajax.php',
 					    data: {poster: posterScreenName,
 			                  post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -595,7 +672,7 @@ app.factory('Comments', function($http, $location){
 		instagram: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/instagramlibs/commentsajax.php',
+					    url: 'http://mashdapp.mashd.it/instagramlibs/commentsajax.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -603,7 +680,7 @@ app.factory('Comments', function($http, $location){
 		facebookComments: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/facebooklibs/getComments.php',
+					    url: 'http://mashdapp.mashd.it/facebooklibs/getComments.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -611,7 +688,7 @@ app.factory('Comments', function($http, $location){
 		facebookLikes: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/facebooklibs/getLikes.php',
+					    url: 'http://mashdapp.mashd.it/facebooklibs/getLikes.php',
 					    data: {postId: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -619,7 +696,7 @@ app.factory('Comments', function($http, $location){
 		facebookAlbum: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/facebooklibs/facebookAlbum.php',
+					    url: 'http://mashdapp.mashd.it/facebooklibs/facebookAlbum.php',
 					    data: {post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -627,7 +704,7 @@ app.factory('Comments', function($http, $location){
 		vineComments: function(postId){
 			return $http({
 					    method: 'POST',
-					    url: 'http://mashd.it/vinelibs/getComments.php',
+					    url: 'http://mashdapp.mashd.it/vinelibs/getComments.php',
 					    data: {post: postId},
 					    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 					    });
@@ -650,7 +727,7 @@ app.directive('design', function (){
 			$(document).on('click', '.twitterFav', function(){
 				var id= $(this).attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://mashd.it/twitterlibs/favorite.php",
+			$.ajax({url:"http://mashdapp.mashd.it/twitterlibs/favorite.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -664,7 +741,7 @@ app.directive('design', function (){
 			$(document).on('click', '.deleteTwitterFav', function(){
 				var id= $(this).attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://mashd.it/twitterlibs/favorite.php",
+			$.ajax({url:"http://mashdapp.mashd.it/twitterlibs/favorite.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -679,7 +756,7 @@ app.directive('design', function (){
 		    	var $this = $(this);
 				var id= $this.attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://mashd.it/twitterlibs/retweet.php",
+			$.ajax({url:"http://mashdapp.mashd.it/twitterlibs/retweet.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -698,7 +775,7 @@ app.directive('design', function (){
 		    	var $this = $(this);
 				var id= $this.attr('data');
 		    	console.log(id);		    
-			$.ajax({url:"http://mashd.it/twitterlibs/unRetweet.php",
+			$.ajax({url:"http://mashdapp.mashd.it/twitterlibs/unRetweet.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -716,7 +793,7 @@ app.directive('design', function (){
 				var id= $(this).attr('data');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://mashd.it/facebooklibs/fbLike.php",
+			$.ajax({url:"http://mashdapp.mashd.it/facebooklibs/fbLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id, 
@@ -736,7 +813,7 @@ app.directive('design', function (){
 				var id= $(this).attr('data');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://mashd.it/facebooklibs/fbLike.php",
+			$.ajax({url:"http://mashdapp.mashd.it/facebooklibs/fbLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -757,7 +834,7 @@ app.directive('design', function (){
 				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
 		    
-			$.ajax({url:"http://mashd.it/instagramlibs/instagramLike.php",
+			$.ajax({url:"http://mashdapp.mashd.it/instagramlibs/instagramLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -772,7 +849,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.deletInstagramLike', function(){
 				var id= $(this).parent().parent().attr('group');
 		    	console.log(id);
-		    	$.ajax({url:"http://mashd.it/instagramlibs/delete_instagramLike.php",
+		    	$.ajax({url:"http://mashdapp.mashd.it/instagramlibs/delete_instagramLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -789,7 +866,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.vineLike', function(){
 				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://mashd.it/vinelibs/vineLike.php",
+		    	$.ajax({url:"http://mashdapp.mashd.it/vinelibs/vineLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -803,7 +880,7 @@ app.directive('design', function (){
 		    $(document).on('click', '.deletVineLike', function(){
 				var id= $(this).parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://mashd.it/vinelibs/delete_vineLike.php",
+		    	$.ajax({url:"http://mashdapp.mashd.it/vinelibs/delete_vineLike.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -818,7 +895,7 @@ app.directive('design', function (){
 		     	 var $this = $(this);
 				var id= $this.parent().parent().attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://mashd.it/vinelibs/vineRevine.php",
+		    	$.ajax({url:"http://mashdapp.mashd.it/vinelibs/vineRevine.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id},
@@ -838,7 +915,7 @@ app.directive('design', function (){
 				var id= $(this).parent().parent().attr('data');
 				var repostId = $(this).attr('data');
 		    	console.log(id);
-		    	$.ajax({url:"http://mashd.it/vinelibs/delete_vineRevine.php",
+		    	$.ajax({url:"http://mashdapp.mashd.it/vinelibs/delete_vineRevine.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: id,
@@ -859,7 +936,7 @@ app.directive('design', function (){
 			    pageValue = parseFloat($(this).attr('data'));
 			    newPage = pageValue + 5 ;
 			    newPageid =  '.' + pageValue;
-			    $.ajax({url:"http://mashd.it/instagramlibs/instagramcommentsajax.php",
+			    $.ajax({url:"http://mashdapp.mashd.it/instagramlibs/instagramcommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: currentDiv,
@@ -878,7 +955,7 @@ app.directive('design', function (){
 			    pageValue = parseFloat($(this).attr('data'));
 			    newPage = pageValue + 1;
 			    newPageid =  '.' + newPage;
-			    $.ajax({url:"http://mashd.it/vinelibs/vinecommentsajax.php",
+			    $.ajax({url:"http://mashdapp.mashd.it/vinelibs/vinecommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {id: currentDiv,
@@ -895,7 +972,7 @@ app.directive('design', function (){
 			    var currentDiv, pageValue, newPage, newPageid;
 			    posterScreenName = $(this).attr('data');
 			    postId = $(this).attr('data-id');
-			    $.ajax({url:"http://mashd.it/twitterlibs/twittercommentsajax.php",
+			    $.ajax({url:"http://mashdapp.mashd.it/twitterlibs/twittercommentsajax.php",
 			           type:'POST',              
 			       dataType:'text',
 			           data: {poster: posterScreenName,
@@ -906,21 +983,6 @@ app.directive('design', function (){
 			    }});
 			});*/
 			
-			
-
-			$(document).on('click', '.faceBookToggle', function() {
-			    	$('.fbPost').parent().toggle();
-			});
-			$(document).on('click', '.twitterToggle', function() {
-			    	$('.twitterPost').parent().toggle();
-			});
-			$(document).on('click', '.instaToggle', function() {
-			    	$('.instagramPost').parent().toggle();
-			});
-			$(document).on('click', '.vineToggle', function() {
-			    	$('.vinepost').parent().toggle();
-			});
-
 		}
 	};
 });

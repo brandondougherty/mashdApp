@@ -11,4 +11,4 @@ if(isset($_SESSION['access_token'])){
 }
  
 /* Redirect to page with the connect to Twitter option. */
-header("Location: http://mashd.it/#/social");
+header("Location: http://mashdapp.mashd.it/#/social");

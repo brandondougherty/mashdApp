@@ -2,6 +2,25 @@ body{
 	background: #F8ECC2;
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
 }
+.iosHead{
+	height: 18px;
+	background-color: #fff;
+}
+.saveButton{
+	float: right;
+	padding: 10px 10px 12px 10px;
+	border: 1px solid #ccc;
+	margin-right: 5px;
+	border-radius: 8px;
+	color: #ccc;
+	line-height: .9;
+}
+.saveCheck{
+	position: absolute;
+    margin: 90px 40%;
+    width: 70px;
+    display: none;
+}
 
 .vineLogin{
 	float: right;
@@ -44,7 +63,12 @@ border-radius: 3%;
 margin-top: 20px;
 padding: 5px 0px;
 }
-
+.contactSource {
+padding: 15px 10px;
+}
+.contact {
+padding-left: 10px;
+}
 #background {
 	position: absolute;
 	top: 39%;
@@ -394,6 +418,9 @@ padding-top: 20px;
 .socialLabel{
 	margin-left: 35px !important;
 	margin-top: -35px !important;
+}
+.secondNav{
+	line-height: 0 !important;
 }
 /*.stickit {
 	position: fixed;

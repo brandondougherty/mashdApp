@@ -56,7 +56,7 @@
       echo "<hr><div class='commentsContainer'>";
       echo "<div class='1'>";
         $i=0;
-        while($i < 5){
+        while($i < 3){
           if(isset($media->comments->data[$i])){
             $comments = $media->comments->data[$i];
             $comment_img = $comments->from->profile_picture;

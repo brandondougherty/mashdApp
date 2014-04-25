@@ -13,7 +13,7 @@ foreach($records['data']['records'] as $vines){
   $postId = $vines['postIdStr'];
   $video_thumb = $vines['thumbnailUrl'];
 $time = strtotime($vines['created']);
-$the_time = time_elapsed_string(strtotime($vines['created']));
+$the_time = time_elapsed_string($time);
  #####START TO PRINT STUFF OUT HERE ###### 
           echo "<div timestamp='$time'>";
 echo "<div class='vinepost' data='$postId'><div class='vineHeader'>";

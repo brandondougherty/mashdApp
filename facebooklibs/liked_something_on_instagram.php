@@ -29,7 +29,7 @@ $self_post_url = '/' .$id_of_self_post;
 $self_origin_post = $facebook->api($self_post_url,'GET');
 $name = $data['from']['name'];
 $id = $data['from']['id'];
-echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name </a>liked this Instagram post.</div></div>";
+echo "<div class='fbPostHead'><a class='fbUser' ng-click=\"goToFbUser('$id')\">$name </a>liked this Instagram post.</div>";
 if(isset($data['mesage'])){
   echo "<div class='fbcontent'>";
   echo $data['message'];

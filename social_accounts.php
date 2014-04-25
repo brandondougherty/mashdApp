@@ -20,7 +20,7 @@ class AccountsLoggedIn {
    $e = new AccountsLoggedIn();
 //fb
 if(isset($_SESSION['fb_user_id']) && !empty($_SESSION['fb_user_id'])){
-    $e->facebook = 'http://mashd.it/facebooklibs/logout.php';
+    $e->facebook = 'http://mashdapp.mashd.it/facebooklibs/logout.php';
     $e->facebookIO = 0;
 }else{
 
@@ -30,7 +30,7 @@ if(isset($_SESSION['fb_user_id']) && !empty($_SESSION['fb_user_id'])){
   ));
   $loginUrl = $facebook->getLoginUrl($params=array(
     'scope' => 'read_stream, read_friendlists, friends_videos, user_videos, friends_photos, publish_actions, read_insights, user_likes, user_status, user_photos, friends_status, friends_likes, user_actions.news, friends_actions.news, friends_actions:instapp, user_actions:instapp',
-    'redirect_uri' => 'http://mashd.it/fbredirect.php'
+    'redirect_uri' => 'http://mashdapp.mashd.it/fbredirect.php'
   ));
      $e->facebook = $loginUrl;  
     $e->facebookIO = 1;
@@ -38,7 +38,7 @@ if(isset($_SESSION['fb_user_id']) && !empty($_SESSION['fb_user_id'])){
 }
 //INSTAGRAM
 if(isset($_SESSION['instagram'])){
-     $e->instagram = 'http://mashd.it/instagram_logout.php';
+     $e->instagram = 'http://mashdapp.mashd.it/instagram_logout.php';
      $e->instagramIO = 0;
 }else{
      $e->instagram = $instagram_loginUrl ;  
@@ -47,16 +47,16 @@ if(isset($_SESSION['instagram'])){
 }
 //TWITTER
 if(isset($_SESSION['access_token'])){
-     $e->twitter = 'http://mashd.it/twitterlibs/twitter_logout.php'; //LOGOUT URL
+     $e->twitter = 'http://mashdapp.mashd.it/twitterlibs/twitter_logout.php'; //LOGOUT URL
      $e->twitterIO = 0;
 }else{
-     $e->twitter = 'http://mashd.it/twitterlibs/redirect.php';//LOGIN  
+     $e->twitter = 'http://mashdapp.mashd.it/twitterlibs/redirect.php';//LOGIN  
      $e->twitterIO = 1;
 
 }
 ///VINE
 if(isset($_SESSION['vine_key'])){
-     $e->vine = 'http://mashd.it/vinelibs/vinelogout.php'; //LOGOUT URL
+     $e->vine = 'http://mashdapp.mashd.it/vinelibs/vinelogout.php'; //LOGOUT URL
      $e->vineIO = 0;
 
 }else{
